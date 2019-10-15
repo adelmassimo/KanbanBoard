@@ -17,21 +17,37 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  checkUtente(){
-    const utente = {
-      username: this.username,
-      password: this.password
-    };
+  myMessage: string = "";
+  error: boolean = false;
+  sign: boolean = false;
 
-    if(this.username != undefined && this.username != "" && this.password != undefined && this.password != ""){
-      if(this.loginService.autenticazione(utente)){
+  onLoginSubmit() {
+    const utente: any = {
+      'username': this.username,
+      'password': this.password
+    }
+    console.log(utente);
+
+    if (this.username != undefined && this.username != "" && this.password != undefined && this.password != "") {
+      if (this.loginService.autenticazione(utente)) {
+
         console.log("successo");
+        this.myMessage = "Login effettuato con successo";
+        this.error = false;
+        this.sign = true;
+
         this.router.navigate(['/pu']);
-      }else{
+      } else {
         console.log("utente non trovato!");
+        this.myMessage = "utente non trovato!";
+        this.error = true;
+        this.sign = false;
       }
-    }else{
+    } else {
       console.log("riempi i campi correttamente!");
+      this.myMessage = "username o password errati";
+      this.error = true;
+      this.sign = false;
     }
   }
 
