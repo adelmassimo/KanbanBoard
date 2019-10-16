@@ -12,7 +12,7 @@ import { HeaderPaginaComponent } from './header-pagina/header-pagina.component';
 
 import { LoginService } from './services/login.service';
 import { RegisterService } from './services/register.service';
-import { from } from 'rxjs';
+
 
 @NgModule({
   declarations: [
