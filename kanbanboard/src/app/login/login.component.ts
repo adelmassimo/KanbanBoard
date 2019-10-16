@@ -11,8 +11,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private loginService: LoginService, private route: ActivatedRoute) { }
 
-  username: string = "mirkotaccini";
-  password: string = "aa";
+  username: string = "";
+  password: string = "";
   myMessage: string = "";
   error: boolean = false;
   sign: boolean = false;
@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
   
   onLoginSubmit() {
     const utente: any = {
-      'username': this.username,
-      'password': this.password
+      username : this.username,
+      password : this.password
     }
     console.log(utente);
 
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
         this.error = false;
         this.sign = true;
 
-        this.router.navigate(['/pu']);
+        //this.router.navigate(['/pu']);
       } else {
         console.log("utente non trovato!");
         this.myMessage = "utente non trovato!";
