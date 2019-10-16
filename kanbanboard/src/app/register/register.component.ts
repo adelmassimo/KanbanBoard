@@ -55,15 +55,18 @@ export class RegisterComponent implements OnInit {
     console.log(utente);
 
     //controllo che i campi non siano vuoti
-    if (this.username != undefined && this.username != "" && this.password != undefined && this.password != ""
-      && this.email != undefined && this.email != "") {
+    if (this.username != undefined && this.username != ""
+      && this.password != undefined && this.password != ""
+      && this.email != undefined && this.email != ""
+      && this.nome != undefined && this.nome != ""
+      && this.cognome != undefined && this.cognome != "") {
       if (this.registerService.registrazione(utente)) {
-        console.log("utente registrato correttamente");
+        console.log("reindirizzamento all homepage");
         this.myMessage = "utente registrato correttamente";
         this.error = false;
         this.sign = true;
       } else {
-        console.log("errore, riprovare");
+        console.log("errore, prego riprovare");
         this.myMessage = "errore, riprovare";
         this.error = true;
         this.sign = false;
@@ -71,8 +74,8 @@ export class RegisterComponent implements OnInit {
     } else {
       console.log("riempi i campi correttamente!");
       this.myMessage = "riempi i campi correttamente!";
-        this.error = true;
-        this.sign = false;
+      this.error = true;
+      this.sign = false;
     }
   }
 
