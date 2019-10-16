@@ -56,14 +56,23 @@ export class RegisterComponent implements OnInit {
 
     //controllo che i campi non siano vuoti
     if (this.username != undefined && this.username != "" && this.password != undefined && this.password != ""
-    && this.email != undefined && this.email != ""){
-      if(this.registerService.registrazione(utente)){
+      && this.email != undefined && this.email != "") {
+      if (this.registerService.registrazione(utente)) {
         console.log("utente registrato correttamente");
-      }else{
-        console.log("errore, prego riprovare");
+        this.myMessage = "utente registrato correttamente";
+        this.error = false;
+        this.sign = true;
+      } else {
+        console.log("errore, riprovare");
+        this.myMessage = "errore, riprovare";
+        this.error = true;
+        this.sign = false;
       }
-    }else{
+    } else {
       console.log("riempi i campi correttamente!");
+      this.myMessage = "riempi i campi correttamente!";
+        this.error = true;
+        this.sign = false;
     }
   }
 
