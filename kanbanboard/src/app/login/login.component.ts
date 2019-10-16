@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
         this.error = false;
         this.sign = true;
 
-        //this.router.navigate(['/pu']);
+        this.router.navigate(['/pu']);
       } else {
         console.log("utente non trovato!");
         this.myMessage = "utente non trovato!";
