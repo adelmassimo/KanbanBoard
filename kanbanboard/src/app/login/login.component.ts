@@ -11,10 +11,11 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private loginService: LoginService, private route: ActivatedRoute) { }
 
-  username: string = "";
-  password: string = "";
+  username: string = "mirkotaccini";
+  password: string = "aa";
 
   ngOnInit() {
+    this.checkUtente();
   }
 
   checkUtente(){
