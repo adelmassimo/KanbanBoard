@@ -28,16 +28,12 @@ export class LoginService {
     //test con mock
     for (let utenteregistrato of Utenti_registrati){
       //console.log(utenteregistrato.username);
-      if(utenteregistrato.username == utente.username){
-        if(utenteregistrato.password == utente.password){
-          console.log("utente trovato " + utenteregistrato.username);
-          return true;
-        }
-        console.log("nome trovato" + utenteregistrato.username);
-        return true;
+      if(utenteregistrato.username == utente.username && utenteregistrato.password == utente.password){
+        console.log("utente trovato " + utenteregistrato.username);
+        return true;  
       }
     }
-    console.log("nome non trovato");
+    console.log("utente non trovato");
     return false;
   }
 }
