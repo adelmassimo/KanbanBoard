@@ -2,15 +2,22 @@
   <div class="col">
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a class="nav-link active">Login</a>
+        <a class="nav-link {LoginActive}" (click)="onChangeTab('login')">Login</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link">Register</a>
+        <a class="nav-link {RegisterActive}" (click)="onChangeTab('register')">Register</a>
       </li>
     </ul>
     <div class="row my-3 mx-3 d-flex justify-content-center">
-      <div class="col">
+      <div *ngIf="isLogin" class="col">
+
         <app-login></app-login>
+      
+      </div>
+      <div *ngIf="isRegister" class="col">
+        
+        <app-register></app-register>
+        
       </div>
     </div>
   </div>
