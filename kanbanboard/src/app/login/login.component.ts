@@ -11,16 +11,16 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private loginService: LoginService, private route: ActivatedRoute) { }
 
-  username: string = "";
-  password: string = "";
-
-  ngOnInit() {
-  }
-
+  username: string = "mirkotaccini";
+  password: string = "aa";
   myMessage: string = "";
   error: boolean = false;
   sign: boolean = false;
 
+  ngOnInit() {
+    this.onLoginSubmit();
+  }
+  
   onLoginSubmit() {
     const utente: any = {
       'username': this.username,
