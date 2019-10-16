@@ -15,7 +15,7 @@ import { LoginService } from './services/login.service';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderPaginaComponent
+    HeaderPaginaComponent,
 
     LoginComponent,
     LoginRegisterComponent
