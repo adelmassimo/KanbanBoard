@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Utenti_registrati } from '../models/mock.login';
-import { Login } from '../models/login';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
