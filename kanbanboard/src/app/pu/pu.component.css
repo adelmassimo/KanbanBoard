@@ -1,0 +1,17 @@
+#container{
+    border: 2px solid black;
+}
+
+#add{
+    float: right;
+    border-top: 1em;
+    border-radius: 2em;
+}
+
+#search{
+    float: right;
+    border-top: 1em;
+    border-radius: 2em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
