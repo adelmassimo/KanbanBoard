@@ -15,6 +15,9 @@ export class LoginService {
 
   isMocked = true;
 
+  nome: string = "";
+  cognome: string = "";
+
   getUtentiRegistrati():Observable<any>{
       return this.http.get( this.base_url+this.wsUtenti );
   }
@@ -29,6 +32,8 @@ export class LoginService {
       //console.log(utenteregistrato.username);
       if(utenteregistrato.username == utente.username && utenteregistrato.password == utente.password){
         console.log("utente trovato " + utenteregistrato.username);
+        this.nome = utenteregistrato.nome;
+        this.cognome = utenteregistrato.cognome;
         return true;  
       }
     }

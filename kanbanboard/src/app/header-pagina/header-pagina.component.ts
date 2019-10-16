@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-header-pagina',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderPaginaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loginService: LoginService) { }
+
+  nome: string = this.loginService.nome;
+  cognome: string = this.loginService.cognome;
+
 
   ngOnInit() {
   }
