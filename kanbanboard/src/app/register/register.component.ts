@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { RegisterService } from '../services/register.service';
 
@@ -11,25 +12,47 @@ export class RegisterComponent implements OnInit {
 
   constructor(private router: Router, private registerService: RegisterService) { }
 
-  username: string = "pipphhuhuho";
-  password: string = "4848nubhuUHU";
-  email: string = "ffhue@gmail.com";
-  nome: string = "marco";
-  cognome: string = "rossi";
+  avatars: any = [
+    "../../assets/img/avatar1.png",
+    "../../assets/img/avatar2.png",
+    "../../assets/img/avatar3.jpg",
+    "../../assets/img/avatar4.png"
+  ];
+
+  avatar: string = "../../assets/img/avatarNone.jpeg";
+  nome: string = "";
+  cognome: string = "";
+  email: string = "";
+  username: string = "";
+  password: string = "";
+  myMessage: string = "";
+  error: boolean = false;
+  sign: boolean = false;
+  scegliAvatarVisibile = false;
 
   ngOnInit() {
-    this.onRegisterSubmit();
   }
 
-  onRegisterSubmit(){
+  onClickShowAvatars() {
+    this.scegliAvatarVisibile = !this.scegliAvatarVisibile;
+  }
+
+  onClickScegliAvatar(avatarImg) {
+    this.avatar = avatarImg;
+  }
+
+  onRegisterSubmit() {
+
     const utente: any = {
+      avatar: this.avatar,
       nome: this.nome,
+      email: this.email,
       cognome: this.cognome,
-      username : this.username,
-      password : this.password,
-      email: this.email
-      
+      username: this.username,
+      password: this.password
     }
+
+    console.log(utente);
 
     //controllo che i campi non siano vuoti
     if (this.username != undefined && this.username != "" && this.password != undefined && this.password != ""
