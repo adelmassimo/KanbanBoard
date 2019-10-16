@@ -1,0 +1,67 @@
+<app-header-pagina></app-header-pagina>
+<div class="container" id="container">
+  <!--Seconda parte Header Menu-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="isMenuVisibile">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <!--<a class="nav-link" [routerLink]="['about']">Progetti</a>-->
+        <div class="col-sm">
+          <select class="form-control" id='listprog'>
+            <option [routerLink]="['#']">Ricerca Progetto</option>
+          </select>
+        </div>
+      </li>
+      <li class="nav-item">
+        <!--<a class="nav-link" [routerLink]="['contact']">Ricerca</a>-->
+        <div class="col-sm">
+          <form class="form-inline">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Progetto" aria-label="Progetto"
+                aria-describedby="basic-addon1">
+              <div class="input-group-prepend">
+                <button type="button" class="btn btn-secondary"><i
+                    class="fa fa-search"></i></button>
+                <!--<span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>-->
+              </div>
+            </div>
+          </form>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <!--Preview progetti-->
+  <!--Se l'utente non ha progetti-->
+  <div class="alert alert-danger" role="alert">
+    Crea un nuovo progetto!
+  </div>
+  <!--Se l'utente non ha progetti-->
+
+  <!--Se l'utente ha dei progetti-->
+  <div class="card" style="width: 18rem;">
+    <img src="../assets/img" class="card-img-top">
+    <div class="card-body">
+      <h5 class="card-title">Progetto 1</h5>
+      <p class="card-text"> Descrizione Progetto </p>
+    </div>
+    <div class="card-body">
+      <a href="#" class="btn btn-primary">Apri Progetto</a>
+    </div>
+  </div>
+  <!--Se l'utente ha dei progetti
+ 
+  Preview progetti-->
+
+  <!--Bottoni end pagina-->
+  <div class="row">
+    <div class="col-sm">
+      <button type="button" class="btn btn-secondary " id='add' [routerLink]="['']"><i class="fa fa-plus"></i></button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <button type="button" class="btn btn-secondary " id='search' (click)="onClickSearchMenu();"><i class="fa fa-search"></i></button>
+    </div>
+  </div>
+  <!--Bottoni end pagina-->
+</div>
