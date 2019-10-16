@@ -18,9 +18,9 @@ export class LoginComponent implements OnInit {
   sign: boolean = false;
 
   ngOnInit() {
-    this.onLoginSubmit();
+    //this.onLoginSubmit();
   }
-  
+
   onLoginSubmit() {
     const utente: any = {
       username : this.username,
