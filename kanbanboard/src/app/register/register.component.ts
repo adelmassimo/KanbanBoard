@@ -14,6 +14,8 @@ export class RegisterComponent implements OnInit {
   username: string = "pipphhuhuho";
   password: string = "4848nubhuUHU";
   email: string = "ffhue@gmail.com";
+  nome: string = "marco";
+  cognome: string = "rossi";
 
   ngOnInit() {
     this.onRegisterSubmit();
@@ -21,16 +23,20 @@ export class RegisterComponent implements OnInit {
 
   onRegisterSubmit(){
     const utente: any = {
+      nome: this.nome,
+      cognome: this.cognome,
       username : this.username,
       password : this.password,
       email: this.email
+      
     }
 
     //controllo che i campi non siano vuoti
     if (this.username != undefined && this.username != "" && this.password != undefined && this.password != ""
-    && this.email != undefined && this.email != ""){
+    && this.email != undefined && this.email != "" && this.nome != undefined && this.nome != ""
+    && this.cognome != undefined && this.cognome != ""){
       if(this.registerService.registrazione(utente)){
-        console.log("utente registrato correttamente");
+        console.log("reindirizzamento all homepage");
       }else{
         console.log("errore, prego riprovare");
       }
