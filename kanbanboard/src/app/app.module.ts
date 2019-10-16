@@ -8,16 +8,19 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { LoginRegisterComponent } from './login-register/login-register.component';
 import { RegisterComponent } from './register/register.component';
+import { HeaderPaginaComponent } from './header-pagina/header-pagina.component';
 
 import { LoginService } from './services/login.service';
 import { RegisterService } from './services/register.service';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LoginRegisterComponent,
-    RegisterComponent
+    RegisterComponent,
+    HeaderPaginaComponent
   ],
   imports: [
     BrowserModule,
