@@ -8,13 +8,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { LoginRegisterComponent } from './login-register/login-register.component';
 import { RegisterComponent } from './register/register.component';
-
+import { HeaderPaginaComponent } from './header-pagina/header-pagina.component'
 import { LoginService } from './services/login.service';
 import { RegisterService } from './services/register.service';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderPaginaComponent,
     LoginComponent,
     LoginRegisterComponent,
     RegisterComponent
