@@ -22,7 +22,7 @@ export class LoginService {
 
   autenticazione(utente):Boolean{
     //collegamento al database con backend
-    
+    console.log(utente);
     
     
     //test con mock
