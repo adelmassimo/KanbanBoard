@@ -38,7 +38,6 @@ export class LoginRegisterComponent implements OnInit {
   }
 
   ngDoCheck() {
-    console.log("ngDoCheck");
     if (!this.localstorageservice.isEmpty()) {
      this.localstorageservice.removeFromStorage();
     }
