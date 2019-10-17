@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { StorageServiceModule } from 'ngx-webstorage-service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,7 @@ import { HeaderPaginaComponent } from './header-pagina/header-pagina.component';
 import { LoginService } from './services/login.service';
 import { RegisterService } from './services/register.service';
 import { ProjectService } from './services/project.service';
+import { LocalStorageService } from './services/local-storage.service';
 
 
 @NgModule({
@@ -29,9 +31,10 @@ import { ProjectService } from './services/project.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    StorageServiceModule 
   ],
-  providers: [],
+  providers: [LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
