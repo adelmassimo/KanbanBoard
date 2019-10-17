@@ -21,28 +21,34 @@ export class LoginService {
   nome: string = "";
   cognome: string = "";
 
-  getUtentiRegistrati():Observable<any>{
-      return this.http.get( this.base_url+this.wsUtenti );
-  }
+  /*getUtente():Observable<any>{
+      this.http.get( this.base_url+this.wsUtenti );
+      return this.http.post(this.base_url + this.wsUtenti);
+  }*/
 
   autenticazione(utente):Boolean{
-    //collegamento al database con backend
-    console.log(utente);
-    
-    
-    //test con mock
-    for (let utenteregistrato of Utenti_registrati){
-      //console.log(utenteregistrato.username);
-      if(utenteregistrato.username == utente.username && utenteregistrato.password == utente.password){
-        console.log("utente trovato " + utenteregistrato.username);
-        this.nome = utenteregistrato.nome;
-        this.cognome = utenteregistrato.cognome;
-        this.isUtenteLoggedin = true;
+    if(!this.isMocked){
 
-        console.log(utenteregistrato);
-        this.localstorageservice.storeOnLocalStorage(utenteregistrato);
+      //collegamento al database con backend
+      console.log(utente);
+      //this.getUtente(utente);
 
-        return true;  
+    }else{
+
+      //test con mock
+      for (let utenteregistrato of Utenti_registrati){
+        //console.log(utenteregistrato.username);
+        if(utenteregistrato.username == utente.username && utenteregistrato.password == utente.password){
+          console.log("utente trovato " + utenteregistrato.username);
+          this.nome = utenteregistrato.nome;
+          this.cognome = utenteregistrato.cognome;
+          this.isUtenteLoggedin = true;
+
+          console.log(utenteregistrato);
+          this.localstorageservice.storeOnLocalStorage(utenteregistrato);
+
+          return true;  
+        }
       }
     }
     console.log("utente non trovato");
