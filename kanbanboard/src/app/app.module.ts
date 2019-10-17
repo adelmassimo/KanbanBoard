@@ -16,6 +16,7 @@ import { HeaderPaginaComponent } from './header-pagina/header-pagina.component';
 
 import { LoginService } from './services/login.service';
 import { RegisterService } from './services/register.service';
+import { ProjectService } from './services/project.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
