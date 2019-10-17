@@ -27,7 +27,6 @@ export class HeaderPaginaComponent implements OnInit {
   }
 
   ngDoCheck() {
-    console.log("ngDoCheck");
     if (!this.localstorageservice.isEmpty()) {
       this.isUtenteLoggedin = !this.localstorageservice.isEmpty();
       this.objlist = this.storage.get('object_list');
