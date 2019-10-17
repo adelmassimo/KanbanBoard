@@ -1,7 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
-// key that is used to access the data in local storageconst 
 const STORAGE_KEY = 'object_list'; 
 
 @Injectable()
@@ -21,6 +20,7 @@ export class LocalStorageService {
   public getLocalStorageContent():any{
     return this.storage.get(STORAGE_KEY) || 'LocaL storage is empty';
   }
+
   public isEmpty(){
     if(this.storage.get(STORAGE_KEY) != undefined ){
       return false;
@@ -28,6 +28,7 @@ export class LocalStorageService {
       return true;
     }
   }
+
   public removeFromStorage(){
     this.storage.remove(STORAGE_KEY);
   }

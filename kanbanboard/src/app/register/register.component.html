@@ -8,8 +8,8 @@
     </div>
 
 
-    <div *ngIf="scegliAvatarVisibile" class="row">
-      <div *ngFor="let avatarImg of avatars" class="col-3 justify-content-around">
+    <div *ngIf="true" class="row">
+      <div *ngFor="let avatarImg of avatars" class="col-3 d-flex justify-content-around my-3">
         <img [src]="avatarImg" class="rounded-circle w-50 cursor-pointer" (click)="onClickScegliAvatar(avatarImg)">
       </div>
     </div>
@@ -52,8 +52,7 @@
 
 
       <!--accedi-->
-      <button class="btn btn-primary">Invia
-      </button>
+      <button class="btn btn-primary">Invia</button>
 
     </form>
     <div *ngIf="error" class="alert alert-danger" role="alert" style="margin-top: 15px;">
