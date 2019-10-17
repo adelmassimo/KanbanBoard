@@ -3,18 +3,21 @@ import { Utenti_registrati } from '../models/mock.login';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { LocalStorageService  } from '../services/local-storage.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private localstorageservice: LocalStorageService) { }
 
   base_url = 'localhost:1337';
   wsUtenti: string = '/users';
 
   isMocked = true;
 
+  isUtenteLoggedin = false;
   nome: string = "";
   cognome: string = "";
 
@@ -34,6 +37,11 @@ export class LoginService {
         console.log("utente trovato " + utenteregistrato.username);
         this.nome = utenteregistrato.nome;
         this.cognome = utenteregistrato.cognome;
+        this.isUtenteLoggedin = true;
+
+        console.log(utenteregistrato);
+        this.localstorageservice.storeOnLocalStorage(utenteregistrato);
+
         return true;  
       }
     }
