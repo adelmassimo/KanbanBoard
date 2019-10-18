@@ -3,13 +3,16 @@ var http = require('http'),
     methods = require('methods'),
     express = require('express'),
     bodyParser = require('body-parser');
+    cors = require('cors');
 
 var app = express();
 
 // Normal express config defaults
+app.use(cors());
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use();
 
 app.use(require('method-override')());
 
