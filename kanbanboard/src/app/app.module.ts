@@ -28,15 +28,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderPaginaComponent,
     LoginComponent,
     LoginRegisterComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    StorageServiceModule,
     BrowserAnimationsModule,
+    StorageServiceModule,
     MatFormFieldModule,
     MatInputModule
   ],

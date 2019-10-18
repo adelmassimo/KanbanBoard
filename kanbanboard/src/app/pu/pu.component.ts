@@ -22,7 +22,7 @@ export class PUComponent implements OnInit {
   nome_progetto: string = "";
 
   //variabile per visualizzare la barra (rossa se non c'è il progetto, verde se il progetto esiste)
-  isVisible: boolean = true;
+  isVisible: boolean = false;
   isSuccess: boolean;
 
   onClickSearchMenu() {
@@ -41,8 +41,8 @@ export class PUComponent implements OnInit {
   onClickSearchProject() {
     
     this.isVisible=true;
-    this.isSuccess=false
-    /*
+    this.isSuccess=false;
+    
     if (this.projectService.getProgetti(this.nome_progetto)){
       console.log("Progetto Trovato!");
       this.isSuccess=true;
@@ -50,7 +50,7 @@ export class PUComponent implements OnInit {
     else{
       console.log("Progetto non Trovato");
       this.isSuccess=false;
-    }*/
+    }
   }
 
   onClickCanc(){
