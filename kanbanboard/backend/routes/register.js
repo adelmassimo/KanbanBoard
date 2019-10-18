@@ -11,7 +11,7 @@ register.get('/registrazione', function (req, res) {
   });
 })
 
-
+/*
 //insert di un utente
 register.post('/registrazione', function (req, res) {
 
@@ -31,19 +31,50 @@ register.post('/registrazione', function (req, res) {
     res.send(rows);
   });
 })
+*/
 
 // controllo alla registrazione se l'utente è già esistente
-register.get('/registrazione/:username/', function (req, res) {
+register.get('/registrazione/:username/:nome/:cognome/:email/:password/:avatar', function (req, res) {
     username = req.params.username;
-  req.body;
+    nome = req.params.nome;
+    cognome = req.params.cognome;
+    email = req.params.email; 
+    password = req.params.password;
+    avatar = req.params.avatar;
+
+    let patternPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/; 
+    let patternEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      
+
   sql_connection.query("SELECT * from utenti WHERE username = '"+username+"'", function(err, rows, fields) {
     if (err) throw err;
-    if ( rows.length == 1)
-      //res.send(rows[0]);
-      console.log("USERNAME ESISTENTE");
-    else
-      res.send(rows);
+
+    if ( rows.length == 1){
+      //ritorno l'utente già registrato
+      res.send(rows[0]);
+      console.log("USERNAME ESISTENTE");    
+    }else{
+      // controllo se le credenziali rispettano i criteri richiesti: password 8 caratteri con minuscole e MAIUSCOLE E NUMERI
+      if(patternEmail.test(String(email)) && patternPassword.test(String(password))){
+        var query = "INSERT INTO utenti ( username, nome_utente, cognome_utente, email, password, img_avatar) VALUES ("+
+                      "'"+username+"',"+
+                      "'"+nome+"',"+
+                      "'"+cognome+"',"+
+                      "'"+email+"',"+
+                      "'"+password+"',"+
+                      "'"+avatar+"')";
+        sql_connection.query(query , function(err, rows, fields) {
+          if (err) throw err;
+          res.send(rows);
+        });
+
+      }else{
+        console.log("USERNAME O PASSWORD ERRATI");  
+      } // fine if
+
         console.log("USERNAME REGISTRATO CORRETTAMENTE");
+    } // fine if
+
   });
 })
 
