@@ -13,6 +13,7 @@ import { HeaderPaginaComponent } from './header-pagina/header-pagina.component';
 
 import { LoginService } from './services/login.service';
 import { RegisterService } from './services/register.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { RegisterService } from './services/register.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
