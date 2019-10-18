@@ -1,12 +1,9 @@
-<div class="container">
-
-    <nav class="navbar navbar-dark bg-dark">
-        <img src="../../assets/Utente.png">
-        <a class="navbar-brand" [routerLink]="['#']">{{ nome }} {{ cognome }}</a>
-        <form class="form-inline">
-            <button class="btn btn-outline-danger my-2 my-sm-0 btn-lg" 
-            type="submit" [routerLink]="['/']">Exit</button>
-        </form>
-    </nav>
-
-</div>
+<nav class="navbar navbar-dark bg-dark">
+    <img *ngIf="isUtenteLoggedin" src="../../assets/Utente.png">
+    <img *ngIf="!isUtenteLoggedin" src="../../assets/img/icona.png">
+    <a class="navbar-brand" [routerLink]="['#']">{{ nome }} {{ cognome }}</a>
+    <form class="form-inline">
+        <button *ngIf="isUtenteLoggedin" class="btn btn-outline-danger my-2 my-sm-0 btn-lg" type="submit"
+            [routerLink]="['/']" (click)="onClickExit()">Exit</button>
+    </form>
+</nav>

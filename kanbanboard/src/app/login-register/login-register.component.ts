@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Inject } from '@angular/core';
+
+import { LocalStorageService } from '../services/local-storage.service';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
 @Component({
   selector: 'app-login-register',
@@ -7,9 +11,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginRegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor (private localstorageservice: LocalStorageService,
+  @Inject(LOCAL_STORAGE) private storage: StorageService) { }
 
   ngOnInit() {
+
   }
   isLogin: boolean = true;
   isRegister: boolean = false;
@@ -31,4 +37,9 @@ export class LoginRegisterComponent implements OnInit {
     }    
   }
 
+  ngDoCheck() {
+    if (!this.localstorageservice.isEmpty()) {
+     this.localstorageservice.removeFromStorage();
+    }
+  }
 }

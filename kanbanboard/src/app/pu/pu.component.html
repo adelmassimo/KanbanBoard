@@ -1,67 +1,69 @@
-<app-header-pagina></app-header-pagina>
-<div class="container" id="container">
-  <!--Seconda parte Header Menu-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="isMenuVisibile">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <!--<a class="nav-link" [routerLink]="['about']">Progetti</a>-->
-        <div class="col-sm">
-          <select class="form-control" id='listprog'>
-            <option [routerLink]="['#']">Ricerca Progetto</option>
-          </select>
-        </div>
-      </li>
-      <li class="nav-item">
-        <!--<a class="nav-link" [routerLink]="['contact']">Ricerca</a>-->
-        <div class="col-sm">
-          <form class="form-inline">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Progetto" aria-label="Progetto"
-                aria-describedby="basic-addon1">
-              <div class="input-group-prepend">
-                <button type="button" class="btn btn-secondary"><i
-                    class="fa fa-search"></i></button>
-                <!--<span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>-->
-              </div>
+<!--Seconda parte Header Menu-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="isMenuVisibile">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item dropdown">
+      <div class="col-sm">
+        <select class="form-control" id='listprog'>
+          <option [routerLink]="['#']" (click)="onClickCercaProgettoUtente()">Cerca un progetto dell'utente</option>
+          <option></option> <!-- DA INSERIRE ALL'INTERNO DELl' OPTION *ngFor="let progetto of progetto>"-->
+        </select>
+      </div>
+    </li>
+    <li class="nav-item">
+      <div class="col-sm">
+        <form class="form-inline">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Certa tra i progetti" name="nome_progetto"
+              [(ngModel)]="nome_progetto">
+            <div class="input-group-prepend">
+              <button type="button" class="btn btn-secondary" (click)="onClickSearchProject()"><i
+                  class="fa fa-search"></i></button>
             </div>
-          </form>
-        </div>
-      </li>
-    </ul>
-  </nav>
+          </div>
+        </form>
+      </div>
+    </li>
+  </ul>
+</nav>
 
-  <!--Preview progetti-->
-  <!--Se l'utente non ha progetti-->
-  <div class="alert alert-danger" role="alert">
-    Crea un nuovo progetto!
+<!--Preview progetti-->
+<!--Se l'utente non ha progetti-->
+<div *ngIf="isVisible" id="error">
+  <div *ngIf="!isSuccess" class="alert alert-danger" role="alert">
+    Progetto non Esistente <a href="javascript:void(0)" (click)="onClickCanc()"><i class="fa fa-times" id="cross"></i></a>
   </div>
-  <!--Se l'utente non ha progetti-->
+  <div *ngIf="isSuccess" class="alert alert-success" role="alert">
+    Progetto esistente <a href="javascript:void(0)" (click)="onClickCanc()"><i class="fa fa-times" id="cross"></i></a>
+  </div>
+</div>
+<!--Se l'utente non ha progetti-->
 
-  <!--Se l'utente ha dei progetti-->
-  <div class="card" style="width: 18rem;">
-    <img src="../assets/img" class="card-img-top">
-    <div class="card-body">
-      <h5 class="card-title">Progetto 1</h5>
-      <p class="card-text"> Descrizione Progetto </p>
-    </div>
-    <div class="card-body">
-      <a href="#" class="btn btn-primary">Apri Progetto</a>
-    </div>
+<!--Se l'utente ha dei progetti-->
+<div class="card" id="card" style="">
+  <img src="../assets/table.png" class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">nome Progetto</h5>
+    <p class="card-text"> Descrizione Progetto </p>
   </div>
-  <!--Se l'utente ha dei progetti
+  <div class="card-body">
+    <button [routerLink]="['']" class="btn btn-primary">Apri Progetto</button>
+  </div>
+</div>
+<!--Se l'utente ha dei progetti
  
   Preview progetti-->
 
-  <!--Bottoni end pagina-->
-  <div class="row">
-    <div class="col-sm">
-      <button type="button" class="btn btn-secondary " id='add' [routerLink]="['']"><i class="fa fa-plus"></i></button>
-    </div>
+<!--Bottoni end pagina-->
+<div class="row">
+  <div class="col-sm">
+    <button type="button" class="btn btn-secondary " id='add' [routerLink]="['']" (click)="onClickNewProject()"><i
+        class="fa fa-plus"></i></button>
   </div>
-  <div class="row">
-    <div class="col-sm">
-      <button type="button" class="btn btn-secondary " id='search' (click)="onClickSearchMenu();"><i class="fa fa-search"></i></button>
-    </div>
-  </div>
-  <!--Bottoni end pagina-->
 </div>
+<div class="row">
+  <div class="col-sm">
+    <button type="button" class="btn btn-secondary " id='search' (click)="onClickSearchMenu()"><i
+        class="fa fa-search"></i></button>
+  </div>
+</div>
+<!--Bottoni end pagina-->
