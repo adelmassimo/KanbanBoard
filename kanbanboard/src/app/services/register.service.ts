@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Utenti_registrati } from '../models/mock.login';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  registrazione(utente):Boolean{
-    //test con mock
+  //3000 è la porta sulla quale resta in ascolto il serve
+  base_url = 'localhost:3000';
+
+  registrazione(utente):Observable<any>{
     
     //controllo password che sia più di 8 caratteri con maisucole, minuscole e numeri
     let patternPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/; 
@@ -29,6 +33,13 @@ export class RegisterService {
       let patternEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       
       if(patternEmail.test(String(utente.email))){
+        
+        //DATABASE
+        return this.http.get(this.base_url + "/api/registrazione/" + utente.username + "/" + utente.nome + "/" + utente.cognome + 
+        "/" + utente.email + "/" + utente.password + "/" + utente.avatar);
+
+
+       /* MOCK 
         Utenti_registrati.push(utente);
 
         //ciclo per visualizzare mock in console
@@ -37,10 +48,11 @@ export class RegisterService {
         }
 
         console.log("utente registrato correttamente!");
-        return true;
+        return true;*/
       }
     } 
-    console.log("errore durante la registrazione");
-    return false;
+    /*console.log("errore durante la registrazione");
+    return false;*/
+    return undefined;
   }
 }
