@@ -29,9 +29,9 @@ export class LoginComponent implements OnInit {
     console.log(utente);
 
     if (this.username != undefined && this.username != "" && this.password != undefined && this.password != "") {
-      if (this.loginService.autenticazione(utente)) {
+      if (this.loginService.getUtente(utente) != undefined) {
 
-        console.log("successo");
+        console.log("successo - utente loggato " + utente.username);
         this.myMessage = "Login effettuato con successo";
         this.error = false;
         this.sign = true;

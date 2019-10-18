@@ -12,8 +12,7 @@ export class LoginService {
 
   constructor(private http: HttpClient,private localstorageservice: LocalStorageService) { }
 
-  base_url = 'localhost:1337';
-  wsUtenti: string = '/users';
+  base_url = 'localhost:3000';
 
   isMocked = true;
 
@@ -21,13 +20,13 @@ export class LoginService {
   nome: string = "";
   cognome: string = "";
 
-  /*getUtente():Observable<any>{
-      this.http.get( this.base_url+this.wsUtenti );
-      return this.http.post(this.base_url + this.wsUtenti);
-  }*/
+  getUtente(utente):Observable<any>{
+      return this.http.get(this.base_url + "/api/login/" + utente.username + "/" + utente.password);
+  }
 
   autenticazione(utente):Boolean{
     if(!this.isMocked){
+
 
       //collegamento al database con backend
       console.log(utente);
