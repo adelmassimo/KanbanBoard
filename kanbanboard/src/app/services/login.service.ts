@@ -21,7 +21,7 @@ export class LoginService {
 
   //login con database
   getUtente(utente):Observable<any>{
-      return this.http.get(this.base_url + "/api/login/" + utente.username + "/" + utente.password);
+      return this.http.post(this.base_url + "/api/login/" + utente.username + "/" + utente.password, "");
   }
 
   //login con mock

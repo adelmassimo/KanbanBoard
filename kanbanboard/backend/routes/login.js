@@ -12,7 +12,7 @@ login.get('/login', function (req, res) {
 })
 
 // controllo al login se l'utente ha le credenziali giuste
-login.get('/login/:username/:password', function (req, res) {
+login.post('/login/:username/:password', function (req, res) {
     username = req.params.username;
     password = req.params.password;
     console.log("Username è: " +username+ " La password è: " + password );
@@ -20,10 +20,11 @@ login.get('/login/:username/:password', function (req, res) {
     if (err) throw err;
 
     if ( rows.length == 1){
-        res.send(rows[0]);
-        console.log("UTENTE GIUSTO");
+      console.log("UTENTE GIUSTO");
+      res.send(rows[0]);
     }else{
-        console.log("UTENTE ERRATO");
+      console.log("UTENTE ERRATO");
+      res.send(null);
     } //fine if
         
   });
