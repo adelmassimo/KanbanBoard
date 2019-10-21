@@ -4,7 +4,7 @@ var sql_connection = require('../db_connector');
 
 
 // qui visualizza la lista di tutti gli utenti
-login.get('/login', function (req, res) {
+login.get('/loginVisualizzaUtenti', function (req, res) {
   sql_connection.query('SELECT * from utenti', function(err, rows, next) {
     if (err) throw err;
     res.send(rows);
@@ -12,9 +12,9 @@ login.get('/login', function (req, res) {
 })
 
 // controllo al login se l'utente ha le credenziali giuste
-login.post('/login/:username/:password', function (req, res) {
-    username = req.params.username;
-    password = req.params.password;
+login.post('/login/', function (req, res) {
+    username = req.body.username;
+    password = req.body.password;
     console.log("Username è: " +username+ " La password è: " + password );
   sql_connection.query("SELECT * from utenti WHERE username = '"+username+"' AND password = '"+password+"'", function(err, rows, next) {
     if (err) throw err;

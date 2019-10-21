@@ -52,30 +52,34 @@ export class RegisterComponent implements OnInit {
       password: this.password
     }
 
-    console.log(utente);
-
     //controllo che i campi non siano vuoti
     if (this.username != undefined && this.username != ""
       && this.password != undefined && this.password != ""
       && this.email != undefined && this.email != ""
       && this.nome != undefined && this.nome != ""
       && this.cognome != undefined && this.cognome != "") {
-      if (this.registerService.registrazione(utente)) {
-        console.log("reindirizzamento all homepage");
-        this.myMessage = "utente registrato correttamente";
-        this.error = false;
-        this.sign = true;
+      
+        this.registerService.registrazione(utente).subscribe(
+          utente => {
+            console.log("successo, utente registrato");
+            this.myMessage = "utente registrato con successo";
+            this.error = false;
+            this.sign = true;
+
+            this.router.navigate(['/login']);
+          },
+          err => {
+            console.log("errore collegamento database");
+            this.myMessage = "Errore, utente non registrato!";
+            this.error = true;
+            this.sign = false;
+          }
+        )
       } else {
-        console.log("errore, prego riprovare");
-        this.myMessage = "errore, riprovare";
+        console.log("riempi i campi correttamente!");
+        this.myMessage = "riempi i campi correttamente!";
         this.error = true;
         this.sign = false;
-      }
-    } else {
-      console.log("riempi i campi correttamente!");
-      this.myMessage = "riempi i campi correttamente!";
-      this.error = true;
-      this.sign = false;
     }
   }
 

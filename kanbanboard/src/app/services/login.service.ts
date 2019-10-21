@@ -13,7 +13,7 @@ export class LoginService {
   constructor(private http: HttpClient,private localstorageservice: LocalStorageService) { }
 
   //3000 è la porta sulla quale resta in ascolto il serve
-  base_url = 'localhost:3000';
+  base_url = 'http://localhost:3000';
 
   isUtenteLoggedin = false;
   nome: string = "";
@@ -21,7 +21,10 @@ export class LoginService {
 
   //login con database
   getUtente(utente):Observable<any>{
-      return this.http.post(this.base_url + "/api/login/" + utente.username + "/" + utente.password, "");
+      return this.http.post(this.base_url + "/api/login/", {
+        'username': utente.username,
+        'password': utente.password
+      });
   }
 
   //login con mock

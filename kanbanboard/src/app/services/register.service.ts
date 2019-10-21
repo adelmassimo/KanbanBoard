@@ -11,7 +11,7 @@ export class RegisterService {
   constructor(private http: HttpClient) { }
 
   //3000 è la porta sulla quale resta in ascolto il serve
-  base_url = 'localhost:3000';
+  base_url = 'http://localhost:3000';
 
   registrazione(utente):Observable<any>{
     
@@ -35,8 +35,14 @@ export class RegisterService {
       if(patternEmail.test(String(utente.email))){
         
         //DATABASE
-        return this.http.get(this.base_url + "/api/registrazione/" + utente.username + "/" + utente.nome + "/" + utente.cognome + 
-        "/" + utente.email + "/" + utente.password + "/" + utente.avatar);
+        return this.http.post(this.base_url + "/api/register/", {
+        'username': utente.username,
+        'nome': utente.nome,
+        'cognome': utente.cognome,
+        'email': utente.email,
+        'password': utente.password,
+        'avatar': utente.avatar
+      });
 
 
        /* MOCK 
