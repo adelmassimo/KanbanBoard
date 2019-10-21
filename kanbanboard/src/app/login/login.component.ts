@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
           } else {
             // andiamo 
             console.log("successo - utente loggato " + utente.username);
+            //aggiungere utente al local storage
             this.myMessage = "Login effettuato con successo";
             this.error = false;
             this.sign = true;
