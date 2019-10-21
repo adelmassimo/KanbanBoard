@@ -1,14 +1,10 @@
 <!--Seconda parte Header Menu-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="isMenuVisibile">
   <ul class="navbar-nav mr-auto">
-    <li class="nav-item dropdown">
-      <div class="col-sm">
-        <select class="form-control" id='listprog'>
-          <option [routerLink]="['#']" (click)="onClickCercaProgettoUtente()">Cerca un progetto dell'utente</option>
-          <option></option> <!-- DA INSERIRE ALL'INTERNO DELl' OPTION *ngFor="let progetto of progetto>"-->
-        </select>
-      </div>
-    </li>
+    <select class="custom-select mr-sm-2">
+      <option>Cerca progetti..</option>
+      <option *ngFor="let progetto of lista_progetti">{{progetto}}</option>
+    </select>
     <li class="nav-item">
       <div class="col-sm">
         <form class="form-inline">
@@ -30,7 +26,8 @@
 <!--Se l'utente non ha progetti-->
 <div *ngIf="isVisible" id="error">
   <div *ngIf="!isSuccess" class="alert alert-danger" role="alert">
-    Progetto non Esistente <a href="javascript:void(0)" (click)="onClickCanc()"><i class="fa fa-times" id="cross"></i></a>
+    Progetto non Esistente <a href="javascript:void(0)" (click)="onClickCanc()"><i class="fa fa-times"
+        id="cross"></i></a>
   </div>
   <div *ngIf="isSuccess" class="alert alert-success" role="alert">
     Progetto esistente <a href="javascript:void(0)" (click)="onClickCanc()"><i class="fa fa-times" id="cross"></i></a>

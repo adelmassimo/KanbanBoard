@@ -18,6 +18,10 @@
     color: black
 }
 
+select{
+  width: 200px;
+}
+
 #error{
     display: block;
     margin: 1em;
