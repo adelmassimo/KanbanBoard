@@ -23,7 +23,6 @@ export class LoginRegisterComponent implements OnInit {
   RegisterActive: string = '';
 
   onChangeTab(tab){
-    console.log(tab);
     if(tab === 'login'){
       this.LoginActive = 'avtive';
       this.isLogin = true;
