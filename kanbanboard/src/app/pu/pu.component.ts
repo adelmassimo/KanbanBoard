@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProgettiDisponibili } from '../models/mock.project';
 import { ProjectService } from '../services/project.service';
+import { PuService } from '../services/pu.service';
 
 @Component({
   selector: 'app-pu',
@@ -8,8 +8,6 @@ import { ProjectService } from '../services/project.service';
   styleUrls: ['./pu.component.css']
 })
 export class PUComponent implements OnInit {
-
-  constructor(private projectService: ProjectService) { }
 
   //apertura menu superiore
   isMenuVisibile: boolean = false;
@@ -25,6 +23,18 @@ export class PUComponent implements OnInit {
   isVisible: boolean = true;
   isSuccess: boolean;
 
+  // Listaprogetti 
+  lista_progetti: any[];
+
+  constructor(private projectService: ProjectService,
+              private puService: PuService) { }
+
+
+  ngOnInit() {
+    this.lista_progetti = this.puService.getProgettiUtente();
+  }
+
+
   onClickSearchMenu() {
     if (this.isMenuVisibile == false) {
       this.isMenuVisibile = true;
@@ -34,34 +44,27 @@ export class PUComponent implements OnInit {
     }
   }
 
-  onClickCercaProgettoUtente(){
-
-  }
 
   onClickSearchProject() {
-    
-    this.isVisible=true;
-    this.isSuccess=false
-    /*
-    if (this.projectService.getProgetti(this.nome_progetto)){
+
+    this.isVisible = true;
+    this.isSuccess = false;
+
+    if (this.projectService.getProgetti(this.nome_progetto)) {
       console.log("Progetto Trovato!");
-      this.isSuccess=true;
+      this.isSuccess = true;
     }
-    else{
+    else {
       console.log("Progetto non Trovato");
-      this.isSuccess=false;
-    }*/
+      this.isSuccess = false;
+    }
   }
 
-  onClickCanc(){
-    this.isVisible=false;
+  onClickCanc() {
+    this.isVisible = false;
   }
 
-  onClickNewProject(){
-
-  }
-
-  ngOnInit() {
+  onClickNewProject() {
   }
 
 }

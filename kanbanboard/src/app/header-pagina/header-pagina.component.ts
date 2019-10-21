@@ -21,6 +21,7 @@ export class HeaderPaginaComponent implements OnInit {
 
   nome: string;
   cognome: string;
+  
 
   ngOnInit() {
     console.log(this.isUtenteLoggedin);
