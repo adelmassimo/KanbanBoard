@@ -31,7 +31,7 @@ export class PUComponent implements OnInit {
 
 
   ngOnInit() {
-    this.lista_progetti = this.puService.getProgettiUtente();
+    //this.lista_progetti = this.puService.getProgettiUtente();
   }
 
 
@@ -44,12 +44,11 @@ export class PUComponent implements OnInit {
     }
   }
 
-
   onClickSearchProject() {
 
     this.isVisible = true;
     this.isSuccess = false;
-
+/*
     if (this.projectService.getProgetti(this.nome_progetto)) {
       console.log("Progetto Trovato!");
       this.isSuccess = true;
@@ -57,7 +56,7 @@ export class PUComponent implements OnInit {
     else {
       console.log("Progetto non Trovato");
       this.isSuccess = false;
-    }
+    }*/
   }
 
   onClickCanc() {

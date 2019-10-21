@@ -36,9 +36,9 @@ login.post('/login/getUtente/', function(req, res){
     if (err) throw err;
 
     if ( rows.length == 1){
-      res.send(rows[0]);
+      res.send({'success':'1','utente':rows[0]});
     }else{
-      res.send({'errore': '0'});
+      res.send({'success': '0'});
     } //fine if
   })
 })//fine login/getutente

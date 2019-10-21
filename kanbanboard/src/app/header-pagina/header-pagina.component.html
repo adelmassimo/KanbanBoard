@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark bg-dark">
-    <img *ngIf="isUtenteLoggedin" src="../../assets/Utente.png">
+    <img *ngIf="isUtenteLoggedin" src="{{avatar}}">
     <img *ngIf="!isUtenteLoggedin" src="../../assets/img/icona.png">
     <a class="navbar-brand" [routerLink]="['#']">{{ nome }} {{ cognome }}</a>
     <form class="form-inline">
