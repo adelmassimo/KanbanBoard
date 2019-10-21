@@ -29,20 +29,29 @@ export class LoginComponent implements OnInit {
     console.log(utente);
 
     if (this.username != undefined && this.username != "" && this.password != undefined && this.password != "") {
-      if (this.loginService.autenticazione(utente)) {
 
-        console.log("successo");
-        this.myMessage = "Login effettuato con successo";
-        this.error = false;
-        this.sign = true;
-        
-        this.router.navigate(['/pu']);
-      } else {
-        console.log("utente non trovato!");
-        this.myMessage = "utente non trovato!";
-        this.error = true;
-        this.sign = false;
-      }
+      this.loginService.getUtente(utente).subscribe(
+        utente => {
+          if (utente === null ) {
+            // oia
+            console.log("utente non trovato!");
+            this.myMessage = "utente non trovato!";
+            this.error = true;
+            this.sign = false;
+          } else {
+            // andiamo 
+            console.log("successo - utente loggato " + utente.username);
+            this.myMessage = "Login effettuato con successo";
+            this.error = false;
+            this.sign = true;
+            
+            this.router.navigate(['/pu']);
+          }
+        },
+        err => {
+          console.log("errore collegamento database");
+        }
+      )
     } else {
       console.log("riempi i campi correttamente!");
       this.myMessage = "username o password errati";

@@ -20,10 +20,10 @@ export class PUComponent implements OnInit {
   nome_progetto: string = "";
 
   //variabile per visualizzare la barra (rossa se non c'è il progetto, verde se il progetto esiste)
-  isVisible: boolean = true;
+  isVisible: boolean = false;
   isSuccess: boolean;
 
-  // Listaprogetti 
+  // Listaprogetti
   lista_progetti: any[];
 
   constructor(private projectService: ProjectService,
