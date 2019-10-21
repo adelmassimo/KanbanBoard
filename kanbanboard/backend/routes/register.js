@@ -30,7 +30,7 @@ register.post('/register/', function (req, res) {
     if ( rows.length == 1){
       //ritorno l'utente già registrato
       console.log("USERNAME ESISTENTE");  
-      res.send(1);
+      res.send("esiste");
     }else{
       // controllo se le credenziali rispettano i criteri richiesti: password 8 caratteri con minuscole e MAIUSCOLE E NUMERI
       if(patternEmail.test(String(email)) && patternPassword.test(String(password))){
@@ -49,7 +49,7 @@ register.post('/register/', function (req, res) {
 
       }else{
         console.log("USERNAME O PASSWORD ERRATI");  
-        res.send(0);
+        res.send("errore");
       } // fine if
     } // fine if
 
