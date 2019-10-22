@@ -21,6 +21,10 @@ export class PostItComponent implements OnInit {
     }
   console.log(postIT);
   }
+
+  onCancelSubmit(){
+    this.router.navigate(['/lavagna']);
+  }
   
   ngOnInit() {
   }

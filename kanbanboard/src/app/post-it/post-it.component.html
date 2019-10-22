@@ -12,13 +12,15 @@
         <!--DESCRIZIONE POST-IT-->
         <div class="mb-3 d-flex justify-content-center">
           <mat-form-field class="w-75">
-              <textarea matInput placeholder="Inserisci la descrizione..." type="text" id="descrizione_postIt" name="descrizione_postIt" [(ngModel)]="descrizione_postIt"></textarea>
-            </mat-form-field>
+            <textarea matInput placeholder="Inserisci la descrizione..." type="text" id="descrizione_postIt" name="descrizione_postIt" [(ngModel)]="descrizione_postIt"></textarea>
+          </mat-form-field>
         </div>
-        <!--SALVA E ELIMINA-->
+        <!--SALVA E ANNULLA-->
         <div class="mb-3 d-flex justify-content-center">
           <button class="btn btn-primary" type="submit">Salva</button>
-          <!-- <button class="btn btn-danger" type="submit" style="margin-left: 20px;">Elimina</button> -->
+          <form action="javascript:void(0)" (submit) = "onCancelSubmit()">
+            <button class="btn btn-danger" type="submit" style="margin-left: 20px;">Annulla</button>
+          </form>
         </div>
       </form>
     </div>
