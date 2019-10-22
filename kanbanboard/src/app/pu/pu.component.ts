@@ -43,14 +43,14 @@ export class PUComponent implements OnInit {
     //this.lista_progetti = this.puService.getProgettiUtente();
   }
 
-  ngDoCheck(){
-/*
+/*  ngDoCheck(){
+
     //questo if controlla se l'utente è loggato altrimenti si viene reindrizzati alla homepage
     if(this.localstorageservice.isEmpty()){
       //se non è loggato nessuno si viene reindirizzati alla homepage
       this.router.navigate(['']);
-    }*/
-  }
+    }
+  }*/
 
 
   onClickSearchMenu() {
