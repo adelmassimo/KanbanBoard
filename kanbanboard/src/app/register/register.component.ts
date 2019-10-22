@@ -80,7 +80,7 @@ export class RegisterComponent implements OnInit {
               this.error = false;
               this.sign = true;
 
-              this.router.navigate(['/login']);
+              window.location.reload();
             }
           },
           err => {
