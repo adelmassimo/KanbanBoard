@@ -1,0 +1,15 @@
+.tabella-lavagna{
+    margin-top: 3.5em;
+}
+.column{
+    width: 25%;
+}
+.titoloProgetto{
+    margin-top: 2em;
+}
+.bottoneCrea{
+    margin-right: 10px;
+}
+.nomeProgetto{
+    font-size: 50px;
+}

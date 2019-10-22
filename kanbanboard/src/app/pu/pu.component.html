@@ -13,7 +13,7 @@
               [(ngModel)]="nome_progetto">
             <div class="input-group-prepend">
               <button type="button" class="btn btn-secondary" (click)="onClickSearchProject()"><i
-                  class="fa fa-search"></i></button>
+                  class="fas fa-search"></i></button>
             </div>
           </div>
         </form>
@@ -26,11 +26,11 @@
 <!--Se l'utente non ha progetti-->
 <div *ngIf="isVisible" id="error">
   <div *ngIf="!isSuccess" class="alert alert-danger" role="alert">
-    Progetto non Esistente <a href="javascript:void(0)" (click)="onClickCanc()"><i class="fa fa-times"
+    Progetto non Esistente <a href="javascript:void(0)" (click)="onClickCanc()"><i class="fas fa-times"
         id="cross"></i></a>
   </div>
   <div *ngIf="isSuccess" class="alert alert-success" role="alert">
-    Progetto esistente <a href="javascript:void(0)" (click)="onClickCanc()"><i class="fa fa-times" id="cross"></i></a>
+    Progetto esistente <a href="javascript:void(0)" (click)="onClickCanc()"><i class="fas fa-times" id="cross"></i></a>
   </div>
 </div>
 <!--Se l'utente non ha progetti-->
