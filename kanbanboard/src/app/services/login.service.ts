@@ -20,15 +20,56 @@ export class LoginService {
   cognome: string = "";
 
   //login con database
-  getUtente(utente):Observable<any>{
+  login(utente):Observable<any>{
       return this.http.post(this.base_url + "/api/login/", {
         'username': utente.username,
         'password': utente.password
       });
   }
 
+  getUtente(utente):Observable<any> {
+    return this.http.post(this.base_url + "/api/login/getUtente/", {'username': utente});
+  }
+
   //login con mock
-  autenticazione(utente):Boolean{
+  caricaLocalStorage(utente){
+    this.getUtente(utente).subscribe(
+      ok=>{
+        if(ok.success==1){
+        console.log('Utente trovato ' + ok.utente.nome_utente + ok.utente.cognome_utente + ok.utente.img_avatar);
+        const user = {
+          'nome_utente': ok.utente.nome_utente,
+          'cognome_utente': ok.utente.cognome_utente,
+          'avatar': ok.utente.img_avatar
+        }
+        this.localstorageservice.storeOnLocalStorage(user);
+        }
+        else{
+          console.log('Utente non trovato');
+        }
+      },
+      error=>{
+        console.log('Collegamento Fallito' + error);
+      }
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 
     //test con mock
     for (let utenteregistrato of Utenti_registrati){
@@ -40,12 +81,13 @@ export class LoginService {
         this.isUtenteLoggedin = true;
 
         console.log(utenteregistrato);
-        this.localstorageservice.storeOnLocalStorage(utenteregistrato);
+        
 
         return true;  
       }
     }
     console.log("utente non trovato");
     return false;
-  }
-}
+*/
+
+

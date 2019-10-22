@@ -28,6 +28,19 @@ login.post('/login/', function (req, res) {
     } //fine if
         
   });
-}) // fine login.get('/login/:username&password', function (req, res) {
+}) // fine login
+
+login.post('/login/getUtente/', function(req, res){
+  username = req.body.username;
+  sql_connection.query("SELECT * from utenti WHERE username = '"+ username +"'", function(err, rows, next){
+    if (err) throw err;
+
+    if ( rows.length == 1){
+      res.send({'success':'1','utente':rows[0]});
+    }else{
+      res.send({'success': '0'});
+    } //fine if
+  })
+})//fine login/getutente
 
 module.exports = login;

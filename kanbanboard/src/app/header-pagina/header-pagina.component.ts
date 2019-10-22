@@ -21,7 +21,7 @@ export class HeaderPaginaComponent implements OnInit {
 
   nome: string;
   cognome: string;
-  
+  avatar: string;  
 
   ngOnInit() {
     console.log(this.isUtenteLoggedin);
@@ -31,8 +31,9 @@ export class HeaderPaginaComponent implements OnInit {
     if (!this.localstorageservice.isEmpty()) {
       this.isUtenteLoggedin = !this.localstorageservice.isEmpty();
       this.objlist = this.storage.get('object_list');
-      this.nome = this.objlist[0].nome;
-      this.cognome = this.objlist[0].cognome;
+      this.nome = this.objlist[0].nome_utente;
+      this.cognome = this.objlist[0].cognome_utente;
+      this.avatar = this.objlist[0].avatar;
     } else {
       this.nome = "Kanbanboard";
       this.cognome = "";
