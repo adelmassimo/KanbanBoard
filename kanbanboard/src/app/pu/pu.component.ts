@@ -3,17 +3,14 @@ import { ProjectService } from '../services/project.service';
 import { PuService } from '../services/pu.service';
 import { LocalStorageService } from '../services/local-storage.service';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
-
+import { Inject } from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-pu',
   templateUrl: './pu.component.html',
   styleUrls: ['./pu.component.css']
 })
 export class PUComponent implements OnInit {
-
-  constructor(private projectService: ProjectService,
-    private puService: PuService,
-    private localstorageservice: LocalStorageService) { }
 
   //apertura menu superiore
   isMenuVisibile: boolean = false;
@@ -36,9 +33,23 @@ export class PUComponent implements OnInit {
   idUser: string;//= this.objlist[0].id_utente;
   idProgetto: string;// = this.objlist[0].id_progeto;
   
+  constructor(private projectService: ProjectService,
+              private puService: PuService, private localstorageservice: LocalStorageService,
+              @Inject(LOCAL_STORAGE) private storage: StorageService, private router: Router) { }
 
+
+  key: string = "object_list";
   ngOnInit() {
     //this.lista_progetti = this.puService.getProgettiUtente();
+  }
+
+  ngDoCheck(){
+/*
+    //questo if controlla se l'utente è loggato altrimenti si viene reindrizzati alla homepage
+    if(this.localstorageservice.isEmpty()){
+      //se non è loggato nessuno si viene reindirizzati alla homepage
+      this.router.navigate(['']);
+    }*/
   }
 
 
