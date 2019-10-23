@@ -10,7 +10,7 @@ progetti.get('/visualizzaProgetti', function (req, res) {
 })
 
 //richiesta per utenti x progetto
-progettiUtenti.post('/visualizzaProgettiUtenti', function (req, res) {
+progetti.post('/visualizzaProgettiUtenti', function (req, res) {
     username = req.body.username;
     sql_connection.query('SELECT utenti.*,'+
 		'progetti.nome_progetto,'+
@@ -26,18 +26,4 @@ progettiUtenti.post('/visualizzaProgettiUtenti', function (req, res) {
     });
 })
 
-
-/*
-progetti.post('/progetti/', function (req, res) {
-    sql_connection.query("SELECT nome_progetto from progetti", function (err, rows, next) {
-        console.log(rows);
-        res.send(rows);
-    });
-
-    sql_connection.query("SELECT descrizione_progetto FROM progetti", function (err, rows, next) {
-        console.log(rows);
-        res.send(rows);
-    });
-
-})//fine post progetti
-*/
+module.exports = progetti;
