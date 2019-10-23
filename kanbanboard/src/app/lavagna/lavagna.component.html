@@ -1,0 +1,33 @@
+<div class="titoloProgetto ">
+  <div class="row ">
+    <div class="col-9">
+      <div>
+        <h1 class="nomeProgetto">{{nomeProgetto}}</h1>
+      </div>
+    </div>
+    <div class="col-3 d-flex justify-content-end align-items-center">
+      <button class="btn btn-sm btn-success bottoneCrea" (click)="creaPostIt()">Crea post-it</button>
+      <button class="btn btn-sm btn-danger" (click)="esciProgetto()">Esci dal progetto</button>
+    </div>
+  </div>
+</div>
+
+<table class="table tabella-lavagna">
+  <thead>
+    <tr>
+      <th class="column">TO DO</th>
+      <th class="column">DOING</th>
+      <th class="column">DONE</th>
+      <th class="column">DONE (ACCEPTED)</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>ciao</td>
+      <td>mi</td>
+      <td>chiamo</td>
+      <td>carletto</td>
+    </tr>
+  </tbody>
+</table>

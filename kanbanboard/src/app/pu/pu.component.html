@@ -13,7 +13,7 @@
               [(ngModel)]="nome_progetto">
             <div class="input-group-prepend">
               <button type="button" class="btn btn-secondary" (click)="onClickSearchProject()"><i
-                  class="fa fa-search"></i></button>
+                  class="fas fa-search"></i></button>
             </div>
           </div>
         </form>
@@ -26,24 +26,24 @@
 <!--Se l'utente non ha progetti-->
 <div *ngIf="isVisible" id="error">
   <div *ngIf="!isSuccess" class="alert alert-danger" role="alert">
-    Progetto non Esistente <a href="javascript:void(0)" (click)="onClickCanc()"><i class="fa fa-times"
+    Progetto non Esistente <a href="javascript:void(0)" (click)="onClickCanc()"><i class="fas fa-times"
         id="cross"></i></a>
   </div>
   <div *ngIf="isSuccess" class="alert alert-success" role="alert">
-    Progetto esistente <a href="javascript:void(0)" (click)="onClickCanc()"><i class="fa fa-times" id="cross"></i></a>
+    Progetto esistente <a href="javascript:void(0)" (click)="onClickCanc()"><i class="fas fa-times" id="cross"></i></a>
   </div>
 </div>
 <!--Se l'utente non ha progetti-->
 
 <!--Se l'utente ha dei progetti-->
-<div class="card" id="card" style="">
+<div class="card" id="card" *ngFor="let item of items">
   <img src="../assets/table.png" class="card-img-top">
   <div class="card-body">
-    <h5 class="card-title">nome Progetto</h5>
-    <p class="card-text"> Descrizione Progetto </p>
+    <h5 class="card-title">{{object.nome_progetto}}</h5>
+    <p class="card-text">{{object.descrizione}}</p>
   </div>
   <div class="card-body">
-    <button [routerLink]="['#']" class="btn btn-primary">Apri Progetto</button>
+    <button (click)="openProject()" class="btn btn-primary">Apri Progetto</button>
   </div>
 </div>
 <!--Se l'utente ha dei progetti

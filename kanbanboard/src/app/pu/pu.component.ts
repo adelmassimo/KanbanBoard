@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
-import { PuService } from '../services/pu.service';
+import { UserService } from '../services/user.service';
+import { LocalStorageService } from '../services/local-storage.service';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LocalStorageService } from '../services/local-storage.service';
-import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 @Component({
   selector: 'app-pu',
   templateUrl: './pu.component.html',
@@ -30,24 +30,30 @@ export class PUComponent implements OnInit {
   // Listaprogetti
   lista_progetti: any[];
 
+  objlist: any[];
+  idUser: string;//= this.objlist[0].id_utente;
+  idProgetto: string;// = this.objlist[0].id_progeto;
+  
   constructor(private projectService: ProjectService,
-              private puService: PuService, private localstorageservice: LocalStorageService,
+              private userService: UserService, private localstorageservice: LocalStorageService,
               @Inject(LOCAL_STORAGE) private storage: StorageService, private router: Router) { }
 
 
   key: string = "object_list";
+
   ngOnInit() {
     //this.lista_progetti = this.puService.getProgettiUtente();
+    this.getProgetti();
   }
 
-  ngDoCheck(){
+/*  ngDoCheck(){
 
     //questo if controlla se l'utente è loggato altrimenti si viene reindrizzati alla homepage
     if(this.localstorageservice.isEmpty()){
       //se non è loggato nessuno si viene reindirizzati alla homepage
       this.router.navigate(['']);
     }
-  }
+  }*/
 
 
   onClickSearchMenu() {
@@ -63,15 +69,15 @@ export class PUComponent implements OnInit {
 
     this.isVisible = true;
     this.isSuccess = false;
-/*
-    if (this.projectService.getProgetti(this.nome_progetto)) {
-      console.log("Progetto Trovato!");
-      this.isSuccess = true;
-    }
-    else {
-      console.log("Progetto non Trovato");
-      this.isSuccess = false;
-    }*/
+    /*
+        if (this.projectService.getProgetti(this.nome_progetto)) {
+          console.log("Progetto Trovato!");
+          this.isSuccess = true;
+        }
+        else {
+          console.log("Progetto non Trovato");
+          this.isSuccess = false;
+        }*/
   }
 
   onClickCanc() {
@@ -80,5 +86,28 @@ export class PUComponent implements OnInit {
 
   onClickNewProject() {
   }
+
+  openProject(){
+    //carico sul local storage il progetto dell'utente
+    //...
+
+    this.router.navigate(['/lavagna'])
+  }
+  /*
+  ngDoCheck() {
+    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+    //Add 'implements DoCheck' to the class.
+    this.puService.getNomeProgetto(this.idUser).subscribe(
+      success=>{
+        console.log(success);
+      },
+      error => {
+        console.log(error);
+      });
+  }
+      }
+    );
+
+  }*/
 
 }

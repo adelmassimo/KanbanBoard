@@ -35,7 +35,7 @@ export class PostItComponent implements OnInit {
     if (this.nome_postIt != undefined && this.nome_postIt != ""
       && this.descrizione_postIt != undefined && this.descrizione_postIt != ""
       && this.panelColor.value != undefined && this.panelColor.value != "") {
-      
+
         this.postItService.inserimentoPostit(postIt).subscribe(
           successo => {
 
@@ -66,9 +66,21 @@ export class PostItComponent implements OnInit {
 
   }
 
+  onCancelSubmit(){
+    this.router.navigate(['/lavagna']);
+  }
+
   ngOnInit() {
     console.log(this.panelColor.value);
   }
 
+  ngDoCheck(){
+
+    //questo if controlla se l'utente è loggato altrimenti si viene reindrizzati alla homepage
+    //if(this.localstorageservice.isEmpty()){
+      //se non è loggato nessuno si viene reindirizzati alla homepage
+      //this.router.navigate(['']);
+    //}
+  }
 
 }

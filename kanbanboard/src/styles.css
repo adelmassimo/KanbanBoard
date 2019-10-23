@@ -31,3 +31,9 @@ background: rgba(0, 0, 255, 0.5);
 .example-panel-yellow.mat-select-panel {
   background: rgba(234, 230, 0, 0.877);
 }
+.nomeProgetto{
+  font-size: 50px;
+}
+.titoloProgetto{
+  margin-top: 2em;
+}
