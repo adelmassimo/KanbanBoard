@@ -19,9 +19,9 @@ export class UserService {
     'avatar': ''
   }
 
-  progettiUtente = {
-
-  }
+  progettiUtente = {}
+  
+  progettoAttivo: any[] = null;
 
   logged: boolean = false;
 
@@ -53,5 +53,20 @@ export class UserService {
     this.user.cognome = '';
     this.user.avatar = '';
     this.logged = false;
+  }
+
+  setProgettoAttivo(id){
+    this.backendProgettoAttivo(id).subscribe(
+      succ=>{
+        
+      },
+      err=>{
+        console.log("errore collegamento database!");
+      }
+    )
+  }
+
+  backendProgettoAttivo(id):Observable<any>{
+    return this.http.post(this.base_url + "/api/", {'idProgetto': id})
   }
 }

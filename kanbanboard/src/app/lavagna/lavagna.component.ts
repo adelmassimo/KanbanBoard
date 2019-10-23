@@ -16,10 +16,6 @@ export class LavagnaComponent implements OnInit {
   }
 
   nomeProgetto: string = "nome progetto";
-  postItTODO: Array<any> = [];
-  postItDOING: Array<any> = [];
-  postItDONE: Array<any> = [];
-  postItDONEACC: Array<any> = [];
 
   ngDoCheck(){
 
@@ -40,10 +36,6 @@ export class LavagnaComponent implements OnInit {
 
   visualizzaPostIt(){
     //riempio il vettore postIt[] con tutti i post-it dell'utente selezionato
-    this.postItTODO.push("todo1");
-    this.postItTODO.push("todo2");
-    this.postItDOING.push("doing1");
-    console.log(this.postItTODO + " " + this.postItDOING); 
   }
 
 }
