@@ -18,6 +18,7 @@ export class HeaderPaginaComponent implements OnInit {
 
   objlist: any[];
 
+  id: string;
   nome: string;
   cognome: string;
   avatar: string;  
@@ -30,6 +31,7 @@ export class HeaderPaginaComponent implements OnInit {
     if (!this.localstorageservice.isEmpty()) {
       this.isUtenteLoggedin = !this.localstorageservice.isEmpty();
       this.objlist = this.storage.get('object_list');
+      this.id = this.objlist[0].id;
       this.nome = this.objlist[0].nome_utente;
       this.cognome = this.objlist[0].cognome_utente;
       this.avatar = this.objlist[0].avatar;

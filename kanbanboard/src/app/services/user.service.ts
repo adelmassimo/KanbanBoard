@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  base_url = 'http://localhost:3000';
 
   user = {
     'id': '',
@@ -13,9 +18,14 @@ export class UserService {
     'cognome': '',
     'avatar': ''
   }
-  logged:boolean = false; 
 
-  setUser(user: any){
+  progettiUtente = {
+
+  }
+
+  logged: boolean = false;
+
+  setUser(user: any) {
     console.log('UserService', user)
     this.user.id = user.id;
     this.user.nome = user.nome;
@@ -24,15 +34,20 @@ export class UserService {
     this.logged = true;
   }
 
-  getUser():any{
+  getUser(): any {
     return this.user;
   }
 
-  isLogged():boolean{
+  getProgettiUtente(): Observable<any>{
+    console.log("id: "+this.user.id);
+    return this.http.post(this.base_url + "/api/visualizzaProgettiUtenti/", { 'idUser': this.user.id });
+  }
+
+  isLogged(): boolean {
     return this.logged;
   }
 
-  logOutUser(){
+  logOutUser() {
     this.user.id = '';
     this.user.nome = '';
     this.user.cognome = '';
@@ -40,4 +55,3 @@ export class UserService {
     this.logged = false;
   }
 }
-  

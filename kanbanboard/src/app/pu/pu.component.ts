@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
-import { PuService } from '../services/pu.service';
+import { UserService } from '../services/user.service';
 import { LocalStorageService } from '../services/local-storage.service';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Inject } from '@angular/core';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-pu',
   templateUrl: './pu.component.html',
@@ -34,24 +35,16 @@ export class PUComponent implements OnInit {
   idProgetto: string;// = this.objlist[0].id_progeto;
   
   constructor(private projectService: ProjectService,
-              private puService: PuService, private localstorageservice: LocalStorageService,
+              private userService: UserService, private localstorageservice: LocalStorageService,
               @Inject(LOCAL_STORAGE) private storage: StorageService, private router: Router) { }
 
 
   key: string = "object_list";
+
   ngOnInit() {
     //this.lista_progetti = this.puService.getProgettiUtente();
+    this.getProgetti();
   }
-
-  ngDoCheck(){
-/*
-    //questo if controlla se l'utente è loggato altrimenti si viene reindrizzati alla homepage
-    if(this.localstorageservice.isEmpty()){
-      //se non è loggato nessuno si viene reindirizzati alla homepage
-      this.router.navigate(['']);
-    }*/
-  }
-
 
   onClickSearchMenu() {
     if (this.isMenuVisibile == false) {
@@ -84,19 +77,14 @@ export class PUComponent implements OnInit {
   onClickNewProject() {
   }
 
-  ngDoCheck() {
-    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
-    //Add 'implements DoCheck' to the class.
-    this.puService.getNomeProgetto(this.idUser).subscribe(
-      success=>{
+  getProgetti(){
+    this.userService.getProgettiUtente().subscribe(
+      success => {
+        //console.log(this.userService.getProgettiUtente());
         console.log(success);
-        //this.lista_progetti
       },
-      error=>{
+      error => {
         console.log(error);
-      }
-    );
-
+      });
   }
-
 }
