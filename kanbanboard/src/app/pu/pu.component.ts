@@ -42,8 +42,7 @@ export class PUComponent implements OnInit {
   key: string = "object_list";
 
   ngOnInit() {
-    //this.lista_progetti = this.puService.getProgettiUtente();
-    this.getProgetti();
+    
   }
 
 /*  ngDoCheck(){
