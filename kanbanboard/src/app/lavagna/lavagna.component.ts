@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Inject } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { LocalStorageService } from '../services/local-storage.service';
-import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
 @Component({
   selector: 'app-lavagna',
@@ -12,13 +8,18 @@ import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 })
 export class LavagnaComponent implements OnInit {
 
-  constructor(private localstorageservice: LocalStorageService,
-    @Inject(LOCAL_STORAGE) private storage: StorageService, private router: Router) { }
+  constructor(private router: Router) { }
 
+  
   ngOnInit() {
+    this.visualizzaPostIt();
   }
 
   nomeProgetto: string = "nome progetto";
+  postItTODO: Array<any> = [];
+  postItDOING: Array<any> = [];
+  postItDONE: Array<any> = [];
+  postItDONEACC: Array<any> = [];
 
   ngDoCheck(){
 
@@ -35,6 +36,14 @@ export class LavagnaComponent implements OnInit {
 
   esciProgetto(){
     this.router.navigate(['/pu']);
+  }
+
+  visualizzaPostIt(){
+    //riempio il vettore postIt[] con tutti i post-it dell'utente selezionato
+    this.postItTODO.push("todo1");
+    this.postItTODO.push("todo2");
+    this.postItDOING.push("doing1");
+    console.log(this.postItTODO + " " + this.postItDOING); 
   }
 
 }
