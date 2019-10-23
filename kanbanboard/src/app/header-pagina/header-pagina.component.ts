@@ -14,7 +14,6 @@ export class HeaderPaginaComponent implements OnInit {
     private localstorageservice: LocalStorageService,
     @Inject(LOCAL_STORAGE) private storage: StorageService) { }
 
-
   isUtenteLoggedin: boolean = false;
 
   objlist: any[];
