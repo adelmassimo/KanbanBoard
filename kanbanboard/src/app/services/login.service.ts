@@ -3,6 +3,7 @@ import { Utenti_registrati } from '../models/mock.login';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { UserService } from '../services/user.service'
 import { LocalStorageService  } from '../services/local-storage.service';
 
 @Injectable({
@@ -10,7 +11,10 @@ import { LocalStorageService  } from '../services/local-storage.service';
 })
 export class LoginService {
 
-  constructor(private http: HttpClient,private localstorageservice: LocalStorageService) { }
+  constructor(
+    private http: HttpClient,
+    private localstorageservice: LocalStorageService,
+    private userservice: UserService) { }
 
   //3000 è la porta sulla quale resta in ascolto il serve
   base_url = 'http://localhost:3000';
@@ -41,7 +45,7 @@ export class LoginService {
           'nome_utente': ok.utente.nome_utente,
           'cognome_utente': ok.utente.cognome_utente,
           'avatar': ok.utente.img_avatar
-        }
+        } 
         this.localstorageservice.storeOnLocalStorage(user);
         }
         else{
