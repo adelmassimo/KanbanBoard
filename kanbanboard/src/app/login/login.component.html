@@ -2,8 +2,18 @@
   <div class="col">
     <!--Avatar-->
     <div class="row d-flex justify-content-around">
-      <div class="col-4">
+      <div class="col-4 mt-3">
         <img src="../../assets/img/avatarNone.jpeg" class="rounded-circle mw-100">
+      </div>
+    </div>
+    <div class="row d-flex justify-content-around">
+      <div class="col-9 mt-3">
+        <div *ngIf="error" class="alert alert-danger d-flex justify-content-around" role="alert">
+          {{myMessage}}
+        </div>
+        <div *ngIf="sign" class="alert alert-success d-flex justify-content-around" role="alert">
+          {{myMessage}}
+        </div>
       </div>
     </div>
     <form action="javascript:void(0)" (submit)="onLoginSubmit()">
@@ -16,25 +26,13 @@
       <!--Password-->
       <div class="d-flex justify-content-center">
         <mat-form-field class="w-75">
-            <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="password">
-          </mat-form-field>
+          <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="password">
+        </mat-form-field>
       </div>
       <!--accedi-->
-      <div class="d-flex justify-content-center">
-       <button mat-raised-button color="primary" class="w-75" (click)="onLoginSubmit()">Accedi</button>
+      <div class="d-flex justify-content-center mt-3">
+        <button mat-raised-button color="primary" class="w-75" (click)="onLoginSubmit()">Accedi</button>
       </div>
-     
-      
     </form>
-    <div class="row d-flex justify-content-around">
-        <div class="col-9">
-          <div *ngIf="error" class="alert alert-danger" role="alert" style="margin-top: 15px;">
-            {{myMessage}}
-          </div>
-          <div *ngIf="sign" class="alert alert-success" role="alert" style="margin-top: 15px;">
-            {{myMessage}}
-          </div>
-        </div>
-      </div>
   </div>
 </div>

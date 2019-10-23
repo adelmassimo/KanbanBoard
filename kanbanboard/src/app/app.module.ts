@@ -7,6 +7,7 @@ import { StorageServiceModule } from 'ngx-webstorage-service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -50,7 +51,8 @@ import { LocalStorageService } from './services/local-storage.service';
     StorageServiceModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTabsModule
   ],
   providers: [LocalStorageService],
   bootstrap: [AppComponent]
