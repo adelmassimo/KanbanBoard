@@ -1,10 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,14 +16,16 @@ import { LoginComponent } from './login/login.component';
 import { LoginRegisterComponent } from './login-register/login-register.component';
 import { RegisterComponent } from './register/register.component';
 import { HeaderPaginaComponent } from './header-pagina/header-pagina.component';
+import { PostItComponent } from './post-it/post-it.component';
 
 import { LoginService } from './services/login.service';
 import { RegisterService } from './services/register.service';
 import { ProjectService } from './services/project.service';
 import { PuService } from './services/pu.service'
 import { LocalStorageService } from './services/local-storage.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PostItComponent } from './post-it/post-it.component';
+
+
+
 
 
 @NgModule({
@@ -41,7 +46,9 @@ import { PostItComponent } from './post-it/post-it.component';
     BrowserAnimationsModule,
     StorageServiceModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [LocalStorageService],
   bootstrap: [AppComponent]
