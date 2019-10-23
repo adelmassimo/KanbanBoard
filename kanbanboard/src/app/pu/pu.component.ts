@@ -81,4 +81,10 @@ export class PUComponent implements OnInit {
   onClickNewProject() {
   }
 
+  openProject(){
+    //carico sul local storage il progetto dell'utente
+    //...
+
+    this.router.navigate(['/lavagna'])
+  }
 }

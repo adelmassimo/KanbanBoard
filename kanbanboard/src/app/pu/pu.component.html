@@ -36,14 +36,14 @@
 <!--Se l'utente non ha progetti-->
 
 <!--Se l'utente ha dei progetti-->
-<div class="card" id="card" style="">
+<div class="card" id="card">
   <img src="../assets/table.png" class="card-img-top">
   <div class="card-body">
     <h5 class="card-title">nome Progetto</h5>
     <p class="card-text"> Descrizione Progetto </p>
   </div>
   <div class="card-body">
-    <button [routerLink]="['#']" class="btn btn-primary">Apri Progetto</button>
+    <button (click)="openProject()" class="btn btn-primary">Apri Progetto</button>
   </div>
 </div>
 <!--Se l'utente ha dei progetti
