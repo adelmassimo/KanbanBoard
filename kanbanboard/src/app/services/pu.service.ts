@@ -14,7 +14,7 @@ export class PuService {
 
 //objlist: any[];
 //idutente: string;
-base_url = 'http://localhost:3000';
+
 
 /*
 getProgettiUtente(): string[]{
@@ -25,9 +25,5 @@ getProgettiUtente(): string[]{
   return ProgettiUtente.filter( item => item.username === this.username)[0].lista_progetti;   
 }
 */
-
-getNomeProgetto(utente):Observable <any>{
-  return this.http.post(this.base_url +"/api/progetti/visualizzaProgettiUtenti",{'idUser': utente});
-}
 
 }

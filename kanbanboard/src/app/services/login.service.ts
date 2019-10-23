@@ -42,6 +42,7 @@ export class LoginService {
         if(ok.success==1){
         console.log('Utente trovato ' + ok.utente.nome_utente + ok.utente.cognome_utente + ok.utente.img_avatar);
         const user = {
+          'id':ok.utente.id_utente,
           'nome_utente': ok.utente.nome_utente,
           'cognome_utente': ok.utente.cognome_utente,
           'avatar': ok.utente.img_avatar

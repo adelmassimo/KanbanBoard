@@ -39,8 +39,8 @@
 <div class="card" id="card" *ngFor="let item of items">
   <img src="../assets/table.png" class="card-img-top">
   <div class="card-body">
-    <h5 class="card-title">{{idProgetto}}</h5>
-    <p class="card-text">{{idProgetto}}</p>
+    <h5 class="card-title">{{object.nome_progetto}}</h5>
+    <p class="card-text">{{object.descrizione}}</p>
   </div>
   <div class="card-body">
     <button (click)="openProject()" class="btn btn-primary">Apri Progetto</button>
