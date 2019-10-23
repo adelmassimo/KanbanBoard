@@ -29,5 +29,13 @@ export class PostItComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngDoCheck(){
+
+    //questo if controlla se l'utente è loggato altrimenti si viene reindrizzati alla homepage
+    //if(this.localstorageservice.isEmpty()){
+      //se non è loggato nessuno si viene reindirizzati alla homepage
+      //this.router.navigate(['']);
+    //}
+  }
 
 }

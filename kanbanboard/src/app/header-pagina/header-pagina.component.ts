@@ -1,7 +1,5 @@
-import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { LocalStorageService } from '../services/local-storage.service';
-import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-header-pagina',
@@ -10,9 +8,7 @@ import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 })
 export class HeaderPaginaComponent implements OnInit {
 
-  constructor(
-    private localstorageservice: LocalStorageService,
-    @Inject(LOCAL_STORAGE) private storage: StorageService) { }
+  constructor(private userService: UserService) { }
 
   isUtenteLoggedin: boolean = false;
 
@@ -28,13 +24,12 @@ export class HeaderPaginaComponent implements OnInit {
   }
 
   ngDoCheck() {
-    if (!this.localstorageservice.isEmpty()) {
-      this.isUtenteLoggedin = !this.localstorageservice.isEmpty();
-      this.objlist = this.storage.get('object_list');
-      this.id = this.objlist[0].id;
-      this.nome = this.objlist[0].nome_utente;
-      this.cognome = this.objlist[0].cognome_utente;
-      this.avatar = this.objlist[0].avatar;
+    if (this.userService.isLogged()) {
+      this.isUtenteLoggedin = this.userService.isLogged();
+      this.objlist = this.userService.getUser();
+      this.nome = this.userService.user.nome;
+      this.cognome = this.userService.user.cognome;
+      this.avatar = this.userService.user.avatar;
     } else {
       this.nome = "Kanbanboard";
       this.cognome = "";
@@ -45,7 +40,7 @@ export class HeaderPaginaComponent implements OnInit {
   onClickExit() {
     this.nome = "";
     this.cognome = "";
-    this.localstorageservice.removeFromStorage();
+    this.userService.logOutUser();
   }
 
 }

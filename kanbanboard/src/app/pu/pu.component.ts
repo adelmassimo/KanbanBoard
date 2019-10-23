@@ -46,6 +46,16 @@ export class PUComponent implements OnInit {
     this.getProgetti();
   }
 
+/*  ngDoCheck(){
+
+    //questo if controlla se l'utente è loggato altrimenti si viene reindrizzati alla homepage
+    if(this.localstorageservice.isEmpty()){
+      //se non è loggato nessuno si viene reindirizzati alla homepage
+      this.router.navigate(['']);
+    }
+  }*/
+
+
   onClickSearchMenu() {
     if (this.isMenuVisibile == false) {
       this.isMenuVisibile = true;
@@ -77,14 +87,27 @@ export class PUComponent implements OnInit {
   onClickNewProject() {
   }
 
-  getProgetti(){
-    this.userService.getProgettiUtente().subscribe(
-      success => {
-        //console.log(this.userService.getProgettiUtente());
+  openProject(){
+    //carico sul local storage il progetto dell'utente
+    //...
+
+    this.router.navigate(['/lavagna'])
+  }
+  /*
+  ngDoCheck() {
+    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+    //Add 'implements DoCheck' to the class.
+    this.puService.getNomeProgetto(this.idUser).subscribe(
+      success=>{
         console.log(success);
       },
       error => {
         console.log(error);
       });
   }
+      }
+    );
+
+  }*/
+
 }

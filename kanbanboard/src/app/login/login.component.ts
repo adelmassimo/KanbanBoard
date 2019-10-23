@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../services/login.service';
-import { observable, Observable } from 'rxjs';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,8 @@ import { observable, Observable } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, private loginService: LoginService, private route: ActivatedRoute) { }
+  constructor(private router: Router, private loginService: LoginService, private route: ActivatedRoute,
+    private userService: UserService) { }
 
   username: string = "";
   password: string = "";
@@ -27,10 +28,8 @@ export class LoginComponent implements OnInit {
       username : this.username,
       password : this.password
     }
-    console.log(utente);
 
     if (this.username != undefined && this.username != "" && this.password != undefined && this.password != "") {
-
       this.loginService.login(utente).subscribe(
         utente => {
           if (utente === null ) {
@@ -42,8 +41,8 @@ export class LoginComponent implements OnInit {
           } else {
             // andiamo 
             console.log("successo - utente loggato " + utente.username);
-            this.loginService.caricaLocalStorage(this.username);
-            //aggiungere utente al local storage
+            //carico l'utente nel servizio utente
+            this.userService.setUser(utente);
             this.myMessage = "Login effettuato con successo";
             this.error = false;
             this.sign = true;

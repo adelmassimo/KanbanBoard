@@ -43,7 +43,7 @@
     <p class="card-text">{{object.descrizione}}</p>
   </div>
   <div class="card-body">
-    <button [routerLink]="['#']" class="btn btn-primary">Apri Progetto</button>
+    <button (click)="openProject()" class="btn btn-primary">Apri Progetto</button>
   </div>
 </div>
 <!--Se l'utente ha dei progetti
