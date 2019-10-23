@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
-import { PuService } from '../services/pu.service';
+import { UserService } from '../services/user.service';
 import { LocalStorageService } from '../services/local-storage.service';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Inject } from '@angular/core';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-pu',
   templateUrl: './pu.component.html',
@@ -34,13 +35,14 @@ export class PUComponent implements OnInit {
   idProgetto: string;// = this.objlist[0].id_progeto;
   
   constructor(private projectService: ProjectService,
-              private puService: PuService, private localstorageservice: LocalStorageService,
+              private userService: UserService, private localstorageservice: LocalStorageService,
               @Inject(LOCAL_STORAGE) private storage: StorageService, private router: Router) { }
 
 
   key: string = "object_list";
+
   ngOnInit() {
-    //this.lista_progetti = this.puService.getProgettiUtente();
+    
   }
 
 /*  ngDoCheck(){
@@ -97,10 +99,11 @@ export class PUComponent implements OnInit {
     this.puService.getNomeProgetto(this.idUser).subscribe(
       success=>{
         console.log(success);
-        //this.lista_progetti
       },
-      error=>{
+      error => {
         console.log(error);
+      });
+  }
       }
     );
 

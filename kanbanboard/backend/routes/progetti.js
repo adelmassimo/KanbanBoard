@@ -10,19 +10,20 @@ progetti.get('/visualizzaProgetti', function (req, res) {
 })
 
 //richiesta per utenti x progetto
-progetti.post('/visualizzaProgettiUtenti', function (req, res) {
-    username = req.body.username;
-    sql_connection.query('SELECT utenti.*,'+
-		'progetti.nome_progetto,'+
-        'progetti.descrizione_progetto,'+
-        'utenti_x_progetti.id_utente,'+
-        'utenti_x_progetti.id_progetto'+
-        'FROM utenti_x_progetti'+
-        'left outer join utenti on utenti.id_utente = utenti_x_progetti.id_utente'+
-        'left OUTER join progetti on progetti.id_progetto = utenti_x_progetti.id_progetto'+
-        'WHERE utenti.id_utente = 1="'+ idUser+ '"', function (err, rows, next) {
+progetti.post('/visualizzaProgettiUtenti/', function (req, res) {
+    idUser = req.body.idUser;
+    console.log("id:" + idUser);
+    sql_connection.query('SELECT utenti.nome_utente, '+
+		'progetti.nome_progetto, '+
+        'progetti.descrizione_progetto, '+
+        'utenti_x_progetti.id_utente, '+
+        'utenti_x_progetti.id_progetto '+
+        'FROM utenti_x_progetti '+
+        'left outer join utenti on utenti.id_utente = utenti_x_progetti.id_utente '+
+        'left OUTER join progetti on progetti.id_progetto = utenti_x_progetti.id_progetto '+
+        'WHERE utenti.id_utente = "'+ idUser + '"', function (err, rows, next) {
         if (err) throw err;
-        res.send(rows);
+        res.send(rows[0]);
     });
 })
 

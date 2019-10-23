@@ -26,7 +26,7 @@ export class LocalStorageService {
       return false;
     }else{
       return true;
-    }
+    } 
   }
 
   public removeFromStorage(){

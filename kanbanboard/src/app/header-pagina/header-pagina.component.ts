@@ -14,6 +14,7 @@ export class HeaderPaginaComponent implements OnInit {
 
   objlist: any[];
 
+  id: string;
   nome: string;
   cognome: string;
   avatar: string;  
