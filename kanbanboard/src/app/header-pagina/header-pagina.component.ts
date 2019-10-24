@@ -12,7 +12,7 @@ export class HeaderPaginaComponent implements OnInit {
 
   isUtenteLoggedin: boolean = false;
 
-  objlist: any[];
+  objlist: any[] = [];
 
   id: string;
   nome: string;
@@ -25,11 +25,11 @@ export class HeaderPaginaComponent implements OnInit {
 
   ngDoCheck() {
     if (this.userService.isLogged()) {
-      this.isUtenteLoggedin = this.userService.isLogged();
-      this.objlist = this.userService.getUser();
+      this.isUtenteLoggedin = true;
       this.nome = this.userService.user.nome;
       this.cognome = this.userService.user.cognome;
       this.avatar = this.userService.user.avatar;
+      console.log("nome: " + this.nome + " cognome: " + this.cognome + " avatar: " + this.avatar)
     } else {
       this.nome = "Kanbanboard";
       this.cognome = "";

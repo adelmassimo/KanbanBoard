@@ -27,10 +27,10 @@ export class UserService {
 
   setUser(user: any) {
     console.log('UserService', user)
-    this.user.id = user.id;
-    this.user.nome = user.nome;
-    this.user.cognome = user.cognome;
-    this.user.avatar = user.avatar;
+    this.user.id = user.id_utente;
+    this.user.nome = user.nome_utente;
+    this.user.cognome = user.cognome_utente;
+    this.user.avatar = user.img_avatar;
     this.logged = true;
   }
 
