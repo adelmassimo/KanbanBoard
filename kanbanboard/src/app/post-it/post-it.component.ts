@@ -12,13 +12,15 @@ import { PostItService } from '../services/post-it.service';
 })
 export class PostItComponent implements OnInit {
 
-  panelColor = new FormControl('yellow');
+  panelColor = new FormControl('yellow');  
+  typePost = new FormControl('to do');
 
   constructor(private router: Router, private route: ActivatedRoute,  private postItService: PostItService) { }
 
   nome_postIt: string = "";
   descrizione_postIt: string = "";
   colore_postIt: string = "";
+  tipologia: string = "";
   myMessage: string = "";
   error: boolean = false;
   aggiunto: boolean = false;
@@ -28,13 +30,15 @@ export class PostItComponent implements OnInit {
       nome_postIt: this.nome_postIt,
       descrizione_postIt: this.descrizione_postIt,
       colore_postIt: this.panelColor.value,
+      tipologia: this.typePost.value
     }
   console.log(postIt);
 
     //controllo che i campi non siano vuoti
     if (this.nome_postIt != undefined && this.nome_postIt != ""
       && this.descrizione_postIt != undefined && this.descrizione_postIt != ""
-      && this.panelColor.value != undefined && this.panelColor.value != "") {
+      && this.panelColor.value != undefined && this.panelColor.value != ""
+      && this.typePost.value != undefined && this.typePost.value != "") {
 
         this.postItService.inserimentoPostit(postIt).subscribe(
           successo => {

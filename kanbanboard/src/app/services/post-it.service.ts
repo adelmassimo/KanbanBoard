@@ -16,8 +16,19 @@ export class PostItService {
     return this.http.post(this.base_url + "/api/post-it/", {
       'nome_postIt': postIt.nome_postIt,
       'descrizione_postIt': postIt.descrizione_postIt,
-      'colore_postIt': postIt.colore_postIt
+      'colore_postIt': postIt.colore_postIt,
+      'tipologia' : postIt.tipologia
     });
-  }
+  } // fine inserimentoPostit(postIt):Observable<any>{
+
+  updatePostit(updatePostIt):Observable<any>{
+    return this.http.post(this.base_url + "/api/post-it/update/:id", {
+      'nome_postIt': updatePostIt.nome_postIt,
+      'descrizione_postIt': updatePostIt.descrizione_postIt,
+      'colore_postIt': updatePostIt.colore_postIt,
+      'tipologia' : updatePostIt.tipologia
+    });
+  } // fine updatePostit(updatePostIt):Observable<any>{
+
 
 }

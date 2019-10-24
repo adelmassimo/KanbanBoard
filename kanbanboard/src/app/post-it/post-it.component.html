@@ -33,6 +33,21 @@
           </mat-form-field>
         </div>
 
+        
+        <!-- SCELTA TIPOLOGIA COLONNA DELLA LAVAGNA -->
+
+        <div class="mb-3 d-flex justify-content-center">
+          <mat-form-field class="w-75">
+            <mat-label>Tipologia</mat-label>
+            <mat-select [formControl]="typePost" panelClass="example-panel-{{typePost.value}}" id="tipologia" name="tipologia">
+              <mat-option value="to do">TO DO</mat-option>
+              <mat-option value="doing">DOING</mat-option>
+              <mat-option value="done">DONE</mat-option>
+              <mat-option value="accepted">DONE ACCEPTED</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
 
         <!--SALVA E ELIMINA-->
         <div class="mb-3 d-flex justify-content-center">
