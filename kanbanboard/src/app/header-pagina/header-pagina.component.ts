@@ -17,7 +17,7 @@ export class HeaderPaginaComponent implements OnInit {
   id: string;
   nome: string;
   cognome: string;
-  avatar: string;  
+  avatar: string;
 
   ngOnInit() {
     console.log(this.isUtenteLoggedin);

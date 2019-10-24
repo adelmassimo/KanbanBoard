@@ -36,11 +36,11 @@
 <!--Se l'utente non ha progetti-->
 
 <!--Se l'utente ha dei progetti-->
-<div class="card" id="card" *ngFor="let item of items">
+<div class="card" id="card" style ="float: left;" *ngFor="let cardP of listaProgetti" >
   <img src="../assets/table.png" class="card-img-top">
   <div class="card-body">
-    <h5 class="card-title">{{object.nome_progetto}}</h5>
-    <p class="card-text">{{object.descrizione}}</p>
+    <h5 class="card-title">{{cardP.progetto}}</h5>
+    <p class="card-text">{{cardP.descrizione}}</p>
   </div>
   <div class="card-body">
     <button (click)="openProject()" class="btn btn-primary">Apri Progetto</button>
