@@ -19,28 +19,19 @@ export class UserService {
     'avatar': ''
   }
 
-  progettiUtente = {
-
-  }
-
   logged: boolean = false;
 
   setUser(user: any) {
     console.log('UserService', user)
-    this.user.id = user.id;
-    this.user.nome = user.nome;
-    this.user.cognome = user.cognome;
-    this.user.avatar = user.avatar;
+    this.user.id = user.id_utente;
+    this.user.nome = user.nome_utente;
+    this.user.cognome = user.cognome_utente;
+    this.user.avatar = user.img_avatar;
     this.logged = true;
   }
 
   getUser(): any {
     return this.user;
-  }
-
-  getProgettiUtente(): Observable<any>{
-    console.log("id: "+this.user.id);
-    return this.http.post(this.base_url + "/api/visualizzaProgettiUtenti/", { 'idUser': this.user.id });
   }
 
   isLogged(): boolean {
