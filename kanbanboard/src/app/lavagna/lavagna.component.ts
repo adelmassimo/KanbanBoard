@@ -63,6 +63,7 @@ export class LavagnaComponent implements OnInit {
 
           //mostrare i postIt sull'html
           for(let post of this.postIt){
+            console.log(post.tipologia);
             if(post.tipologia == "to do"){
               this.toDo.push(post);
             } else if(post.tipologia == "doing"){
