@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
+import { UserService } from '../services/user.service';
 
 import { PostItService } from '../services/post-it.service';
 //import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -14,7 +15,8 @@ export class PostItComponent implements OnInit {
 
   panelColor = new FormControl('yellow');
 
-  constructor(private router: Router, private route: ActivatedRoute,  private postItService: PostItService) { }
+  constructor(private router: Router, private route: ActivatedRoute,  private postItService: PostItService,
+              private userService: UserService) { }
 
   nome_postIt: string = "";
   descrizione_postIt: string = "";
@@ -28,9 +30,10 @@ export class PostItComponent implements OnInit {
       nome_postIt: this.nome_postIt,
       descrizione_postIt: this.descrizione_postIt,
       colore_postIt: this.panelColor.value,
-      tipologia: "TODO"
+      tipologia: "TODO",
+      id_progetto: this.userService.progettoAttivo
     }
-  console.log(postIt);
+    console.log(postIt);
 
     //controllo che i campi non siano vuoti
     if (this.nome_postIt != undefined && this.nome_postIt != ""

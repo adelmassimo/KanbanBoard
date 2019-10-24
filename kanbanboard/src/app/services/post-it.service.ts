@@ -16,7 +16,8 @@ export class PostItService {
     return this.http.post(this.base_url + "/api/post-it/", {
       'nome_postIt': postIt.nome_postIt,
       'descrizione_postIt': postIt.descrizione_postIt,
-      'colore_postIt': postIt.colore_postIt
+      'colore_postIt': postIt.colore_postIt,
+      'id_progetto': postIt.id_progetto
     });
   }
 

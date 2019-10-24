@@ -12,9 +12,21 @@
     margin-top: 50px;
 }
 .postIt{
-    background: orange;
-    min-height: 200px;
+    min-height: 100px;
+}
+.postIt-title{
+    font-size: 15px;
+}
+.postIt-desc{
+    font-size: 10px;
 }
 .divPost{
     margin-top: 10px;
+}
+.bottoneAggiorna{
+    width: 180px;
+    height: 40px;
+}
+:host-context(.orange) div {
+    background-color: orange;
 }
