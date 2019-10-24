@@ -7,4 +7,33 @@
 .bottoneCrea{
     margin-right: 10px;
 }
-
+.row-list{
+    border-top: 1px solid black;
+    margin-top: 50px;
+}
+.postIt{
+    height: 100px;
+}
+.postIt-title{
+    font-size: 15px;
+}
+.postIt-desc{
+    font-size: 10px;
+    
+}
+.tabella{
+    border-right: 1px solid rgb(168, 167, 167);
+}
+.divPost{
+    margin-top: 10px;
+}
+.lavagna{
+    margin-top: 50px;
+}
+.bottoneAggiorna{
+    width: 180px;
+    height: 40px;
+}
+:host-context(.orange) div {
+    background-color: orange;
+}

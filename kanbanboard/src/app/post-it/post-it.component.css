@@ -1,14 +1,4 @@
-/*
-div button{
-    margin-left: 100px;
-    position: relative;
-}   
-
-div{
-    display: flex;
-    text-align: justify;
-}
-*/
-.titoloProgetto{
+.nomeProgetto {
     text-align: center;
+    margin-bottom: 20px;
 }

@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormControl } from '@angular/forms';
+import { UserService } from '../services/user.service';
+
+import { PostItService } from '../services/post-it.service';
 //import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
@@ -9,24 +13,72 @@ import { Router } from '@angular/router';
 })
 export class PostItComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  panelColor = new FormControl('yellow');
+  typePost = new FormControl('to do');
 
-  nome_post_it: string = "";
+  constructor(private router: Router, private route: ActivatedRoute,  private postItService: PostItService,
+              private userService: UserService) { }
+
+  nome_postIt: string = "";
   descrizione_postIt: string = "";
+  colore_postIt: string = "";
+  tipologia: string = "";
+  myMessage: string = "";
+  error: boolean = false;
+  aggiunto: boolean = false;
 
   onSaveSubmit(){
-    const postIT = {
-      nome_post_it: this.nome_post_it,
+    const postIt: any = {
+      nome_postIt: this.nome_postIt,
       descrizione_postIt: this.descrizione_postIt,
+      colore_postIt: this.panelColor.value,
+      tipologia: this.typePost.value,
+      id_progetto: this.userService.progettoAttivo
     }
-  console.log(postIT);
+    console.log(postIt);
+
+    //controllo che i campi non siano vuoti
+    if (this.nome_postIt != undefined && this.nome_postIt != ""
+      && this.descrizione_postIt != undefined && this.descrizione_postIt != ""
+      && this.panelColor.value != undefined && this.panelColor.value != ""
+      && this.typePost.value != undefined && this.typePost.value != "") {
+
+        this.postItService.inserimentoPostit(postIt).subscribe(
+          successo => {
+
+            if(successo.aggiunto != 1){
+              console.log("POST-IT NON INSERITO");
+              this.myMessage = "POST-IT NON INSERITO";
+              this.error = true;
+              this.aggiunto = false;
+            }else{
+              console.log("POST-IT INSERITO!");
+              this.myMessage = "POST-IT INSERITO!";
+              this.error = false;
+              this.aggiunto = true;
+              //window.location.reload();
+              this.router.navigate(['/lavagna']);
+            }
+          },
+          err => {
+            console.log("errore collegamento database");
+          }
+        )
+      } else {
+        console.log("riempi i campi correttamente!");
+        this.myMessage = "Riempi i campi correttamente!";
+        this.error = true;
+        this.aggiunto = false;
+    }
+
   }
 
   onCancelSubmit(){
     this.router.navigate(['/lavagna']);
   }
-  
+
   ngOnInit() {
+    console.log(this.panelColor.value);
   }
 
   ngDoCheck(){
