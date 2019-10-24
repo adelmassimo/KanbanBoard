@@ -29,6 +29,8 @@ import { PuService } from './services/pu.service'
 import { UserService } from './services/user.service'
 
 import { LocalStorageService } from './services/local-storage.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProjectComponent } from './project/project.component';
 
 
 
@@ -41,6 +43,7 @@ import { LocalStorageService } from './services/local-storage.service';
     LoginComponent,
     LoginRegisterComponent,
     RegisterComponent,
+    ProjectComponent,
     LavagnaComponent,
     PostItComponent,
   ],
