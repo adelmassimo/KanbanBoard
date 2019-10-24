@@ -13,53 +13,59 @@ import { Router } from '@angular/router';
 })
 export class PUComponent implements OnInit {
 
-  //apertura menu superiore
-  isMenuVisibile: boolean = false;
-  isNoProgetto: boolean = false;
+  // apertura menu superiore
+  isMenuVisibile = false;
+  isNoProgetto = false;
 
-  //prova per la ricerca progetti dell'utente
-  nameProject: string = "prova";
+  // prova per la ricerca progetti dell'utente
+  nameProject = 'prova';
 
-  //variabile per la ricerca del progetto all'intenro del DB
-  nome_progetto: string = "";
+  // variabile per la ricerca del progetto all'intenro del DB
+  nome_progetto = '';
 
-  //variabile per visualizzare la barra (rossa se non c'è il progetto, verde se il progetto esiste)
-  isVisible: boolean = false;
+  // variabile per visualizzare la barra (rossa se non c'è il progetto, verde se il progetto esiste)
+  isVisible = false;
   isSuccess: boolean;
 
-  // Listaprogetti
-  lista_progetti: any[];
+  //variabile per la creazione e visualizzazione delle card
+  progetto: any[] = [];
+  descrizione: any[] = [];
+  listaProgetti: any[] = [{ 'progetto': "", 'descrizione': "" }];
 
-  objlist: any[];
-  idUser: string;//= this.objlist[0].id_utente;
-  idProgetto: string;// = this.objlist[0].id_progeto;
-  
   constructor(private projectService: ProjectService,
-              private userService: UserService, private localstorageservice: LocalStorageService,
-              @Inject(LOCAL_STORAGE) private storage: StorageService, private router: Router) { }
+    private userService: UserService, private localstorageservice: LocalStorageService,
+    @Inject(LOCAL_STORAGE) private storage: StorageService, private router: Router) { }
 
 
-  key: string = "object_list";
+  key = 'object_list';
 
   ngOnInit() {
-    
+    this.projectService.getProgettiUtente().subscribe(
+      success => {
+        for (let i = 0; i < success.length; i++) {
+          console.log(success[i]);
+          this.progetto.push(success[i].nome_progetto);
+          this.descrizione.push(success[i].descrizione_progetto);
+        }
+        console.log(this.progetto);
+        console.log(this.descrizione);
+        for (let t = 0; t < this.progetto.length; t++) {
+          this.listaProgetti.push({ progetto: this.progetto[t], descrizione: this.descrizione[t] });
+        }
+        this.listaProgetti.splice(0,1);
+        console.log(this.listaProgetti);
+      },
+      error => {
+        console.log('errore');
+      }
+    );
   }
-
-/*  ngDoCheck(){
-
-    //questo if controlla se l'utente è loggato altrimenti si viene reindrizzati alla homepage
-    if(this.localstorageservice.isEmpty()){
-      //se non è loggato nessuno si viene reindirizzati alla homepage
-      this.router.navigate(['']);
-    }
-  }*/
 
 
   onClickSearchMenu() {
     if (this.isMenuVisibile == false) {
       this.isMenuVisibile = true;
-    }
-    else {
+    } else {
       this.isMenuVisibile = false;
     }
   }
@@ -86,27 +92,11 @@ export class PUComponent implements OnInit {
   onClickNewProject() {
   }
 
-  openProject(){
-    //carico sul local storage il progetto dell'utente
-    //...
+  openProject() {
+    // carico sul local storage il progetto dell'utente
+    // ...
 
-    this.router.navigate(['/lavagna'])
+    this.router.navigate(['/lavagna']);
   }
-  /*
-  ngDoCheck() {
-    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
-    //Add 'implements DoCheck' to the class.
-    this.puService.getNomeProgetto(this.idUser).subscribe(
-      success=>{
-        console.log(success);
-      },
-      error => {
-        console.log(error);
-      });
-  }
-      }
-    );
-
-  }*/
 
 }
