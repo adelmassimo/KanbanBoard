@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'pu', component: PUComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'project', component: ProjectComponent }
+  { path: 'project', component: ProjectComponent },
   { path: 'lavagna', component: LavagnaComponent },
   { path: 'post-it', component: PostItComponent }
 ];
