@@ -40,7 +40,7 @@ export class LoginService {
     this.getUtente(utente).subscribe(
       ok=>{
         if(ok.success==1){
-        console.log('Utente trovato ' + ok.utente.nome_utente + ok.utente.cognome_utente + ok.utente.img_avatar);
+        console.log('Utente trovato ' + ok.utente.id_utente + ok.utente.nome_utente + ok.utente.cognome_utente + ok.utente.img_avatar);
         const user = {
           'id':ok.utente.id_utente,
           'nome_utente': ok.utente.nome_utente,

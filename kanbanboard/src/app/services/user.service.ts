@@ -38,11 +38,6 @@ export class UserService {
     return this.user;
   }
 
-  getProgettiUtente(): Observable<any>{
-    console.log("id: "+this.user.id);
-    return this.http.post(this.base_url + "/api/visualizzaProgettiUtenti/", { 'idUser': this.user.id });
-  }
-
   isLogged(): boolean {
     return this.logged;
   }
