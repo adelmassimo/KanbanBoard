@@ -20,6 +20,7 @@ import { ProjectService } from './services/project.service';
 import { PuService } from './services/pu.service'
 import { LocalStorageService } from './services/local-storage.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProjectComponent } from './project/project.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     LoginRegisterComponent,
     RegisterComponent,
+    ProjectComponent,
   ],
   imports: [
     BrowserModule,
