@@ -28,9 +28,9 @@ register.post('/register/', function (req, res) {
     if (err) throw err;
 
     if ( rows.length == 1){
-      //ritorno l'utente già registrato
-      console.log("USERNAME ESISTENTE");  
-      res.send("esiste");
+      //ritorno un codice di errore 
+      console.log("USERNAME ESISTENTE"); 
+      res.send({"errore": '1'});
     }else{
       // controllo se le credenziali rispettano i criteri richiesti: password 8 caratteri con minuscole e MAIUSCOLE E NUMERI
       if(patternEmail.test(String(email)) && patternPassword.test(String(password))){
@@ -43,13 +43,19 @@ register.post('/register/', function (req, res) {
                       "'"+avatar+"')";
         sql_connection.query(query , function(err, rows, fields) {
           if (err) throw err;
+
           console.log("USERNAME REGISTRATO CORRETTAMENTE");
-          res.send(rows[0]);
+          //eseguo la select per ritornare l'utente
+          sql_connection.query("SELECT * from utenti WHERE username = '"+username+"'", function(err, rows, fields){
+            res.send(rows);
+          })
+          
         });
 
       }else{
-        console.log("USERNAME O PASSWORD ERRATI");  
-        res.send("errore");
+        //ritorno il codice di errore 0
+        console.log("USERNAME O PASSWORD ERRATI"); 
+        res.send({"errore": '0'});
       } // fine if
     } // fine if
 

@@ -1,0 +1,20 @@
+.tabella-lavagna{
+    margin-top: 3.5em;
+}
+.column{
+    width: 25%;
+}
+.bottoneCrea{
+    margin-right: 10px;
+}
+.row-list{
+    border-top: 1px solid black;
+    margin-top: 50px;
+}
+.postIt{
+    background: orange;
+    min-height: 200px;
+}
+.divPost{
+    margin-top: 10px;
+}

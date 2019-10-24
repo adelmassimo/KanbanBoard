@@ -62,14 +62,26 @@ export class RegisterComponent implements OnInit {
         this.registerService.registrazione(utente).subscribe(
           utente => {
 
-            console.log(utente);
-            
-            console.log("successo, utente registrato");
-            this.myMessage = "utente registrato con successo";
-            this.error = false;
-            this.sign = true;
+            if(utente.errore == 1){
+              console.log("utente già registrato");
+              this.myMessage = "utente già registrato";
+              this.error = true;
+              this.sign = false;
 
-            this.router.navigate(['/login']);
+            }else if(utente.errore == 0){
+              console.log("email o password errati!");
+              this.myMessage = "email o password errati!";
+              this.error = true;
+              this.sign = false;
+
+            }else{
+              console.log("successo, utente registrato");
+              this.myMessage = "utente registrato con successo";
+              this.error = false;
+              this.sign = true;
+
+              window.location.reload();
+            }
           },
           err => {
             console.log("errore collegamento database");

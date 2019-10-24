@@ -5,21 +5,19 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterService {
+export class PostItService {
 
   constructor(private http: HttpClient) { }
 
   //3000 è la porta sulla quale resta in ascolto il serve
   base_url = 'http://localhost:3000';
 
-  registrazione(utente):Observable<any>{
-    return this.http.post(this.base_url + "/api/register/", {
-      'username': utente.username,
-      'nome': utente.nome,
-      'cognome': utente.cognome,
-      'email': utente.email,
-      'password': utente.password,
-      'avatar': utente.avatar
+  inserimentoPostit(postIt):Observable<any>{
+    return this.http.post(this.base_url + "/api/post-it/", {
+      'nome_postIt': postIt.nome_postIt,
+      'descrizione_postIt': postIt.descrizione_postIt,
+      'colore_postIt': postIt.colore_postIt
     });
   }
+
 }

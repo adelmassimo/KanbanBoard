@@ -1,66 +1,61 @@
-<div class="row my-3 mx-3 d-flex justify-content-center">
-  <div class="col-6">
+<div class="row mx-3 d-flex justify-content-center overflow-hidden">
+  <div class="col">
     <!--Avatar-->
     <div class="row d-flex justify-content-around">
-      <div class="col-4">
+      <div class="col-4 mt-3">
         <img [src]="avatar" class="rounded-circle mw-100 cursor-pointer" (click)="onClickShowAvatars()">
       </div>
     </div>
-
-
+    <div class="row d-flex justify-content-around">
+      <div class="col-9 mt-3">
+        <div *ngIf="error" class="alert alert-danger d-flex justify-content-around" role="alert">
+          {{myMessage}}
+        </div>
+        <div *ngIf="sign" class="alert alert-success d-flex justify-content-around" role="alert">
+          {{myMessage}}
+        </div>
+      </div>
+    </div>
     <div *ngIf="true" class="row">
-      <div *ngFor="let avatarImg of avatars" class="col-3 d-flex justify-content-around my-3">
+      <div *ngFor="let avatarImg of avatars" class="col-3 d-flex justify-content-around my-3 ">
         <img [src]="avatarImg" class="rounded-circle w-50 cursor-pointer" (click)="onClickScegliAvatar(avatarImg)">
       </div>
     </div>
     <form class="form form-sm" action="javascript:void(0)" (submit)="onRegisterSubmit()">
       <!--nome-->
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Nome</span>
-        </div>
-        <input type="text" class="form-control" name="nome" [(ngModel)]="nome">
+      <div class="d-flex justify-content-center">
+        <mat-form-field class="w-75">
+          <input matInput placeholder="Nome" name="nom" [(ngModel)]="nome">
+        </mat-form-field>
       </div>
       <!--cognome-->
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Cognome</span>
-        </div>
-        <input type="text" class="form-control" name="cognome" [(ngModel)]="cognome">
+      <div class="d-flex justify-content-center">
+        <mat-form-field class="w-75">
+          <input matInput placeholder="Cognome" name="cognome" [(ngModel)]="cognome">
+        </mat-form-field>
       </div>
       <!--email-->
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">email</span>
-        </div>
-        <input type="text" class="form-control" name="email" [(ngModel)]="email">
+      <div class="d-flex justify-content-center">
+        <mat-form-field class="w-75">
+          <input matInput placeholder="Email" name="email" [(ngModel)]="email">
+        </mat-form-field>
       </div>
       <!--Username-->
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Username</span>
-        </div>
-        <input type="text" class="form-control" name="username" [(ngModel)]="username">
+      <div class="d-flex justify-content-center">
+        <mat-form-field class="w-75">
+          <input matInput placeholder="Username" name="username" [(ngModel)]="username">
+        </mat-form-field>
       </div>
       <!--Password-->
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Password</span>
-        </div>
-        <input type="password" class="form-control" name="password" [(ngModel)]="password">
+      <div class="d-flex justify-content-center">
+        <mat-form-field class="w-75">
+          <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="password">
+        </mat-form-field>
       </div>
-
-
-      <!--accedi-->
-      <button class="btn btn-primary">Invia</button>
-
+      <!--registrati-->
+      <div class="d-flex justify-content-center mt-3">
+        <button mat-raised-button color="primary" class="w-75" (click)="onRegisterSubmit()">Invia</button>
+      </div>
     </form>
-    <div *ngIf="error" class="alert alert-danger" role="alert" style="margin-top: 15px;">
-      {{myMessage}}
-    </div>
-    <div *ngIf="sign" class="alert alert-success" role="alert" style="margin-top: 15px;">
-      {{myMessage}}
-    </div>
-
   </div>
 </div>

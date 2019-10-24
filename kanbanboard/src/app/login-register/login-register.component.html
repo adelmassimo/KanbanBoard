@@ -1,6 +1,17 @@
 <div class="row my-3 mx-3 d-flex justify-content-center">
   <div class="col">
-    <ul class="nav nav-tabs cursor-pointer">
+    <img src="../../assets/img/login-register-vertical.jpeg" class="mw-100">
+  </div>
+  <div class="col">
+    <mat-tab-group mat-align-tabs="end">
+      <mat-tab label="Login">
+          <app-login></app-login>
+      </mat-tab>
+      <mat-tab label="Register">
+          <app-register></app-register>
+      </mat-tab>
+    </mat-tab-group>
+    <!--<ul class="nav nav-tabs cursor-pointer">
       <li class="nav-item">
         <a class="nav-link {LoginActive}" (click)="onChangeTab('login')">Login</a>
       </li>
@@ -19,6 +30,6 @@
         <app-register></app-register>
 
       </div>
-    </div>
+    </div>-->
   </div>
 </div>
