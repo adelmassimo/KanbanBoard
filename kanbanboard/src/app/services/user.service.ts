@@ -19,9 +19,9 @@ export class UserService {
     'avatar': ''
   }
 
-  progettiUtente = {
-
-  }
+  progettiUtente = {}
+  
+  progettoAttivo: string = "1";
 
   logged: boolean = false;
 
@@ -53,5 +53,13 @@ export class UserService {
     this.user.cognome = '';
     this.user.avatar = '';
     this.logged = false;
+  }
+
+  setProgettoAttivo(id){
+    //mettere nell'array progettoAttivo i dati del progetto attivo passati dalla pagina utente
+  }
+
+  getPostItProgetto():Observable<any>{
+    return this.http.post(this.base_url + "/api/visualizzaPostItProgetto/", {'idProgetto': this.progettoAttivo})
   }
 }

@@ -6,9 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 import { AppComponent } from './app.component';
@@ -27,6 +28,8 @@ import { PuService } from './services/pu.service'
 import { UserService } from './services/user.service'
 
 import { LocalStorageService } from './services/local-storage.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProjectComponent } from './project/project.component';
 
 
 
@@ -39,6 +42,7 @@ import { LocalStorageService } from './services/local-storage.service';
     LoginComponent,
     LoginRegisterComponent,
     RegisterComponent,
+    ProjectComponent,
     LavagnaComponent,
     PostItComponent,
   ],
@@ -51,7 +55,9 @@ import { LocalStorageService } from './services/local-storage.service';
     StorageServiceModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatCardModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatSelectModule

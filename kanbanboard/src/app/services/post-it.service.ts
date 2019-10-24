@@ -17,7 +17,8 @@ export class PostItService {
       'nome_postIt': postIt.nome_postIt,
       'descrizione_postIt': postIt.descrizione_postIt,
       'colore_postIt': postIt.colore_postIt,
-      'tipologia' : postIt.tipologia
+      'tipologia' : postIt.tipologia,
+      'id_progetto': postIt.id_progetto
     });
   } // fine inserimentoPostit(postIt):Observable<any>{
 
