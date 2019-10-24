@@ -21,7 +21,7 @@ export class UserService {
 
   progettiUtente = {}
   
-  progettoAttivo: any[] = null;
+  progettoAttivo: string = "1";
 
   logged: boolean = false;
 
@@ -56,17 +56,10 @@ export class UserService {
   }
 
   setProgettoAttivo(id){
-    this.backendProgettoAttivo(id).subscribe(
-      succ=>{
-        
-      },
-      err=>{
-        console.log("errore collegamento database!");
-      }
-    )
+    //mettere nell'array progettoAttivo i dati del progetto attivo passati dalla pagina utente
   }
 
-  backendProgettoAttivo(id):Observable<any>{
-    return this.http.post(this.base_url + "/api/", {'idProgetto': id})
+  getPostItProgetto():Observable<any>{
+    return this.http.post(this.base_url + "/api/visualizzaPostItProgetto/", {'idProgetto': this.progettoAttivo})
   }
 }
