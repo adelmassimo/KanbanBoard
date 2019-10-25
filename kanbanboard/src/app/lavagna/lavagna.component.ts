@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';
+import { ProjectService } from '../services/project.service';
 
 @Component({
   selector: 'app-lavagna',
@@ -9,7 +9,7 @@ import { UserService } from '../services/user.service';
 })
 export class LavagnaComponent implements OnInit {
 
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private router: Router, private projectService: ProjectService) { }
 
   
   ngOnInit() {
@@ -44,9 +44,8 @@ export class LavagnaComponent implements OnInit {
   }
 
   visualizzaPostIt(){
-    this.userService.getPostItProgetto().subscribe(
+    this.projectService.getPostItProgetto().subscribe(
       succ =>{
-        console.log(succ)
         //controllo se mi arriva almeno una entry dal database
         if(succ[0] != null){
           //svuoto tutti i vettori per ricaricare i post-it presenti nel DB
@@ -59,12 +58,10 @@ export class LavagnaComponent implements OnInit {
           //riempio il vettore postIt[] con tutti i post-it dell'progetto selezionato
           for(let post of succ){
             this.postIt.push(post);
-            console.log(this.postIt);
           }
-
+          console.log(this.postIt);
           //mostrare i postIt sull'html
           for(let post of this.postIt){
-            console.log(post.tipologia);
             if(post.tipologia == "to do"){
               this.toDo.push(post);
             } else if(post.tipologia == "doing"){
@@ -75,9 +72,6 @@ export class LavagnaComponent implements OnInit {
               this.accepted.push(post);
             }
           }
-          console.log(this.toDo);
-          console.log("to do: " + this.toDo + " doing: " + this.doing + " done: " + this.done + 
-          " accepted: " + this.accepted);
         }
       },
       err =>{
