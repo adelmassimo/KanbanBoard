@@ -46,6 +46,7 @@ export class LavagnaComponent implements OnInit {
   visualizzaPostIt(){
     this.userService.getPostItProgetto().subscribe(
       succ =>{
+        console.log(succ)
         //controllo se mi arriva almeno una entry dal database
         if(succ[0] != null){
           //svuoto tutti i vettori per ricaricare i post-it presenti nel DB

@@ -8,13 +8,12 @@
     <li class="nav-item">
       <div class="col-sm">
         <form class="form-inline">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Certa tra i progetti" name="nome_progetto"
-              [(ngModel)]="nome_progetto">
             <div class="input-group-prepend">
-              <button type="button" class="btn btn-secondary" (click)="onClickSearchProject()"><i
-                  class="fas fa-search"></i></button>
-            </div>
+              <input type="text" class="form-control" placeholder="Certa tra i progetti" name="nome_progetto"
+                [(ngModel)]="nome_progetto">
+              <button type="button" class="btn btn-secondary" (click)="onClickSearchProject(nome_progetto)">
+                <i class="fa fa-search"></i>
+              </button>
           </div>
         </form>
       </div>

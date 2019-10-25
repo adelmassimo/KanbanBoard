@@ -13,6 +13,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 
+
 import { AppComponent } from './app.component';
 import { PUComponent } from './pu/pu.component';
 import { LoginComponent } from './login/login.component';
@@ -22,6 +23,7 @@ import { HeaderPaginaComponent } from './header-pagina/header-pagina.component';
 import { LavagnaComponent } from './lavagna/lavagna.component';
 import { PostItComponent } from './post-it/post-it.component';
 import { ProjectComponent } from './project/project.component';
+import { LocalStorageService } from './services/local-storage.service';
 
 
 
@@ -31,8 +33,6 @@ import { ProjectService } from './services/project.service';
 import { PuService } from './services/pu.service'
 import { UserService } from './services/user.service'
 import { NewProjectService } from './services/new-project.service';
-
-import { LocalStorageService } from './services/local-storage.service';
 
 
 
