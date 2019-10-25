@@ -80,7 +80,7 @@ export class RegisterComponent implements OnInit {
               this.error = false;
               this.sign = true;
 
-              window.location.reload();
+              //window.location.reload();
             }
           },
           err => {

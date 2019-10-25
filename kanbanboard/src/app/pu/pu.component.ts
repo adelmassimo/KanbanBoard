@@ -123,4 +123,8 @@ export class PUComponent implements OnInit {
     //this.router.navigate(['/lavagna']);
   }
 
+  onClickRefresh(){
+    
+  }
+
 }
