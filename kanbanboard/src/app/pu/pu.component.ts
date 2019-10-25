@@ -5,7 +5,6 @@ import { LocalStorageService } from '../services/local-storage.service';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Inject } from '@angular/core';
 import { Router } from '@angular/router';
-//import { ProjectComponent } from '../project/project.component';
 
 @Component({
   selector: 'app-pu',
@@ -18,17 +17,17 @@ export class PUComponent implements OnInit {
   isMenuVisibile = false;
   isNoProgetto = false;
 
-  // prova per la ricerca progetti dell'utente
-  nameProject = 'prova';
-
   // variabile per visualizzare la barra (rossa se non c'è il progetto, verde se il progetto esiste)
   isVisible = false;
   isSuccess: boolean;
 
   //variabile per la creazione e visualizzazione delle card
+  ricercaProgetto: string;
+  idCard: any[] = [];
   progetto: any[] = [];
   descrizione: any[] = [];
-  listaProgetti: any[] = [{ 'progetto': "", 'descrizione': "" }];
+  listaProgetti: any[] = [{ 'idCard': "", 'progetto': "", 'descrizione': "" }];
+  idProgettoTrovato: any;
 
   constructor(private projectService: ProjectService,
     private userService: UserService, private localstorageservice: LocalStorageService,
@@ -41,26 +40,32 @@ export class PUComponent implements OnInit {
     this.createCard();
   }
 
-  createCard(){
+  createCard() {
     this.projectService.getProgettiUtente().subscribe(
       success => {
+        /*
         for (let i = 0; i < success.length; i++) {
-          console.log(success[i]);
+          this.idCard.push(success[i].id_progetto);
           this.progetto.push(success[i].nome_progetto);
           this.descrizione.push(success[i].descrizione_progetto);
-        }
-        console.log(this.progetto);
-        console.log(this.descrizione);
-        for (let t = 0; t < this.progetto.length; t++) {
-          this.listaProgetti.push({ progetto: this.progetto[t], descrizione: this.descrizione[t] });
+          this.listaProgetti.push({ idCard: this.idCard[i], progetto: this.progetto[i], descrizione: this.descrizione[i] });
         }
         this.listaProgetti.splice(0, 1);
-        console.log(this.listaProgetti);
+          console.log(this.listaProgetti);
+      },*/
+      for (let i = 0; i < success.length; i++) {
+          this.idCard.push(success[i].id_progetto);
+          this.progetto.push(success[i].nome_progetto);
+          this.descrizione.push(success[i].descrizione_progetto);
+          this.listaProgetti.push({ idCard: this.idCard[i], progetto: this.progetto[i], descrizione: this.descrizione[i] });
+        }
+        this.listaProgetti.splice(0, 1);
+          console.log(this.listaProgetti);
       },
       error => {
-        console.log('errore');
-      }
-    );
+        console.log("ERRORE");
+      });
+
   }
 
   onClickSearchMenu() {
@@ -72,36 +77,45 @@ export class PUComponent implements OnInit {
   }
 
   onClickSearchProject(nome_progetto: string) {
-    this.nameProject=nome_progetto;
+    this.ricercaProgetto = nome_progetto;
     this.isVisible = true;
     this.isSuccess = false;
 
-    console.log(this.nameProject);
     this.projectService.getProgettiUtente().subscribe(
-      success=>{
-        console.log('ricerca')
-        console.log(this.listaProgetti);
-        for (var i = 0; i < success.length; i++){
-          if (this.nameProject == this.listaProgetti[i].progetto) {
-            console.log("Progetto Trovato!");
+      success => {
+        /*
+        for (var i = 0; i < success.length; i++) {
+          if (this.ricercaProgetto == this.listaProgetti[i].progetto) {
+            this.idProgettoTrovato = this.listaProgetti[i].idCard;
+            this.progetto.push(success[i].nome_progetto);
             this.isSuccess = true;
           }
+        }7
+        */
+        if (this.isSuccess = true) {
+          console.log('trovato');
+          this.projectService.getCercaProgetti(this.ricercaProgetto).subscribe(
+            success=>{
+              
+
+            },
+            error=>{
+
+            }
+          )
+          console.log(this.listaProgetti);
+          console.log(this.idProgettoTrovato);
         }
       },
-      error=>{
-          console.log("Progetto non Trovato");
-          this.isSuccess = false;
+      error => {
+        this.isSuccess = false;
       }
     );
-    
+
   }
 
   onClickCanc() {
     this.isVisible = false;
-  }
-
-  onClickNewProject() {
-    //this.projectComponent.onProjectSubmit();
   }
 
   openProject() {
