@@ -19,11 +19,11 @@ export class NewProjectService {
     });
   }
 
-  updateProject(project):Observable<any>{
+  /*updateProject(project):Observable<any>{
     return this.http.post(this.base_url + "/api/project/:id", {
       'nome_progetto': project.nome_progetto,
       'descrizione_progetto': project.descrizione_progetto
     });
-  }
+  } */
 
 }

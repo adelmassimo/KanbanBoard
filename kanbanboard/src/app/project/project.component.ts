@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NewProjectService } from '../services/new-project.service';
 
-
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -21,7 +20,6 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit() {
   }
-
 
   onProjectSubmit() {
     const project: any = {

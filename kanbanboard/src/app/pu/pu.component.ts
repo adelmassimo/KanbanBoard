@@ -5,6 +5,7 @@ import { LocalStorageService } from '../services/local-storage.service';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Inject } from '@angular/core';
 import { Router } from '@angular/router';
+//import { ProjectComponent } from '../project/project.component';
 
 @Component({
   selector: 'app-pu',
@@ -17,8 +18,8 @@ export class PUComponent implements OnInit {
   isMenuVisibile = false;
   isNoProgetto = false;
 
-  // variabile per la ricerca del progetto all'intenro del DB
-  porgettoAttivo: string = "";
+  // prova per la ricerca progetti dell'utente
+  nameProject = 'prova';
 
   // variabile per visualizzare la barra (rossa se non c'è il progetto, verde se il progetto esiste)
   isVisible = false;
@@ -38,6 +39,10 @@ export class PUComponent implements OnInit {
   key = 'object_list';
 
   ngOnInit() {
+    this.createCard();
+  }
+
+  createCard(){
     this.projectService.getProgettiUtente().subscribe(
       success => {
         for (let i = 0; i < success.length; i++) {
@@ -51,7 +56,7 @@ export class PUComponent implements OnInit {
         for (let t = 0; t < this.progetto.length; t++) {
           this.listaProgetti.push({ id_progetto: this.id_progetto[t], progetto: this.progetto[t], descrizione: this.descrizione[t] });
         }
-        this.listaProgetti.splice(0,1);
+        this.listaProgetti.splice(0, 1);
         console.log(this.listaProgetti);
       },
       error => {
@@ -59,7 +64,6 @@ export class PUComponent implements OnInit {
       }
     );
   }
-
 
   onClickSearchMenu() {
     if (this.isMenuVisibile == false) {
@@ -69,19 +73,29 @@ export class PUComponent implements OnInit {
     }
   }
 
-  onClickSearchProject() {
-
+  onClickSearchProject(nome_progetto: string) {
+    this.nameProject=nome_progetto;
     this.isVisible = true;
     this.isSuccess = false;
-    /*
-        if (this.projectService.getProgetti(this.nome_progetto)) {
-          console.log("Progetto Trovato!");
-          this.isSuccess = true;
+
+    console.log(this.nameProject);
+    this.projectService.getProgettiUtente().subscribe(
+      success=>{
+        console.log('ricerca')
+        console.log(this.listaProgetti);
+        for (var i = 0; i < success.length; i++){
+          if (this.nameProject == this.listaProgetti[i].progetto) {
+            console.log("Progetto Trovato!");
+            this.isSuccess = true;
+          }
         }
-        else {
+      },
+      error=>{
           console.log("Progetto non Trovato");
           this.isSuccess = false;
-        }*/
+      }
+    );
+    
   }
 
   onClickCanc() {
@@ -89,6 +103,7 @@ export class PUComponent implements OnInit {
   }
 
   onClickNewProject() {
+    //this.projectComponent.onProjectSubmit();
   }
 
   openProject(id) {
