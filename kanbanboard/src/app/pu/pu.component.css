@@ -2,6 +2,7 @@
     float: right;
     border-top: 1em;
     border-radius: 2em;
+    margin-top: 10px;
 }
 
 #search{
@@ -15,6 +16,12 @@
 #refresh{
     float: right;
     border-top: 1em;
+    border-radius: 2em;
+}
+
+#sort{
+    float: right;
+    margin-top: 10px;
     border-radius: 2em;
 }
 

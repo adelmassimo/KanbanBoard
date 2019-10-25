@@ -89,6 +89,7 @@ export class PUComponent implements OnInit {
 
   openProject(id) {
     // carico sullo user service il progetto selezionato dell'utente
+    console.log(id);
     this.projectService.getProgettoById(id).subscribe(
       succ =>{
         if(succ != []){
@@ -113,6 +114,10 @@ export class PUComponent implements OnInit {
   }
 
   onClickRefresh(){
+    
+  }
+
+  onClickSort(){
     
   }
 
