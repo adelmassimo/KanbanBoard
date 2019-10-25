@@ -40,13 +40,5 @@ export class PostItService {
     });
   } // fine updatePostit(updatePostIt):Observable<any>{
 
-
-  inserimentoProgettiPerPostIt(progettiPerPostIt):Observable<any>{
-    return this.http.post(this.base_url + "/api/post-it/progettiXPostIt", {
-      'nome_postIt': progettiPerPostIt.nome_postIt,
-      'descrizione_postIt': progettiPerPostIt.descrizione_postIt,
-      'id_progetto': progettiPerPostIt.id_progetto
-    });
-  } // fine inserimentoPostit(postIt):Observable<any>{
 */
 }
