@@ -30,7 +30,7 @@ export class PostItComponent implements OnInit {
       nome_postIt: this.nome_postIt,
       descrizione_postIt: this.descrizione_postIt,
       colore_postIt: this.panelColor.value,
-      tipologia: "TODO",
+      tipologia: "to do",
       id_progetto: this.userService.progettoAttivo
     }
     console.log(postIt);
