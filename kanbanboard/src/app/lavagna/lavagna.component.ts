@@ -43,7 +43,8 @@ export class LavagnaComponent implements OnInit {
 
   visualizzaPostIt() {
     this.userService.getPostItProgetto().subscribe(
-      succ => {
+      succ =>{
+        console.log(succ)
         //controllo se mi arriva almeno una entry dal database
         if (succ[0] != null) {
           //svuoto tutti i vettori per ricaricare i post-it presenti nel DB
@@ -60,8 +61,9 @@ export class LavagnaComponent implements OnInit {
           }
 
           //mostrare i postIt sull'html
-          for (let post of this.postIt) {
-            if (post.tipologia == "to do") {
+          for(let post of this.postIt){
+            console.log(post.tipologia);
+            if(post.tipologia == "to do"){
               this.toDo.push(post);
             } else if (post.tipologia == "doing") {
               this.doing.push(post);

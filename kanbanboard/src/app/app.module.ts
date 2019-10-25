@@ -12,8 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
-
-import {MatDialogModule} from "@angular/material";
+import { MatDialogModule } from "@angular/material";
 
 import { AppComponent } from './app.component';
 import { PUComponent } from './pu/pu.component';
@@ -32,8 +31,10 @@ import { RegisterService } from './services/register.service';
 import { ProjectService } from './services/project.service';
 import { PuService } from './services/pu.service'
 import { UserService } from './services/user.service'
+import { NewProjectService } from './services/new-project.service';
 
 import { LocalStorageService } from './services/local-storage.service';
+
 
 
 
@@ -51,7 +52,6 @@ import { LocalStorageService } from './services/local-storage.service';
     LavagnaComponent,
     PostItComponent,
     CourseDialogComponent,
-    
   ],
   imports: [
     BrowserModule,

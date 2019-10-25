@@ -3,28 +3,28 @@
 
     <h1 class="font-italic font-weight-bold">Crea nuovo progetto</h1>
 
-    <form action="javascript:void(0)" (submit)="onProjectSubmit()">
+    <form action="javascript:void(0)">
       <!--Nome progetto-->
       <div class="mb-3 d-flex justify-content-center">
         <mat-form-field class="w-75">
-          <input matInput placeholder="Nome progetto" name="username" [(ngModel)]="username">
+          <input matInput placeholder="Nome progetto" id="nome_progetto" name="nome_progetto" [(ngModel)]="nome_progetto">
         </mat-form-field>
       </div>
       <!--Descrizione progetto-->
       <div class="mb-3 d-flex justify-content-center">
         <mat-form-field class="w-75">
-          <textarea rows="3" matInput placeholder="Descrizione progetto"></textarea>
+          <textarea rows="3" matInput placeholder="Descrizione progetto" id="descrizione_progetto" type="text" name="descrizione_progetto" [(ngModel)]="descrizione_progetto"></textarea>
         </mat-form-field>
       </div>
-      <!-- bottone cerca-->
-      <button class="btn btn-primary">Crea</button>
+      <!-- bottone crea-->
+      <button mat-raised-button color="primary" type="button" (click)="onProjectSubmit()" [routerLink]="['/pu']">Crea</button>
 
     </form>
 
     <div *ngIf="error" class="alert alert-danger" role="alert" style="margin-top: 15px;">
       {{myMessage}}
     </div>
-    <div *ngIf="sign" class="alert alert-success" role="alert" style="margin-top: 15px;">
+    <div *ngIf="creato" class="alert alert-success" role="alert" style="margin-top: 15px;">
       {{myMessage}}
     </div>
   </div>

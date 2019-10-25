@@ -5,6 +5,7 @@ import { LocalStorageService } from '../services/local-storage.service';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Inject } from '@angular/core';
 import { Router } from '@angular/router';
+//import { ProjectComponent } from '../project/project.component';
 
 @Component({
   selector: 'app-pu',
@@ -13,70 +14,88 @@ import { Router } from '@angular/router';
 })
 export class PUComponent implements OnInit {
 
-  //apertura menu superiore
-  isMenuVisibile: boolean = false;
-  isNoProgetto: boolean = false;
+  // apertura menu superiore
+  isMenuVisibile = false;
+  isNoProgetto = false;
 
-  //prova per la ricerca progetti dell'utente
-  nameProject: string = "prova";
+  // prova per la ricerca progetti dell'utente
+  nameProject = 'prova';
 
-  //variabile per la ricerca del progetto all'intenro del DB
-  nome_progetto: string = "";
-
-  //variabile per visualizzare la barra (rossa se non c'è il progetto, verde se il progetto esiste)
-  isVisible: boolean = false;
+  // variabile per visualizzare la barra (rossa se non c'è il progetto, verde se il progetto esiste)
+  isVisible = false;
   isSuccess: boolean;
 
-  // Listaprogetti
-  lista_progetti: any[];
+  //variabile per la creazione e visualizzazione delle card
+  id_progetto: any[] = [];
+  progetto: any[] = [];
+  descrizione: any[] = [];
+  listaProgetti: any[] = [{ 'id_progetto': "", 'progetto': "", 'descrizione': "" }];
 
-  objlist: any[];
-  idUser: string;//= this.objlist[0].id_utente;
-  idProgetto: string;// = this.objlist[0].id_progeto;
-  
   constructor(private projectService: ProjectService,
-              private userService: UserService, private localstorageservice: LocalStorageService,
-              @Inject(LOCAL_STORAGE) private storage: StorageService, private router: Router) { }
+    private userService: UserService, private localstorageservice: LocalStorageService,
+    @Inject(LOCAL_STORAGE) private storage: StorageService, private router: Router) { }
 
 
-  key: string = "object_list";
+  key = 'object_list';
 
   ngOnInit() {
-    
+    this.createCard();
   }
 
-/*  ngDoCheck(){
-
-    //questo if controlla se l'utente è loggato altrimenti si viene reindrizzati alla homepage
-    if(this.localstorageservice.isEmpty()){
-      //se non è loggato nessuno si viene reindirizzati alla homepage
-      this.router.navigate(['']);
-    }
-  }*/
-
+  createCard(){
+    this.projectService.getProgettiUtente().subscribe(
+      success => {
+        for (let i = 0; i < success.length; i++) {
+          console.log(success[i]);
+          this.id_progetto.push(success[i].id_progetto);
+          this.progetto.push(success[i].nome_progetto);
+          this.descrizione.push(success[i].descrizione_progetto);
+        }
+        console.log(this.progetto);
+        console.log(this.descrizione);
+        for (let t = 0; t < this.progetto.length; t++) {
+          this.listaProgetti.push({ id_progetto: this.id_progetto[t], progetto: this.progetto[t], descrizione: this.descrizione[t] });
+        }
+        this.listaProgetti.splice(0, 1);
+        console.log(this.listaProgetti);
+      },
+      error => {
+        console.log('errore');
+      }
+    );
+  }
 
   onClickSearchMenu() {
     if (this.isMenuVisibile == false) {
       this.isMenuVisibile = true;
-    }
-    else {
+    } else {
       this.isMenuVisibile = false;
     }
   }
 
-  onClickSearchProject() {
-
+  onClickSearchProject(nome_progetto: string) {
+    this.nameProject=nome_progetto;
     this.isVisible = true;
     this.isSuccess = false;
-    /*
-        if (this.projectService.getProgetti(this.nome_progetto)) {
-          console.log("Progetto Trovato!");
-          this.isSuccess = true;
+
+    console.log(this.nameProject);
+    this.projectService.getProgettiUtente().subscribe(
+      success=>{
+        console.log('ricerca')
+        console.log(this.listaProgetti);
+        for (var i = 0; i < success.length; i++){
+          if (this.nameProject == this.listaProgetti[i].progetto) {
+            console.log("Progetto Trovato!");
+            this.isSuccess = true;
+          }
         }
-        else {
+      },
+      error=>{
           console.log("Progetto non Trovato");
           this.isSuccess = false;
-        }*/
+      }
+    );
+    
   }
 
   onClickCanc() {
@@ -84,29 +103,14 @@ export class PUComponent implements OnInit {
   }
 
   onClickNewProject() {
+    //this.projectComponent.onProjectSubmit();
   }
 
-  openProject(){
-    //carico sul local storage il progetto dell'utente
-    //...
-
-    this.router.navigate(['/lavagna'])
+  openProject(id) {
+    // carico sul local storage il progetto dell'utente
+    // ...
+    
+    this.router.navigate(['/lavagna']);
   }
-  /*
-  ngDoCheck() {
-    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
-    //Add 'implements DoCheck' to the class.
-    this.puService.getNomeProgetto(this.idUser).subscribe(
-      success=>{
-        console.log(success);
-      },
-      error => {
-        console.log(error);
-      });
-  }
-      }
-    );
-
-  }*/
 
 }
