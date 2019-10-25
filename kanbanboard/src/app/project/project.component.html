@@ -17,14 +17,14 @@
         </mat-form-field>
       </div>
       <!-- bottone crea-->
-      <button class="btn btn-primary" type="submit"  [routerLink]="['#']">Crea</button>
+      <button class="btn btn-primary" type="submit"  [routerLink]="['/pu']">Crea</button>
 
     </form>
 
     <div *ngIf="error" class="alert alert-danger" role="alert" style="margin-top: 15px;">
       {{myMessage}}
     </div>
-    <div *ngIf="sign" class="alert alert-success" role="alert" style="margin-top: 15px;">
+    <div *ngIf="creato" class="alert alert-success" role="alert" style="margin-top: 15px;">
       {{myMessage}}
     </div>
   </div>
