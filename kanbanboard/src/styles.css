@@ -43,10 +43,7 @@ background: rgba(0, 0, 255, 0.5);
 
 
 /*start dialog visualizza postit*/
-.mat-dialog-container{
-  background: none;
-  box-shadow: none;
-}
+
 
 .bg-red{
   background-color: red;
@@ -64,17 +61,36 @@ background: rgba(0, 0, 255, 0.5);
   background-color: yellow;
 }
 
-.descrizione-postit-parent{
-  overflow: hidden;
+.mat-dialog-actions{
+  margin: 10px 0 1px 20px !important;
+}
+.mat-dialog-container{
+  background: none;
+  box-shadow: none;
+  overflow: hidden !important;
 }
 .mat-dialog-content{
-  overflow: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+  overflow-y:scroll;
+  overflow-x:hidden;
+  /*
+  width: 100%;
+  height: 100%;
+  overflow: hidden;*/
 }
 
-.descrizione-postit-child{
+.bottone:hover{
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/*.descrizione-postit-child{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   overflow-y: scroll;
   padding-right: 272px; 
   box-sizing: content-box;
-}
+}*/
 
 /*end dialog visualizza postit*/

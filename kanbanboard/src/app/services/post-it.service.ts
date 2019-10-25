@@ -20,7 +20,16 @@ export class PostItService {
       'tipologia' : postIt.tipologia,
       'id_progetto': postIt.id_progetto
     });
-  } // fine inserimentoPostit(postIt):Observable<any>{
+  } // fine inserimentoPostit(postIt):Observable<any>
+
+  /**start Elimina postit */
+  eliminaPostit(postIt):Observable<any>{
+    return this.http.post(this.base_url + "/api/deletePostIt/", {
+      'id_postIt': postIt.id_postIt
+    });
+  }
+  /**end Elimina postit */
+
 /*
   updatePostit(updatePostIt):Observable<any>{
     return this.http.post(this.base_url + "/api/post-it/update/:id", {

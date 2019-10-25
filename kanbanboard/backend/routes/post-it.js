@@ -66,10 +66,26 @@ postIt.post('/post-it/update/:id', function (req, res) {
                     'left outer join postit on postit.id_postIt = progetti_x_postit.id_postIt ' +
                     'left outer join progetti on progetti.id_progetto = progetti_x_postit.id_progetto ' +
                     'WHERE progetti.id_progetto = "' + id + '"', function (err, rows, next) {
-        console.log(rows)
+        //console.log(rows)
             if (err) throw err;
             res.send(rows);
         });
+  });
+
+
+  //elimina postit
+  postIt.post('/deletePostIt/', function (req, res) {
+    id_postIt = req.body.id_postIt;
+    console.log('sto eliminando:',id_postIt);
+
+    var query = "DELETE FROM postit "
+              + "WHERE  id_postIt = '"+id_postIt+"'";
+        sql_connection.query(query , function(err, rows, fields) {
+            if (err) throw err;
+            console.log("POST-IT eliminato");         
+            res.send({"eliminato" : '1'});     
+        });
+
   });
 
 

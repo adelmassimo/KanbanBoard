@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 
+import { PostItService } from '../services/post-it.service';
 import { UserService } from '../services/user.service';
+
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
 
 @Component({
@@ -15,6 +17,7 @@ export class LavagnaComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
+    private postitservice: PostItService,
     private dialog: MatDialog
   ) { }
 
@@ -84,19 +87,16 @@ export class LavagnaComponent implements OnInit {
     );
   }
 
-
   //dialog visualizza postit
   openDialog(post) {
-
-    console.log("post selezionato:",post);
 
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
-    //dialogConfig.autoFocus = true;
+    dialogConfig.autoFocus = false;
 
     dialogConfig.width = '500px';
-    //dialogConfig.maxHeight= '500px';
+    dialogConfig.height= '100%';
     
     dialogConfig.data = post;
 
@@ -105,8 +105,16 @@ export class LavagnaComponent implements OnInit {
     const dialogRef = this.dialog.open(CourseDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-      data => console.log("Dialog output:", data)
-    );
+      data => {
+      if(data.action === 'delete'){
+        this.postitservice.eliminaPostit(data.postIt).subscribe(
+          success => {
+            this.visualizzaPostIt();
+          }
+        )
+      }
+      });
+
   }
 
 }

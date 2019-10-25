@@ -21,7 +21,7 @@ export class UserService {
 
   progettiUtente = {}
   
-  progettoAttivo: any[] = [];
+  progettoAttivo: string = "1";
 
   logged: boolean = false;
 
@@ -55,6 +55,6 @@ export class UserService {
   }
 
   getPostItProgetto():Observable<any>{
-    return this.http.post(this.base_url + "/api/visualizzaPostItProgetto/", {'idProgetto': this.progettoAttivo})
+    return this.http.post(this.base_url + "/api/visualizzaPostItProgetto/", {'idProgetto': "1"})
   }
 }
