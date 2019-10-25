@@ -22,16 +22,10 @@ export class PUComponent implements OnInit {
   isSuccess: boolean;
 
   //variabile per la creazione e visualizzazione delle card
-  id_progetto: any[] = [];
-  nome_progetto: any[] = [];
-  descrizione: any[] = [];
-  listaProgetti: any[] = [{ 'id_progetto': "", 'nome_progetto': "", 'descrizione': "" }];
+  listaProgetti: any[] = [];
 
   constructor(private projectService: ProjectService,
     private userService: UserService, private router: Router) { }
-
-
-  key = 'object_list';
 
   ngOnInit() {
     this.createCard();
@@ -41,14 +35,12 @@ export class PUComponent implements OnInit {
     this.projectService.getProgettiUtente().subscribe(
       success => {
         for (let i = 0; i < success.length; i++) {
-          this.id_progetto.push(success[i].id_progetto);
-          this.nome_progetto.push(success[i].nome_progetto);
-          this.descrizione.push(success[i].descrizione_progetto);
+          this.listaProgetti.push({ 
+            id_progetto: success[i].id_progetto, 
+            nome_progetto: success[i].nome_progetto, 
+            descrizione: success[i].descrizione_progetto 
+          });
         }
-        for (let t = 0; t < this.nome_progetto.length; t++) {
-          this.listaProgetti.push({ id_progetto: this.id_progetto[t], nome_progetto: this.nome_progetto[t], descrizione: this.descrizione[t] });
-        }
-        this.listaProgetti.splice(0, 1);
         console.log(this.listaProgetti);
       },
       error => {
