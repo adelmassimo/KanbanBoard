@@ -1,0 +1,39 @@
+<!--colore_postIt: "Yellow"
+    ​
+    descrizione_postIt: "Descrizione"
+    ​
+    descrizione_progetto: "prrrrrrrrogetto"
+    ​
+    id_postIt: 1
+    ​
+    id_progetto: 1
+    ​
+    nome_postIt: "Titolo"
+    ​
+    nome_progetto: "progetto"
+    ​
+    tipologia: "to do"-->
+<div class="p-3 {{coloreSfondo}}">
+
+
+  <h2 mat-dialog-title>{{post.nome_postIt}}</h2>
+
+  <mat-dialog-content>
+    <div class="row d-flex justify-content-end">
+      <div class="col px-5 descrizione-postit-child">
+        {{post.descrizione_postIt}}
+      </div>
+    </div>
+    <div class="row d-flex justify-content-end">
+      <div class="col-4">
+        #{{post.id_postIt}}
+      </div>
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button class="mat-stroked-button" color="primary" (click)="close()">Close</button>
+  </mat-dialog-actions>
+
+</div>
