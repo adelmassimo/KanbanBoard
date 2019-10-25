@@ -17,20 +17,18 @@ export class PUComponent implements OnInit {
   isMenuVisibile = false;
   isNoProgetto = false;
 
-  // prova per la ricerca progetti dell'utente
-  nameProject = 'prova';
-
   // variabile per la ricerca del progetto all'intenro del DB
-  nome_progetto = '';
+  porgettoAttivo: string = "";
 
   // variabile per visualizzare la barra (rossa se non c'è il progetto, verde se il progetto esiste)
   isVisible = false;
   isSuccess: boolean;
 
   //variabile per la creazione e visualizzazione delle card
+  id_progetto: any[] = [];
   progetto: any[] = [];
   descrizione: any[] = [];
-  listaProgetti: any[] = [{ 'progetto': "", 'descrizione': "" }];
+  listaProgetti: any[] = [{ 'id_progetto': "", 'progetto': "", 'descrizione': "" }];
 
   constructor(private projectService: ProjectService,
     private userService: UserService, private localstorageservice: LocalStorageService,
@@ -44,13 +42,14 @@ export class PUComponent implements OnInit {
       success => {
         for (let i = 0; i < success.length; i++) {
           console.log(success[i]);
+          this.id_progetto.push(success[i].id_progetto);
           this.progetto.push(success[i].nome_progetto);
           this.descrizione.push(success[i].descrizione_progetto);
         }
         console.log(this.progetto);
         console.log(this.descrizione);
         for (let t = 0; t < this.progetto.length; t++) {
-          this.listaProgetti.push({ progetto: this.progetto[t], descrizione: this.descrizione[t] });
+          this.listaProgetti.push({ id_progetto: this.id_progetto[t], progetto: this.progetto[t], descrizione: this.descrizione[t] });
         }
         this.listaProgetti.splice(0,1);
         console.log(this.listaProgetti);
@@ -92,10 +91,10 @@ export class PUComponent implements OnInit {
   onClickNewProject() {
   }
 
-  openProject() {
+  openProject(id) {
     // carico sul local storage il progetto dell'utente
     // ...
-
+    
     this.router.navigate(['/lavagna']);
   }
 
