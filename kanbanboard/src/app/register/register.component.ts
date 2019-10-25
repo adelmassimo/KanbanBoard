@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
       
         this.registerService.registrazione(utente).subscribe(
           utente => {
-
+            console.log(utente);
             if(utente.errore == 1){
               console.log("utente già registrato");
               this.myMessage = "utente già registrato";
@@ -80,7 +80,7 @@ export class RegisterComponent implements OnInit {
               this.error = false;
               this.sign = true;
 
-              //window.location.reload();
+              window.location.reload();
             }
           },
           err => {
