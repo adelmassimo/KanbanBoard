@@ -14,14 +14,17 @@ export class PUComponent implements OnInit {
   isMenuVisibile = false;
   isNoProgetto = false;
 
-  // prova per la ricerca progetti dell'utente
-  nameProject = 'prova';
-
   // variabile per visualizzare la barra (rossa se non c'è il progetto, verde se il progetto esiste)
   isVisible = false;
   isSuccess: boolean;
 
   //variabile per la creazione e visualizzazione delle card
+  ricercaProgetto: string;
+  idCard: any[] = [];
+  progetto: any[] = [];
+  descrizione: any[] = [];
+ // listaProgetti: any[] = [{ 'idCard': "", 'progetto': "", 'descrizione': "" }];
+  idProgettoTrovato: any;
   listaProgetti: any[] = [];
 
   constructor(private projectService: ProjectService,
@@ -31,9 +34,10 @@ export class PUComponent implements OnInit {
     this.createCard();
   }
 
-  createCard(){
+  createCard() {
     this.projectService.getProgettiUtente().subscribe(
       success => {
+        
         for (let i = 0; i < success.length; i++) {
           this.listaProgetti.push({ 
             id_progetto: success[i].id_progetto, 
@@ -44,9 +48,9 @@ export class PUComponent implements OnInit {
         console.log(this.listaProgetti);
       },
       error => {
-        console.log('errore');
-      }
-    );
+        console.log("ERRORE");
+      });
+
   }
 
   onClickSearchMenu() {
@@ -58,28 +62,41 @@ export class PUComponent implements OnInit {
   }
 
   onClickSearchProject(nome_progetto: string) {
-    this.nameProject=nome_progetto;
+    this.ricercaProgetto = nome_progetto;
     this.isVisible = true;
     this.isSuccess = false;
 
-    console.log(this.nameProject);
     this.projectService.getProgettiUtente().subscribe(
-      success=>{
-        console.log('ricerca')
-        console.log(this.listaProgetti);
-        for (var i = 0; i < success.length; i++){
-          if (this.nameProject == this.listaProgetti[i].progetto) {
-            console.log("Progetto Trovato!");
+      success => {
+        /*
+        for (var i = 0; i < success.length; i++) {
+          if (this.ricercaProgetto == this.listaProgetti[i].progetto) {
+            this.idProgettoTrovato = this.listaProgetti[i].idCard;
+            this.progetto.push(success[i].nome_progetto);
             this.isSuccess = true;
           }
+        }7
+        */
+        if (this.isSuccess = true) {
+          console.log('trovato');
+          this.projectService.getCercaProgetti(this.ricercaProgetto).subscribe(
+            success=>{
+              
+
+            },
+            error=>{
+
+            }
+          )
+          console.log(this.listaProgetti);
+          console.log(this.idProgettoTrovato);
         }
       },
-      error=>{
-          console.log("Progetto non Trovato");
-          this.isSuccess = false;
+      error => {
+        this.isSuccess = false;
       }
     );
-    
+
   }
 
   onClickCanc() {
