@@ -52,18 +52,22 @@
   Preview progetti-->
 
 <!--Bottoni end pagina-->
-<div>
-  <div class="row">
-    <div class="col-sm">
-      <button type="button" class="btn btn-secondary " id='add' [routerLink]="['/project']"><i
-          class="fa fa-plus"></i></button>
-    </div>
+<div class="row">
+  <div class="col-sm">
+    <button type="button" class="btn btn-secondary " id='add' [routerLink]="['/project']"><i
+        class="fa fa-plus"></i></button>
   </div>
   <div class="row">
     <div class="col-sm">
       <button type="button" class="btn btn-secondary " id='search' (click)="onClickSearchMenu()"><i
           class="fa fa-search"></i></button>
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm">
+    <button type="button" class="btn btn-secondary " id='refresh' (click)="onClickRefresh()">
+      <i class="fa fa-sync" aria-hidden="true"></i></button>
   </div>
 </div>
 <!--Bottoni end pagina-->

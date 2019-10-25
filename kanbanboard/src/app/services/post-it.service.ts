@@ -21,7 +21,7 @@ export class PostItService {
       'id_progetto': postIt.id_progetto
     });
   } // fine inserimentoPostit(postIt):Observable<any>{
-
+/*
   updatePostit(updatePostIt):Observable<any>{
     return this.http.post(this.base_url + "/api/post-it/update/:id", {
       'nome_postIt': updatePostIt.nome_postIt,
@@ -31,5 +31,5 @@ export class PostItService {
     });
   } // fine updatePostit(updatePostIt):Observable<any>{
 
-
+*/
 }

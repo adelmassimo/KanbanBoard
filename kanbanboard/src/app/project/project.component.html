@@ -3,7 +3,7 @@
 
     <h1 class="font-italic font-weight-bold">Crea nuovo progetto</h1>
 
-    <form action="javascript:void(0)" (submit)="onProjectSubmit()">
+    <form action="javascript:void(0)">
       <!--Nome progetto-->
       <div class="mb-3 d-flex justify-content-center">
         <mat-form-field class="w-75">
@@ -17,7 +17,7 @@
         </mat-form-field>
       </div>
       <!-- bottone crea-->
-      <button class="btn btn-primary" type="button" (click)="onProjectSubmit()" [routerLink]="['/pu']">Crea</button>
+      <button mat-raised-button color="primary" type="button" (click)="onProjectSubmit()" [routerLink]="['/pu']">Crea</button>
 
     </form>
 

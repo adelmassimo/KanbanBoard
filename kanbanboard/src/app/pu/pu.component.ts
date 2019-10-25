@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { UserService } from '../services/user.service';
-import { LocalStorageService } from '../services/local-storage.service';
-import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
-import { Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -26,15 +23,12 @@ export class PUComponent implements OnInit {
   idCard: any[] = [];
   progetto: any[] = [];
   descrizione: any[] = [];
-  listaProgetti: any[] = [{ 'idCard': "", 'progetto': "", 'descrizione': "" }];
+ // listaProgetti: any[] = [{ 'idCard': "", 'progetto': "", 'descrizione': "" }];
   idProgettoTrovato: any;
+  listaProgetti: any[] = [];
 
   constructor(private projectService: ProjectService,
-    private userService: UserService, private localstorageservice: LocalStorageService,
-    @Inject(LOCAL_STORAGE) private storage: StorageService, private router: Router) { }
-
-
-  key = 'object_list';
+    private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.createCard();
@@ -43,24 +37,15 @@ export class PUComponent implements OnInit {
   createCard() {
     this.projectService.getProgettiUtente().subscribe(
       success => {
-        /*
+        
         for (let i = 0; i < success.length; i++) {
-          this.idCard.push(success[i].id_progetto);
-          this.progetto.push(success[i].nome_progetto);
-          this.descrizione.push(success[i].descrizione_progetto);
-          this.listaProgetti.push({ idCard: this.idCard[i], progetto: this.progetto[i], descrizione: this.descrizione[i] });
+          this.listaProgetti.push({ 
+            id_progetto: success[i].id_progetto, 
+            nome_progetto: success[i].nome_progetto, 
+            descrizione: success[i].descrizione_progetto 
+          });
         }
-        this.listaProgetti.splice(0, 1);
-          console.log(this.listaProgetti);
-      },*/
-      for (let i = 0; i < success.length; i++) {
-          this.idCard.push(success[i].id_progetto);
-          this.progetto.push(success[i].nome_progetto);
-          this.descrizione.push(success[i].descrizione_progetto);
-          this.listaProgetti.push({ idCard: this.idCard[i], progetto: this.progetto[i], descrizione: this.descrizione[i] });
-        }
-        this.listaProgetti.splice(0, 1);
-          console.log(this.listaProgetti);
+        console.log(this.listaProgetti);
       },
       error => {
         console.log("ERRORE");
@@ -118,11 +103,34 @@ export class PUComponent implements OnInit {
     this.isVisible = false;
   }
 
-  openProject() {
-    // carico sul local storage il progetto dell'utente
-    // ...
 
-    this.router.navigate(['/lavagna']);
+  openProject(id) {
+    // carico sullo user service il progetto selezionato dell'utente
+    this.projectService.getProgettoById(id).subscribe(
+      succ =>{
+        if(succ != []){
+          var progetto = {
+            'id_progetto': succ[0].id_progetto,
+            'nome_progetto': succ[0].nome_progetto,
+            'descrizione': succ[0].descrizione_progetto
+          }
+          this.projectService.setProgetto(progetto)
+
+          this.router.navigate(['/lavagna']);
+        }else{
+          //id progetto non presente nel database
+          this.router.navigate(['/']);
+        }
+      },
+      err =>{
+        console.log("errore connessione database!");
+      }
+    )
+    //this.router.navigate(['/lavagna']);
+  }
+
+  onClickRefresh(){
+    
   }
 
 }

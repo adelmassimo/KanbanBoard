@@ -26,4 +26,12 @@ export class ProjectService {
     console.log(this.userService.user.id);
     return this.http.post(this.base_url + "/api/cercaProgetti/", { 'nome_progetto': ricerca, 'id': this.userService.user.id });
   }
+
+  getProgettoById(id): Observable<any>{
+    return this.http.post(this.base_url + "/api/visualizzaProgettoById/", {'id': id});
+  }
+
+  getPostItProgetto():Observable<any>{
+    return this.http.post(this.base_url + "/api/visualizzaPostItProgetto/", {'idProgetto': this.progetto.id})
+  }
 }
