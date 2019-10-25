@@ -25,7 +25,7 @@
         <h2>TO DO</h2>
         <div class="row">
           <!-- rappresentazione grafica del post-it -->
-          <div *ngFor="let post of toDo" class="col-6 divPost">
+          <div *ngFor="let post of toDo" class="col-6 divPost cursor-pointer" (click)="openDialog(post)">
             <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
               <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
               <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>

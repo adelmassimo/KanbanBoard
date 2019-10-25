@@ -17,11 +17,12 @@ project.post('/project/', function (req, res) {
           console.log("PROGETTO INSERITO");  
         });
 
+
 }); 
 
 
 //UPDATE
-project.post('/project/:id', function (req, res) {
+/*project.post('/project/:id', function (req, res) {
 
   nome_progetto = req.body.nome_progetto;
   descrizione_progetto = req.body.descrizione_progetto;
@@ -34,6 +35,6 @@ project.post('/project/:id', function (req, res) {
         console.log("PROGETTO AGGIORNATO");  
       });
 
-}); 
+}); */
 
 module.exports = project;

@@ -31,9 +31,50 @@ background: rgb(171, 171, 231);
 .example-panel-yellow.mat-select-panel {
   background: rgb(247, 245, 148);
 }
+
+/*questa roba si fa con le classi di bootstrap*/
 .nomeProgetto{
   font-size: 50px;
 }
 .titoloProgetto{
   margin-top: 2em;
 }
+/*questa roba si fa con le classi di bootstrap*/
+
+
+/*start dialog visualizza postit*/
+.mat-dialog-container{
+  background: none;
+  box-shadow: none;
+}
+
+.bg-red{
+  background-color: red;
+}
+.bg-green{
+  background-color: green;
+}
+.bg-blu{
+  background-color: blue;
+}
+.bg-pink{
+  background-color: pink;
+}
+.bg-yellow{
+  background-color: yellow;
+}
+
+.descrizione-postit-parent{
+  overflow: hidden;
+}
+.mat-dialog-content{
+  overflow: hidden;
+}
+
+.descrizione-postit-child{
+  overflow-y: scroll;
+  padding-right: 272px; 
+  box-sizing: content-box;
+}
+
+/*end dialog visualizza postit*/

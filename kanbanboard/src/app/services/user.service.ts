@@ -21,7 +21,7 @@ export class UserService {
 
   progettiUtente = {}
   
-  progettoAttivo: string = "1";
+  progettoAttivo: any[] = [];
 
   logged: boolean = false;
 
