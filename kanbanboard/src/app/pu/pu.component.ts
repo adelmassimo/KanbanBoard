@@ -23,9 +23,9 @@ export class PUComponent implements OnInit {
 
   //variabile per la creazione e visualizzazione delle card
   id_progetto: any[] = [];
-  progetto: any[] = [];
+  nome_progetto: any[] = [];
   descrizione: any[] = [];
-  listaProgetti: any[] = [{ 'id_progetto': "", 'progetto': "", 'descrizione': "" }];
+  listaProgetti: any[] = [{ 'id_progetto': "", 'nome_progetto': "", 'descrizione': "" }];
 
   constructor(private projectService: ProjectService,
     private userService: UserService, private router: Router) { }
@@ -42,11 +42,11 @@ export class PUComponent implements OnInit {
       success => {
         for (let i = 0; i < success.length; i++) {
           this.id_progetto.push(success[i].id_progetto);
-          this.progetto.push(success[i].nome_progetto);
+          this.nome_progetto.push(success[i].nome_progetto);
           this.descrizione.push(success[i].descrizione_progetto);
         }
-        for (let t = 0; t < this.progetto.length; t++) {
-          this.listaProgetti.push({ id_progetto: this.id_progetto[t], progetto: this.progetto[t], descrizione: this.descrizione[t] });
+        for (let t = 0; t < this.nome_progetto.length; t++) {
+          this.listaProgetti.push({ id_progetto: this.id_progetto[t], nome_progetto: this.nome_progetto[t], descrizione: this.descrizione[t] });
         }
         this.listaProgetti.splice(0, 1);
         console.log(this.listaProgetti);
@@ -94,9 +94,6 @@ export class PUComponent implements OnInit {
     this.isVisible = false;
   }
 
-  onClickNewProject() {
-    //this.projectComponent.onProjectSubmit();
-  }
 
   openProject(id) {
     // carico sullo user service il progetto selezionato dell'utente
