@@ -12,24 +12,24 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .example-panel-red.mat-select-panel {
-  background: rgba(255, 112, 112, 0.89);
+  background: rgba(255, 0, 0, 0.5);
 }
 
 .example-panel-green.mat-select-panel {
-background: rgba(188, 245, 188, 0.986);
+background: rgba(0, 255, 0, 0.5);
 }
 
 .example-panel-blue.mat-select-panel {
-background: rgb(171, 171, 231);
+background: rgba(0, 0, 255, 0.5);
 }
 
 .example-panel-pink.mat-select-panel {
-  background: rgb(226, 144, 219);
+  background: rgba(255, 0, 234, 0.5);
 }
 
 
 .example-panel-yellow.mat-select-panel {
-  background: rgb(247, 245, 148);
+  background: rgba(234, 230, 0, 0.877);
 }
 
 /*questa roba si fa con le classi di bootstrap*/

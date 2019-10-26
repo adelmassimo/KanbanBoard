@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
       
         this.registerService.registrazione(utente).subscribe(
           utente => {
-            console.log(utente);
+
             if(utente.errore == 1){
               console.log("utente già registrato");
               this.myMessage = "utente già registrato";

@@ -5,32 +5,20 @@ var sql_connection = require('../db_connector');
 //INSERT
 project.post('/project/', function (req, res) {
 
-  nome_progetto = req.body.nome_progetto;
-  descrizione_progetto = req.body.descrizione_progetto;
-  id_utente = req.body.id_utente;
+    nome_progetto = req.body.nome_progetto;
+    descrizione_progetto = req.body.descrizione_progetto;
 
-  var query = "INSERT INTO progetti ( nome_progetto, descrizione_progetto) VALUES (" +
-                  "'" + nome_progetto + "'," +
-                  "'" + descrizione_progetto + "')";
-  sql_connection.query(query, function (err, rows, fields) {
-    if (err) throw err;
-    var id_progetto = rows['insertId'];
-    console.log(rows)
-
-    var queryUtenteProgetto = "INSERT INTO utenti_x_progetti (id_utente, id_progetto) VALUES (" +
-                                  "'" + id_utente + "'," +
-                                  "'" + id_progetto + "')";
-    sql_connection.query(queryUtenteProgetto, function (err, rows, fields) {
-      if(err) throw err;
-      
-    });
-
-    res.send({ "creato": '1' });
-    console.log("PROGETTO INSERITO");
-  });
+    var query = "INSERT INTO progetti ( nome_progetto, descrizione_progetto) VALUES ("+
+                      "'"+nome_progetto+"',"+
+                      "'"+descrizione_progetto+"')";
+        sql_connection.query(query , function(err, rows, fields) {
+          if (err) throw err;
+          res.send({"creato" : '1'});
+          console.log("PROGETTO INSERITO");  
+        });
 
 
-});
+}); 
 
 
 //UPDATE

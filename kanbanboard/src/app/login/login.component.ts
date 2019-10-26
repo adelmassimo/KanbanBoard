@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit {
             this.error = true;
             this.sign = false;
           } else {
+            // andiamo 
+            console.log("successo - utente loggato " + utente.username);
             //carico l'utente nel servizio utente
             this.userService.setUser(utente);
             this.myMessage = "Login effettuato con successo";

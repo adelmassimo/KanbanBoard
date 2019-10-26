@@ -29,6 +29,7 @@ export class HeaderPaginaComponent implements OnInit {
       this.nome = this.userService.user.nome;
       this.cognome = this.userService.user.cognome;
       this.avatar = this.userService.user.avatar;
+      console.log("nome: " + this.nome + " cognome: " + this.cognome + " avatar: " + this.avatar)
     } else {
       this.nome = "Kanbanboard";
       this.cognome = "";

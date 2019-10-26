@@ -2,7 +2,6 @@
     float: right;
     border-top: 1em;
     border-radius: 2em;
-    margin-top: 10px;
 }
 
 #search{
@@ -11,18 +10,6 @@
     border-radius: 2em;
     margin-top: 10px;
     margin-bottom: 10px;
-}
-
-#refresh{
-    float: right;
-    border-top: 1em;
-    border-radius: 2em;
-}
-
-#sort{
-    float: right;
-    margin-top: 10px;
-    border-radius: 2em;
 }
 
 #cross{
@@ -44,10 +31,4 @@ select{
     width: 18rem;
     margin-top: 1em;
     margin-left: 1em;
-    float: left;
-}
-
-#idProgetto{
-    float: right;
-    margin-top: 10px;
 }
