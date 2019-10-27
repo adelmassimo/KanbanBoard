@@ -106,13 +106,19 @@ export class LavagnaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       data => {
-      if(data.action === 'delete'){
-        this.postitservice.eliminaPostit(data.postIt).subscribe(
-          success => {
-            this.visualizzaPostIt();
-          }
-        )
-      }
+        if(data.action === 'delete'){
+          this.postitservice.eliminaPostit(data.postIt).subscribe(
+            success => {
+              this.visualizzaPostIt();
+            }
+          )
+        }else if(data.action === 'update'){
+          this.postitservice.updatePostit(data.postIt).subscribe(
+            success => {
+              this.visualizzaPostIt();
+            }
+          )
+        }
       });
 
   }

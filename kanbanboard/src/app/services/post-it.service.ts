@@ -30,9 +30,10 @@ export class PostItService {
   }
   /**end Elimina postit */
 
-/*
+
   updatePostit(updatePostIt):Observable<any>{
-    return this.http.post(this.base_url + "/api/post-it/update/:id", {
+    return this.http.post(this.base_url + "/api/updatePostIt/", {
+      'id_postIt': updatePostIt.id_postIt,
       'nome_postIt': updatePostIt.nome_postIt,
       'descrizione_postIt': updatePostIt.descrizione_postIt,
       'colore_postIt': updatePostIt.colore_postIt,
@@ -40,7 +41,7 @@ export class PostItService {
     });
   } // fine updatePostit(updatePostIt):Observable<any>{
 
-
+/*
   inserimentoProgettiPerPostIt(progettiPerPostIt):Observable<any>{
     return this.http.post(this.base_url + "/api/post-it/progettiXPostIt", {
       'nome_postIt': progettiPerPostIt.nome_postIt,
