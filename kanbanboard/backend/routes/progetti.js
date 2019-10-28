@@ -22,7 +22,7 @@ progetti.post('/visualizzaProgettiUtenti/', function (req, res) {
         'FROM utenti_x_progetti ' +
         'left outer join utenti on utenti.id_utente = utenti_x_progetti.id_utente ' +
         'left OUTER join progetti on progetti.id_progetto = utenti_x_progetti.id_progetto ' +
-        'WHERE utenti.id_utente = "' + id + '"', function (err, rows, next) {
+        'WHERE utenti.id_utente = "' + id + '" ORDER BY progetti.nome_progetto ASC', function (err, rows, next) {
         console.log(rows)
             if (err) throw err;
             res.send(rows);

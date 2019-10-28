@@ -42,9 +42,8 @@ export class ProjectService {
 
   getProgettiUtente(): Observable<any> {
     console.log("Entrato id(GetProgettiUtente): " + this.userService.user.id);
-    var id = this.userService.user.id;
 
-    return this.http.post(this.base_url + "/api/visualizzaProgettiUtenti/", { 'id': id });
+    return this.http.post(this.base_url + "/api/visualizzaProgettiUtenti/", { 'id': this.userService.user.id });
 
   }
 }

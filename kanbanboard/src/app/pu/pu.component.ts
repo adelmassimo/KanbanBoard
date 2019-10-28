@@ -29,7 +29,10 @@ export class PUComponent implements OnInit {
   id_progetto: any[] = [];
   progetto: any[] = [];
   descrizione: any[] = [];
-  listaProgetti: any[] = [{ 'id_progetto': "", 'progetto': "", 'descrizione': "" }];
+  listaProgetti: any[] = [];
+
+  //variabile per fare toggle sul sort button
+  sortDown: boolean = true;
 
   constructor(private projectService: ProjectService,
     private userService: UserService, private localstorageservice: LocalStorageService,
@@ -39,25 +42,32 @@ export class PUComponent implements OnInit {
   key = 'object_list';
 
   ngOnInit() {
-    this.createCard();
+    this.createCard('asc');
   }
 
-  createCard(){
+  createCard(ordinamento:string){
+    this.listaProgetti.splice(0);
+
+    //nella query viene fatto l'ordinamento dalla a alla z del nome_progettos
     this.projectService.getProgettiUtente().subscribe(
       success => {
-        for (let i = 0; i < success.length; i++) {
-          console.log(success[i]);
-          this.id_progetto.push(success[i].id_progetto);
-          this.progetto.push(success[i].nome_progetto);
-          this.descrizione.push(success[i].descrizione_progetto);
+        if(ordinamento == 'asc'){
+          for (let i = 0; i < success.length; i++) {
+            this.listaProgetti.push({ 
+              id_progetto: success[i].id_progetto, 
+              nome_progetto: success[i].nome_progetto, 
+              descrizione: success[i].descrizione_progetto 
+            });
+          }
+        }else{
+          for (let i = success.length-1; i >= 0; i--) {
+            this.listaProgetti.push({ 
+              id_progetto: success[i].id_progetto, 
+              nome_progetto: success[i].nome_progetto, 
+              descrizione: success[i].descrizione_progetto 
+            });
+          }
         }
-        console.log(this.progetto);
-        console.log(this.descrizione);
-        for (let t = 0; t < this.progetto.length; t++) {
-          this.listaProgetti.push({ id_progetto: this.id_progetto[t], progetto: this.progetto[t], descrizione: this.descrizione[t] });
-        }
-        this.listaProgetti.splice(0, 1);
-        console.log(this.listaProgetti);
       },
       error => {
         console.log('errore');
@@ -83,7 +93,7 @@ export class PUComponent implements OnInit {
       success=>{
         console.log('ricerca')
         console.log(this.listaProgetti);
-        for (var i = 0; i < success.length; i++){
+        for (let i = 0; i < success.length; i++){
           if (this.nameProject == this.listaProgetti[i].progetto) {
             console.log("Progetto Trovato!");
             this.isSuccess = true;
@@ -95,7 +105,6 @@ export class PUComponent implements OnInit {
           this.isSuccess = false;
       }
     );
-    
   }
 
   onClickCanc() {
@@ -113,4 +122,15 @@ export class PUComponent implements OnInit {
     this.router.navigate(['/lavagna']);
   }
 
+  toggleSort(){
+    //funzione per creare toggle dell'ordinamento alfabetico
+    if(this.sortDown){
+      this.sortDown = false;
+      this.createCard('desc');
+    }else{
+      this.sortDown = true;
+      //ordinamento dalla a alla z
+      this.createCard('asc');
+    }
+  }
 }

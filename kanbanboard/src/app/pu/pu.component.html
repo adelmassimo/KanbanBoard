@@ -52,14 +52,28 @@
 <!--Bottoni end pagina-->
 <div class="row">
   <div class="col-sm">
-    <button type="button" class="btn btn-secondary " id='add' [routerLink]="['/project']" (click)="onClickNewProject()"><i
+    <button type="button" class="btn btn-secondary button-util" [routerLink]="['/project']" (click)="onClickNewProject()"><i
         class="fa fa-plus"></i></button>
   </div>
 </div>
 <div class="row">
   <div class="col-sm">
-    <button type="button" class="btn btn-secondary " id='search' (click)="onClickSearchMenu()"><i
+    <button type="button" class="btn btn-secondary button-util" (click)="onClickSearchMenu()"><i
         class="fa fa-search"></i></button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm">
+    <button type="button" class="btn btn-secondary button-util" (click)="toggleSort()">
+      <i *ngIf="sortDown" class="fa fa-sort-alpha-down"></i>
+      <i *ngIf="!sortDown" class="fa fa-sort-alpha-up"></i>
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm">
+    <button type="button" class="btn btn-secondary button-util" (click)="createCard()"><i
+        class="fa fa-redo-alt"></i></button>
   </div>
 </div>
 <!--Bottoni end pagina-->
