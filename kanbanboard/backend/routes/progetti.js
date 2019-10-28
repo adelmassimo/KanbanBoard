@@ -15,7 +15,7 @@ progetti.post('/visualizzaProgettiUtenti/', function (req, res) {
     console.log('ProgettoUtente entrato')
     console.log("id: " + id);
     sql_connection.query('SELECT utenti.nome_utente, ' +
-        'progetti.nome_progetto, ' + 
+        'progetti.nome_progetto, ' +
         'progetti.descrizione_progetto, ' +
         'utenti_x_progetti.id_utente, ' +
         'utenti_x_progetti.id_progetto ' +
@@ -29,15 +29,6 @@ progetti.post('/visualizzaProgettiUtenti/', function (req, res) {
         });
 
 
-});
-
-progetti.post('/visualizzaProgettoById/', function(req, res){
-    id = req.body.id;
-    sql_connection.query('SELECT * FROM progetti WHERE id_progetto= "' + 
-    id + '"', function(err, rows, next){
-        if (err) throw err;
-        res.send(rows);
-    })
-});
+})
 
 module.exports = progetti;

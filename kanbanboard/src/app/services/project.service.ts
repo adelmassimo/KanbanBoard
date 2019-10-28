@@ -22,7 +22,9 @@ export class ProjectService {
     "descrizione": ''
   }
 
-  setProgetto(progetto) {
+  setProgetto(progetto: any) {
+    //this.getProgettiUtente();
+    console.log('Progetto', progetto);
     this.progetto.id = progetto.id_progetto;
     this.progetto.nomeProgetto = progetto.nome_progetto;
     this.progetto.descrizione = progetto.descrizione;
@@ -39,17 +41,10 @@ export class ProjectService {
  
 
   getProgettiUtente(): Observable<any> {
+    console.log("Entrato id(GetProgettiUtente): " + this.userService.user.id);
     var id = this.userService.user.id;
 
     return this.http.post(this.base_url + "/api/visualizzaProgettiUtenti/", { 'id': id });
 
-  }
-
-  getProgettoById(id): Observable<any>{
-    return this.http.post(this.base_url + "/api/visualizzaProgettoById/", {'id': id});
-  }
-
-  getPostItProgetto():Observable<any>{
-    return this.http.post(this.base_url + "/api/visualizzaPostItProgetto/", {'idProgetto': this.progetto.id})
   }
 }

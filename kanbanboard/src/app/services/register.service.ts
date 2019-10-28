@@ -13,7 +13,7 @@ export class RegisterService {
   base_url = 'http://localhost:3000';
 
   registrazione(utente):Observable<any>{
-    return this.http.post(this.base_url + "/api/registrazione/", {
+    return this.http.post(this.base_url + "/api/register/", {
       'username': utente.username,
       'nome': utente.nome,
       'cognome': utente.cognome,

@@ -3,7 +3,7 @@
   <ul class="navbar-nav mr-auto">
     <select class="custom-select mr-sm-2">
       <option>Cerca progetti..</option>
-      <option *ngFor="let progetto of listaProgetti">{{progetto.nome_progetto}}</option>
+      <option *ngFor="let progetto of lista_progetti">{{progetto}}</option>
     </select>
     <li class="nav-item">
       <div class="col-sm">
@@ -52,7 +52,7 @@
 <!--Bottoni end pagina-->
 <div class="row">
   <div class="col-sm">
-    <button type="button" class="btn btn-secondary " id='add' [routerLink]="['/project']"><i
+    <button type="button" class="btn btn-secondary " id='add' [routerLink]="['/project']" (click)="onClickNewProject()"><i
         class="fa fa-plus"></i></button>
   </div>
 </div>
@@ -60,12 +60,6 @@
   <div class="col-sm">
     <button type="button" class="btn btn-secondary " id='search' (click)="onClickSearchMenu()"><i
         class="fa fa-search"></i></button>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm">
-    <button type="button" class="btn btn-secondary " id='refresh' (click)="onClickRefresh()">
-      <i class="fa fa-sync" aria-hidden="true"></i></button>
   </div>
 </div>
 <!--Bottoni end pagina-->
