@@ -22,31 +22,32 @@ project.post('/project/', function (req, res) {
                                   "'" + id_progetto + "')";
     sql_connection.query(queryUtenteProgetto, function (err, rows, fields) {
       if(err) throw err;
-      
+
     });
 
     res.send({ "creato": '1' });
     console.log("PROGETTO INSERITO");
   });
+});   // fine INSERT
 
 
-});
 
 
 //UPDATE
-/*project.post('/project/:id', function (req, res) {
+project.post('/updateProject/', function (req, res) {
 
   nome_progetto = req.body.nome_progetto;
   descrizione_progetto = req.body.descrizione_progetto;
+  id_progetto = req.body.id_progetto;
 
-  var query = "UPDATE progetti set nome_progetto = '"+nome_progetto+"'," 
-                + "descrizione_progetto = '"+descrizione_progetto+ "'";
+  var query = "UPDATE progetti set nome_progetto = '"+nome_progetto+"',"
+                + "descrizione_progetto = '"+descrizione_progetto+ "',"
+                + "WHERE id_progetto = '"+id_progetto+"'";
       sql_connection.query(query , function(err, rows, fields) {
         if (err) throw err;
-        //res.send({"creato" : '1'});
-        console.log("PROGETTO AGGIORNATO");  
+        res.send({"modificato" : '1'});
+        console.log("PROGETTO MODIFICATO");
       });
-
-}); */
+});   // fine UPDATE
 
 module.exports = project;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjectService } from '../services/project.service';
 import { UserService } from '../services/user.service';
+import { ProjectService } from '../services/project.service';
 
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
@@ -15,6 +16,8 @@ export class LavagnaComponent implements OnInit {
 
   constructor(private router: Router, private projectService: ProjectService,
     private userService: UserService,
+    private postitservice: PostItService,
+    private projectservice: ProjectService,
     private dialog: MatDialog
     ){ }
 
@@ -89,12 +92,12 @@ export class LavagnaComponent implements OnInit {
 
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
-    //dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = false;
 
     dialogConfig.width = '500px';
     //dialogConfig.maxHeight= '500px';
-    
+
     dialogConfig.data = post;
 
     //this.dialog.open(CourseDialogComponent, dialogConfig);
@@ -102,8 +105,44 @@ export class LavagnaComponent implements OnInit {
     const dialogRef = this.dialog.open(CourseDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-      data => console.log("Dialog output:", data)
-    );
+      data => {
+        if(data.action === 'delete'){
+          this.postitservice.eliminaPostit(data.postIt).subscribe(
+            success => {
+              this.visualizzaPostIt();
+            }
+          )
+        }else if(data.action === 'update'){
+          this.postitservice.updatePostit(data.postIt).subscribe(
+            success => {
+              this.visualizzaPostIt();
+            }
+          )
+        }
+      });
+
+  }
+
+  onClickUpdate() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    //dialogConfig.autoFocus = true;
+
+    dialogConfig.width = '500px';
+    //dialogConfig.maxHeight= '500px';
+    dialogConfig.data = this.projectservice.progetto;
+    console.log(this.projectservice.progetto)
+    const dialogRef = this.dialog.open(ImpostazioniProgettoDialogComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+            console.log(data)
+      }
+    )
+
+
   }
 
 }
