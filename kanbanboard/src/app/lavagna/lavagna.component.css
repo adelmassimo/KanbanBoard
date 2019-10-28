@@ -4,8 +4,16 @@
 .column{
     width: 25%;
 }
-.bottoneCrea{
-    margin-right: 10px;
+.buttonLavagna{
+    height: 40px;
+    width: 180px;
+    margin-bottom: 10px;
+    margin-left: 30%;
+    font-size: 15px;
+}
+.button-icon{
+    font-size: 15px;
+    float: left;
 }
 .row-list{
     border-top: 1px solid black;

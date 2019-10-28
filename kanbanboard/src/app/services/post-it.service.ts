@@ -20,20 +20,10 @@ export class PostItService {
       'tipologia' : postIt.tipologia,
       'id_progetto': postIt.id_progetto
     });
-  } // fine inserimentoPostit(postIt):Observable<any>
-
-  /**start Elimina postit */
-  eliminaPostit(postIt):Observable<any>{
-    return this.http.post(this.base_url + "/api/deletePostIt/", {
-      'id_postIt': postIt.id_postIt
-    });
-  }
-  /**end Elimina postit */
-
-
+  } // fine inserimentoPostit(postIt):Observable<any>{
+/*
   updatePostit(updatePostIt):Observable<any>{
-    return this.http.post(this.base_url + "/api/updatePostIt/", {
-      'id_postIt': updatePostIt.id_postIt,
+    return this.http.post(this.base_url + "/api/post-it/update/:id", {
       'nome_postIt': updatePostIt.nome_postIt,
       'descrizione_postIt': updatePostIt.descrizione_postIt,
       'colore_postIt': updatePostIt.colore_postIt,
@@ -41,13 +31,5 @@ export class PostItService {
     });
   } // fine updatePostit(updatePostIt):Observable<any>{
 
-/*
-  inserimentoProgettiPerPostIt(progettiPerPostIt):Observable<any>{
-    return this.http.post(this.base_url + "/api/post-it/progettiXPostIt", {
-      'nome_postIt': progettiPerPostIt.nome_postIt,
-      'descrizione_postIt': progettiPerPostIt.descrizione_postIt,
-      'id_progetto': progettiPerPostIt.id_progetto
-    });
-  } // fine inserimentoPostit(postIt):Observable<any>{
 */
 }
