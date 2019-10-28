@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';
+
 import { ProjectService } from '../services/project.service';
+import { UserService } from '../services/user.service';
+import { PostItService } from '../services/post-it.service';
+
 
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
@@ -74,7 +77,7 @@ export class LavagnaComponent implements OnInit {
               this.accepted.push(post);
             }
           }
-          
+
         }
         //imposto il titolo del progetto
         this.nomeProgetto = this.projectService.progetto.nomeProgetto;
