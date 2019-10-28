@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ProjectService } from '../services/project.service';
+import { NewProjectService } from '../services/new-project.service';
 import { UserService } from '../services/user.service';
 import { PostItService } from '../services/post-it.service';
 
 
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
-import { PostItService } from '../services/post-it.service';
 import { ImpostazioniProgettoDialogComponent } from '../impostazioni-progetto-dialog/impostazioni-progetto-dialog.component';
 
 @Component({
@@ -22,6 +22,7 @@ export class LavagnaComponent implements OnInit {
     private userService: UserService,
     private postitservice: PostItService,
     private projectservice: ProjectService,
+    private newprojectservice: NewProjectService,
     private dialog: MatDialog
     ){ }
 
@@ -136,13 +137,24 @@ export class LavagnaComponent implements OnInit {
     dialogConfig.width = '500px';
     //dialogConfig.maxHeight= '500px';
     dialogConfig.data = this.projectservice.progetto;
-    console.log(this.projectservice.progetto)
+    console.log("rubio",this.projectservice.progetto)
     const dialogRef = this.dialog.open(ImpostazioniProgettoDialogComponent, dialogConfig);
 
 
     dialogRef.afterClosed().subscribe(
       data => {
-            console.log(data)
+
+            if(data.action === 'modifica'){
+
+              this.newprojectservice.updateProject(data.progetto).subscribe(
+                success =>{
+                  this.visualizzaPostIt();
+                  this.projectService.setProgetto(data.progetto);
+                  this.nomeProgetto = this.projectService.progetto.nomeProgetto;
+                }
+
+              );
+            }
       }
     )
 

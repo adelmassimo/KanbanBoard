@@ -6,20 +6,20 @@
     <!--Nome progetto-->
     <div class="mb-3 d-flex justify-content-center">
       <mat-form-field class="w-75">
-        <input matInput placeholder="Nome progetto" id="nome_progetto" name="nome_progetto" [(ngModel)]="nome_progetto">
+        <input matInput placeholder="Nome progetto" name="nome_progetto"  [(ngModel)]="nome_progetto" value="{{project.nome_progetto}}">
       </mat-form-field>
     </div>
 
     <!--Descrizione progetto-->
     <div class="mb-3 d-flex justify-content-center">
       <mat-form-field class="w-75">
-        <textarea rows="3" matInput placeholder="Descrizione progetto" id="descrizione_progetto" type="text"
-          name="descrizione_progetto" [(ngModel)]="descrizione_progetto"></textarea>
+        <textarea rows="3" matInput placeholder="Descrizione progetto" type="text"
+          name="descrizione_progetto" [(ngModel)]="descrizione_progetto" value="{{project.descrizione_progetto}}"></textarea>
       </mat-form-field>
     </div>
 
     <!-- bottoni-->
-    <button mat-button (click)="onClickAnnulla()">Annulla</button>
-    <button mat-button [mat-dialog-close]="">Salva</button>
+    <button mat-button (click)="close()">Annulla</button>
+    <button mat-button (click)="salva()">Salva</button>
   </form>
 </div>
