@@ -7,12 +7,26 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
   styleUrls: ['./impostazioni-progetto-dialog.component.css']
 })
 export class ImpostazioniProgettoDialogComponent{
+
+  project: any = {
+    id_progetto: 10,
+    nome_progetto: "",
+    descrizione_progetto: ""
+  }
   
   constructor(
     public dialogRef: MatDialogRef<ImpostazioniProgettoDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) {}
+    @Inject(MAT_DIALOG_DATA) public data) {
+      console.log(data)
+      this.project = {
+        id_progetto: data.id_progetto,
+        nome_progetto: data.nome_progetto,
+        descrizione_progetto: data.descrizione_progetto
+      }
+    }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  onClickAnnulla(): void {
+    this.dialogRef.close(this.project);
+    
   }
 }

@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from "@angular/material";
 
 import { PostItService } from '../services/post-it.service';
 import { UserService } from '../services/user.service';
+import { ProjectService } from '../services/project.service';
 
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
 import { ImpostazioniProgettoDialogComponent } from '../impostazioni-progetto-dialog/impostazioni-progetto-dialog.component';
@@ -19,6 +20,7 @@ export class LavagnaComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private postitservice: PostItService,
+    private projectservice: ProjectService,
     private dialog: MatDialog
   ) { }
 
@@ -94,7 +96,7 @@ export class LavagnaComponent implements OnInit {
 
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
+    dialogConfig.disableClose = false;
     dialogConfig.autoFocus = false;
 
     dialogConfig.width = '500px';
@@ -128,13 +130,23 @@ export class LavagnaComponent implements OnInit {
   onClickUpdate() {
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
+    dialogConfig.disableClose = false;
     //dialogConfig.autoFocus = true;
 
     dialogConfig.width = '500px';
     //dialogConfig.maxHeight= '500px';
-
+    dialogConfig.data = this.projectservice.progetto;
+    console.log(this.projectservice.progetto)
     const dialogRef = this.dialog.open(ImpostazioniProgettoDialogComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+            console.log(data)
+      }
+    )
+
+
   }
 
 }

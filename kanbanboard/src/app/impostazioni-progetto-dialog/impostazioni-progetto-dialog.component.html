@@ -2,12 +2,14 @@
   <h1 class="font-italic font-weight-bold">Modifica progetto <i class="fas fa-wrench"></i></h1>
 
   <form action="javascript:void(0)">
+
     <!--Nome progetto-->
     <div class="mb-3 d-flex justify-content-center">
       <mat-form-field class="w-75">
         <input matInput placeholder="Nome progetto" id="nome_progetto" name="nome_progetto" [(ngModel)]="nome_progetto">
       </mat-form-field>
     </div>
+
     <!--Descrizione progetto-->
     <div class="mb-3 d-flex justify-content-center">
       <mat-form-field class="w-75">
@@ -15,8 +17,9 @@
           name="descrizione_progetto" [(ngModel)]="descrizione_progetto"></textarea>
       </mat-form-field>
     </div>
+
     <!-- bottoni-->
-    <button mat-button (click)="onNoClick()">Annulla</button>
-    <button mat-button [mat-dialog-close]="" cdkFocusInitial>Salva</button>
+    <button mat-button (click)="onClickAnnulla()">Annulla</button>
+    <button mat-button [mat-dialog-close]="">Salva</button>
   </form>
 </div>
