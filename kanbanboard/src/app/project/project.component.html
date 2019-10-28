@@ -16,8 +16,12 @@
           <textarea rows="3" matInput placeholder="Descrizione progetto" id="descrizione_progetto" type="text" name="descrizione_progetto" [(ngModel)]="descrizione_progetto"></textarea>
         </mat-form-field>
       </div>
-      <!-- bottone crea-->
-      <button mat-raised-button color="primary" type="button" (click)="onProjectSubmit()" [routerLink]="['/pu']">Crea</button>
+      <!-- bottone crea e annulla-->
+      <div class="d-flex justify-content-center">
+        <button mat-raised-button color="primary" type="button" (click)="onProjectSubmit()" [routerLink]="['/pu']"
+        class="buttonCrea">Crea</button>
+        <button mat-raised-button class="buttonCancel" type="button" [routerLink]="['/pu']">Annulla</button>
+      </div>
 
     </form>
 

@@ -135,7 +135,6 @@ export class PUComponent implements OnInit {
             'nome_progetto': succ[0].nome_progetto,
             'descrizione': succ[0].descrizione_progetto
           }
-          console.log(progetto);
           this.projectService.setProgetto(progetto)
 
           this.router.navigate(['/lavagna']);

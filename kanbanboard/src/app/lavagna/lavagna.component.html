@@ -1,18 +1,19 @@
 <div class="titoloProgetto ">
   <div class="row ">
-    <div class="col-9">
-      <div>
-        <h1 class="nomeProgetto">{{nomeProgetto}}<i class="fas fa-wrench"></i></h1>
-      </div>
+    <div class="col">
+      <h1 class="nomeProgetto">{{nomeProgetto}}</h1>
     </div>
-    <div class="col-3 d-flex justify-content-end align-items-center">
-      <button class="btn btn-sm btn-success bottoneCrea" (click)="creaPostIt()">Crea post-it</button>
-      <button class="btn btn-sm btn-danger" (click)="esciProgetto()">Esci dal progetto</button>
+    <div class="col">
+
+      <button mat-raised-button>
+        <h2><i class="fas fa-wrench cursor-pointer" (click)="onClickUpdate()"></i> </h2>
+      </button>
+
     </div>
-  </div>
-  <div class="row">
-    <div class="col-12 d-flex justify-content-end">
-      <button class="btn btn-sm btn-info bottoneAggiorna" (click)="visualizzaPostIt()">Aggiorna</button>
+    <div class="col-3 d-flex flex-column">
+      <button class="btn btn-success buttonLavagna" (click)="creaPostIt()">Crea post-it</button>
+      <button class="btn btn-info buttonLavagna" (click)="visualizzaPostIt()">Aggiorna</button>
+      <button class="btn btn-danger buttonLavagna" (click)="esciProgetto()">Esci dal progetto</button>
     </div>
   </div>
 </div>
@@ -21,56 +22,56 @@
 
 <div class="row lavagna">
 
-    <div class="col-3 tabella">
-        <h2>TO DO</h2>
-        <div class="row">
-          <!-- rappresentazione grafica del post-it -->
-          <div *ngFor="let post of toDo" class="col-6 divPost cursor-pointer" (click)="openDialog(post)">
-            <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
-              <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
-              <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>
-            </mat-card>
-          </div>
-          <!-- -->
-        </div>
-    </div>
-    <div class="col-3 tabella">
-        <h2>DOING</h2>
-        <div class="row">
-            <!-- rappresentazione grafica del post-it -->
-            <div *ngFor="let post of doing" class="col-6 divPost">
-              <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
-                <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
-                <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>
-              </mat-card>
-            </div>
-            <!-- -->
-          </div>
-    </div>
-    <div class="col-3 tabella">
-        <h2>DONE</h2>
-        <div class="row">
-            <!-- rappresentazione grafica del post-it -->
-            <div *ngFor="let post of done" class="col-6 divPost">
-              <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
-                <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
-                <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>
-              </mat-card>
-            </div>
-            <!-- -->
-          </div>
-    </div>
-    <div class="col-3">
-        <h2>DONE ACCEPTED</h2>
-        <div class="row">
-            <!-- rappresentazione grafica del post-it -->
-            <div *ngFor="let post of accepted" class="col-6 divPost">
-              <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
-                <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
-                <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>
-              </mat-card>
-            </div>
-            <!-- -->
-          </div>
+  <div class="col-3 tabella">
+    <h2>TO DO</h2>
+    <div class="row">
+      <!-- rappresentazione grafica del post-it -->
+      <div *ngFor="let post of toDo" class="col-6 divPost cursor-pointer" (click)="openDialog(post)">
+        <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
+          <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
+          <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>
+        </mat-card>
+      </div>
+      <!-- -->
     </div>
   </div>
+  <div class="col-3 tabella">
+    <h2>DOING</h2>
+    <div class="row">
+      <!-- rappresentazione grafica del post-it -->
+      <div *ngFor="let post of doing" class="col-6 divPost">
+        <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
+          <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
+          <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>
+        </mat-card>
+      </div>
+      <!-- -->
+    </div>
+  </div>
+  <div class="col-3 tabella">
+    <h2>DONE</h2>
+    <div class="row">
+      <!-- rappresentazione grafica del post-it -->
+      <div *ngFor="let post of done" class="col-6 divPost">
+        <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
+          <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
+          <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>
+        </mat-card>
+      </div>
+      <!-- -->
+    </div>
+  </div>
+  <div class="col-3">
+    <h2>DONE ACCEPTED</h2>
+    <div class="row">
+      <!-- rappresentazione grafica del post-it -->
+      <div *ngFor="let post of accepted" class="col-6 divPost">
+        <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
+          <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
+          <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>
+        </mat-card>
+      </div>
+      <!-- -->
+    </div>
+  </div>
+</div>

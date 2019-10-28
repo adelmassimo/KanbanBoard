@@ -8,6 +8,8 @@ import { PostItService } from '../services/post-it.service';
 
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
+import { PostItService } from '../services/post-it.service';
+import { ImpostazioniProgettoDialogComponent } from '../impostazioni-progetto-dialog/impostazioni-progetto-dialog.component';
 
 @Component({
   selector: 'app-lavagna',
@@ -76,9 +78,9 @@ export class LavagnaComponent implements OnInit {
             }
           }
 
-          //imposto il titolo del progetto
-          this.nomeProgetto = this.projectService.progetto.nomeProgetto;
         }
+        //imposto il titolo del progetto
+        this.nomeProgetto = this.projectService.progetto.nomeProgetto;
       },
       err => {
         console.log("errore connessione database!");
