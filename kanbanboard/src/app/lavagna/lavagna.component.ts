@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
+import { ImpostazioniProgettoDialogComponent } from '../impostazioni-progetto-dialog/impostazioni-progetto-dialog.component';
 
 @Component({
   selector: 'app-lavagna',
@@ -16,7 +17,7 @@ export class LavagnaComponent implements OnInit {
   constructor(private router: Router, private projectService: ProjectService,
     private userService: UserService,
     private dialog: MatDialog
-    ){ }
+  ) { }
 
 
   ngOnInit() {
@@ -31,6 +32,7 @@ export class LavagnaComponent implements OnInit {
   done: Array<any> = [];
   accepted: Array<any> = [];
 
+
   colore: string = "orange";
 
   creaPostIt() {
@@ -41,9 +43,9 @@ export class LavagnaComponent implements OnInit {
     this.router.navigate(['/pu']);
   }
 
-  visualizzaPostIt(){
+  visualizzaPostIt() {
     this.projectService.getPostItProgetto().subscribe(
-      succ =>{
+      succ => {
         //controllo se mi arriva almeno una entry dal database
         if (succ[0] != null) {
           //svuoto tutti i vettori per ricaricare i post-it presenti nel DB
@@ -59,8 +61,8 @@ export class LavagnaComponent implements OnInit {
           }
           console.log(this.postIt);
           //mostrare i postIt sull'html
-          for(let post of this.postIt){
-            if(post.tipologia == "to do"){
+          for (let post of this.postIt) {
+            if (post.tipologia == "to do") {
               this.toDo.push(post);
             } else if (post.tipologia == "doing") {
               this.doing.push(post);
@@ -85,7 +87,7 @@ export class LavagnaComponent implements OnInit {
   //dialog visualizza postit
   openDialog(post) {
 
-    console.log("post selezionato:",post);
+    console.log("post selezionato:", post);
 
     const dialogConfig = new MatDialogConfig();
 
@@ -94,7 +96,7 @@ export class LavagnaComponent implements OnInit {
 
     dialogConfig.width = '500px';
     //dialogConfig.maxHeight= '500px';
-    
+
     dialogConfig.data = post;
 
     //this.dialog.open(CourseDialogComponent, dialogConfig);
@@ -104,6 +106,18 @@ export class LavagnaComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       data => console.log("Dialog output:", data)
     );
+  }
+
+  onClickUpdate() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    //dialogConfig.autoFocus = true;
+
+    dialogConfig.width = '500px';
+    //dialogConfig.maxHeight= '500px';
+
+    const dialogRef = this.dialog.open(ImpostazioniProgettoDialogComponent, dialogConfig);
   }
 
 }
