@@ -15,7 +15,7 @@ export class NewProjectService {
   base_url = 'http://localhost:3000';
 
 
-  
+
   inserimentoProject(project):Observable<any>{
     return this.http.post(this.base_url + "/api/project/", {
       'nome_progetto': project.nome_progetto,
@@ -32,6 +32,6 @@ export class NewProjectService {
       'descrizione_progetto': updateProject.descrizione_progetto,
       'id_progetto': updateProject.id_progetto
     });
-  } 
+  }
 
 }

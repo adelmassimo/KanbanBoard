@@ -24,7 +24,6 @@ import { LavagnaComponent } from './lavagna/lavagna.component';
 import { PostItComponent } from './post-it/post-it.component';
 import { ProjectComponent } from './project/project.component';
 import { CourseDialogComponent } from './course-dialog/course-dialog.component';
-import { ImpostazioniProgettoDialogComponent } from './impostazioni-progetto-dialog/impostazioni-progetto-dialog.component';
 
 
 import { LoginService } from './services/login.service';
@@ -53,7 +52,6 @@ import { LocalStorageService } from './services/local-storage.service';
     LavagnaComponent,
     PostItComponent,
     CourseDialogComponent,
-    ImpostazioniProgettoDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,9 +72,6 @@ import { LocalStorageService } from './services/local-storage.service';
   ],
   providers: [LocalStorageService],
   bootstrap: [AppComponent],
-  entryComponents: [
-    CourseDialogComponent,
-    ImpostazioniProgettoDialogComponent
-  ]
+  entryComponents: [CourseDialogComponent]
 })
 export class AppModule { }

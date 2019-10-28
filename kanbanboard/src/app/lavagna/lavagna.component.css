@@ -38,11 +38,3 @@
 :host-context(.orange) div {
     background-color: orange;
 }
-
-div h1 button{
-    margin-left: 100px;
-    font-size: 40px;
-    cursor: pointer;
-    background-color: white;
-    border: none;
-}
