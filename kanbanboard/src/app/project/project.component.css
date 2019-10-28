@@ -5,3 +5,8 @@ h1{
 form{
     margin-top: 40px;
 }
+.buttonCancel{
+    background: rgb(216, 21, 21);
+    color: white;
+    margin-left: 80px;
+}

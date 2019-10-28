@@ -70,10 +70,10 @@ export class LavagnaComponent implements OnInit {
               this.accepted.push(post);
             }
           }
-
-          //imposto il titolo del progetto
-          this.nomeProgetto = this.projectService.progetto.nomeProgetto;
+          
         }
+        //imposto il titolo del progetto
+        this.nomeProgetto = this.projectService.progetto.nomeProgetto;
       },
       err => {
         console.log("errore connessione database!");
