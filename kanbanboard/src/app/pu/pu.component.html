@@ -3,17 +3,17 @@
   <ul class="navbar-nav mr-auto">
     <select class="custom-select mr-sm-2">
       <option>Cerca progetti..</option>
-      <option *ngFor="let progetto of lista_progetti">{{progetto}}</option>
+      <option *ngFor="let progetto of listaProgetti">{{progetto.progetto}}</option>
     </select>
     <li class="nav-item">
       <div class="col-sm">
         <form class="form-inline">
-            <div class="input-group-prepend">
-              <input type="text" class="form-control" placeholder="Certa tra i progetti" name="nome_progetto"
-                [(ngModel)]="nome_progetto">
-              <button type="button" class="btn btn-secondary" (click)="onClickSearchProject(nome_progetto)">
-                <i class="fa fa-search"></i>
-              </button>
+          <div class="input-group-prepend">
+            <input type="text" class="form-control" placeholder="Certa tra i progetti" name="ricercaProgetto"
+              [(ngModel)]="ricercaProgetto">
+            <button type="button" class="btn btn-secondary" (click)="onClickSearchProject(ricercaProgetto)">
+              <i class="fa fa-search"></i>
+            </button>
           </div>
         </form>
       </div>
@@ -35,14 +35,15 @@
 <!--Se l'utente non ha progetti-->
 
 <!--Se l'utente ha dei progetti-->
-<div class="card" id="card" style ="float: left;" *ngFor="let cardP of listaProgetti" >
+<div class="card" id="card" *ngFor="let card of listaProgetti">
   <img src="../assets/table.png" class="card-img-top">
-  <div class="card-body">
-    <h5 class="card-title">{{cardP.progetto}}</h5>
-    <p class="card-text">{{cardP.descrizione}}</p>
+  <div class="card-body" id={{card.idid_progetto}}>
+    <h5 class="card-title">{{card.nome_progetto}}</h5>
+    <p class="card-text">{{card.descrizione}}</p>
   </div>
   <div class="card-body">
-    <button (click)="openProject(cardP.id_progetto)" class="btn btn-primary">Apri Progetto</button>
+    <button (click)="openProject(card.id_progetto)" class="btn btn-primary">Apri Progetto</button>
+    <p class="card-text" id="idProgetto">ID Progetto: {{card.id_progetto}}</p>
   </div>
 </div>
 <!--Se l'utente ha dei progetti
@@ -52,14 +53,28 @@
 <!--Bottoni end pagina-->
 <div class="row">
   <div class="col-sm">
-    <button type="button" class="btn btn-secondary " id='add' [routerLink]="['/project']" (click)="onClickNewProject()"><i
+    <button type="button" class="btn btn-secondary button-util" [routerLink]="['/project']" (click)="onClickNewProject()"><i
         class="fa fa-plus"></i></button>
   </div>
 </div>
 <div class="row">
   <div class="col-sm">
-    <button type="button" class="btn btn-secondary " id='search' (click)="onClickSearchMenu()"><i
+    <button type="button" class="btn btn-secondary button-util" (click)="onClickSearchMenu()"><i
         class="fa fa-search"></i></button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm">
+    <button type="button" class="btn btn-secondary button-util" (click)="toggleSort()">
+      <i *ngIf="sortDown" class="fa fa-sort-alpha-down"></i>
+      <i *ngIf="!sortDown" class="fa fa-sort-alpha-up"></i>
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm">
+    <button type="button" class="btn btn-secondary button-util" (click)="createCard()"><i
+        class="fa fa-redo-alt"></i></button>
   </div>
 </div>
 <!--Bottoni end pagina-->
