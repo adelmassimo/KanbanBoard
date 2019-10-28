@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProjectService } from '../services/project.service';
 import { UserService } from '../services/user.service';
 import { ProjectService } from '../services/project.service';
 
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
+import { PostItService } from '../services/post-it.service';
+import { ImpostazioniProgettoDialogComponent } from '../impostazioni-progetto-dialog/impostazioni-progetto-dialog.component';
 
 @Component({
   selector: 'app-lavagna',
