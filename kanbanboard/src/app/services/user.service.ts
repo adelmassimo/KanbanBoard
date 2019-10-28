@@ -24,7 +24,6 @@ export class UserService {
   logged: boolean = false;
 
   setUser(user: any) {
-    console.log('UserService', user)
     this.user.id = user.id_utente;
     this.user.nome = user.nome_utente;
     this.user.cognome = user.cognome_utente;

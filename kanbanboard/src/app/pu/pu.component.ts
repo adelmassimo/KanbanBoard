@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { UserService } from '../services/user.service';
-import { LocalStorageService } from '../services/local-storage.service';
-import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
-import { Inject } from '@angular/core';
 import { Router } from '@angular/router';
-//import { ProjectComponent } from '../project/project.component';
 
 @Component({
   selector: 'app-pu',
@@ -18,28 +14,24 @@ export class PUComponent implements OnInit {
   isMenuVisibile = false;
   isNoProgetto = false;
 
-  // prova per la ricerca progetti dell'utente
-  nameProject = 'prova';
-
   // variabile per visualizzare la barra (rossa se non c'è il progetto, verde se il progetto esiste)
   isVisible = false;
   isSuccess: boolean;
 
   //variabile per la creazione e visualizzazione delle card
-  id_progetto: any[] = [];
+  ricercaProgetto: string;
+  idCard: any[] = [];
   progetto: any[] = [];
   descrizione: any[] = [];
   listaProgetti: any[] = [];
 
   //variabile per fare toggle sul sort button
   sortDown: boolean = true;
+  // listaProgetti: any[] = [{ 'idCard': "", 'progetto': "", 'descrizione': "" }];
+  idProgettoTrovato: any;
 
   constructor(private projectService: ProjectService,
-    private userService: UserService, private localstorageservice: LocalStorageService,
-    @Inject(LOCAL_STORAGE) private storage: StorageService, private router: Router) { }
-
-
-  key = 'object_list';
+    private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.createCard('asc');
@@ -70,9 +62,9 @@ export class PUComponent implements OnInit {
         }
       },
       error => {
-        console.log('errore');
-      }
-    );
+        console.log("ERRORE");
+      });
+
   }
 
   onClickSearchMenu() {
@@ -84,42 +76,83 @@ export class PUComponent implements OnInit {
   }
 
   onClickSearchProject(nome_progetto: string) {
-    this.nameProject=nome_progetto;
+    this.ricercaProgetto = nome_progetto;
     this.isVisible = true;
     this.isSuccess = false;
 
-    console.log(this.nameProject);
     this.projectService.getProgettiUtente().subscribe(
       success=>{
         console.log('ricerca')
         console.log(this.listaProgetti);
         for (let i = 0; i < success.length; i++){
-          if (this.nameProject == this.listaProgetti[i].progetto) {
+          if (this.progetto == this.listaProgetti[i].progetto) {
             console.log("Progetto Trovato!");
-            this.isSuccess = true;
+            /*
+            for (var i = 0; i < success.length; i++) {
+              if (this.ricercaProgetto == this.listaProgetti[i].progetto) {
+                this.idProgettoTrovato = this.listaProgetti[i].idCard;
+                this.progetto.push(success[i].nome_progetto);
+                this.isSuccess = true;
+              }
+            }
+            */
+            if (this.isSuccess = true) {
+              console.log('trovato');
+              this.projectService.getCercaProgetti(this.ricercaProgetto).subscribe(
+                success => {
+
+
+                },
+                error => {
+
+                }
+              )
+              console.log(this.listaProgetti);
+              console.log(this.idProgettoTrovato);
+            }
           }
         }
       },
-      error=>{
-          console.log("Progetto non Trovato");
-          this.isSuccess = false;
+      error => {
+        this.isSuccess = false;
       }
     );
+
   }
 
   onClickCanc() {
     this.isVisible = false;
   }
 
-  onClickNewProject() {
-    //this.projectComponent.onProjectSubmit();
-  }
 
   openProject(id) {
-    // carico sul local storage il progetto dell'utente
-    // ...
-    
-    this.router.navigate(['/lavagna']);
+    // carico sullo user service il progetto selezionato dell'utente
+    this.projectService.getProgettoById(id).subscribe(
+      succ => {
+        if (succ != []) {
+          var progetto = {
+            'id_progetto': succ[0].id_progetto,
+            'nome_progetto': succ[0].nome_progetto,
+            'descrizione': succ[0].descrizione_progetto
+          }
+          console.log(progetto);
+          this.projectService.setProgetto(progetto)
+
+          this.router.navigate(['/lavagna']);
+        } else {
+          //id progetto non presente nel database
+          this.router.navigate(['/']);
+        }
+      },
+      err => {
+        console.log("errore connessione database!");
+      }
+    )
+    //this.router.navigate(['/lavagna']);
+  }
+
+  onClickRefresh() {
+
   }
 
   toggleSort(){

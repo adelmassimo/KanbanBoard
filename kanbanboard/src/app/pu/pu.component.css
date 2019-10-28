@@ -5,6 +5,16 @@
     margin-top: 12px;
 }
 
+#refresh{
+    float: right;
+}
+
+#refresh{
+    float: right;
+    border-top: 1em;
+    border-radius: 2em;
+}
+
 #cross{
     font-size: 20px;
     float: right;
@@ -24,4 +34,10 @@ select{
     width: 18rem;
     margin-top: 1em;
     margin-left: 1em;
+    float: left;
+}
+
+#idProgetto{
+    float: right;
+    margin-top: 10px;
 }
