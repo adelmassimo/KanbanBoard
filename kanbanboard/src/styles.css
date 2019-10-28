@@ -43,21 +43,40 @@ background: rgba(0, 0, 255, 0.5);
 
 
 /*start dialog visualizza postit*/
+/*.example-panel-red.mat-select-panel {
+  background: #FF6347;
+}
 
+.example-panel-green.mat-select-panel {
+background: #98FB98;
+}
+
+.example-panel-blue.mat-select-panel {
+background: #87CEEB;
+}
+
+.example-panel-pink.mat-select-panel {
+  background: #FFC0CB;
+}
+
+
+.example-panel-yellow.mat-select-panel {
+  background: 	#EEE8AA;
+}*/
 .bg-red{
-  background-color: red;
+  background-color: #FF6347;
 }
 .bg-green{
-  background-color: green;
+  background-color: #98FB98;
 }
 .bg-blue{
-  background-color: blue;
+  background-color: #87CEEB;
 }
 .bg-pink{
-  background-color: pink;
+  background-color: #FFC0CB;
 }
 .bg-yellow{
-  background-color: yellow;
+  background-color: #EEE8AA;
 }
 .mat-dialog-actions{
   margin: 10px 0 1px 20px !important;

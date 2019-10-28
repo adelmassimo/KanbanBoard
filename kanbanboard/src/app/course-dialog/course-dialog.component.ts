@@ -61,9 +61,15 @@ export class CourseDialogComponent implements OnInit {
 
   openModifica() {
     this.modifica = true;
-    console.log(this.modifica, this.post);
   }
-
+  annulla(){
+    this.modifica = false;
+    this.coloreSfondo = "bg-" + this.post.colore_postIt;
+    this.titolo = this.post.nome_postIt;
+    this.descrizione = this.post.descrizione_postIt;
+    this.panelColor.setValue(this.post.colore_postIt);
+    this.typePost.setValue(this.post.tipologia);
+  }
   onChangeColor(){
     this.coloreSfondo = "bg-"+this.panelColor.value;
   }
@@ -89,5 +95,7 @@ export class CourseDialogComponent implements OnInit {
       'postIt': this.post
     });
   }
+
+  
 
 }
