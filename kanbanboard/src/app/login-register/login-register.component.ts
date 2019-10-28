@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Inject } from '@angular/core';
-
-import { LocalStorageService } from '../services/local-storage.service';
-import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
 @Component({
   selector: 'app-login-register',
@@ -11,8 +7,7 @@ import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 })
 export class LoginRegisterComponent implements OnInit {
 
-  constructor (private localstorageservice: LocalStorageService,
-  @Inject(LOCAL_STORAGE) private storage: StorageService) { }
+  constructor () { }
 
   ngOnInit() {
 
@@ -24,7 +19,7 @@ export class LoginRegisterComponent implements OnInit {
 
   onChangeTab(tab){
     if(tab === 'login'){
-      this.LoginActive = 'avtive';
+      this.LoginActive = 'active';
       this.isLogin = true;
       this.RegisterActive = '';
       this.isRegister = false;
@@ -34,11 +29,5 @@ export class LoginRegisterComponent implements OnInit {
       this.RegisterActive = 'active';
       this.isRegister = true;
     }    
-  }
-
-  ngDoCheck() {
-    if (!this.localstorageservice.isEmpty()) {
-     this.localstorageservice.removeFromStorage();
-    }
   }
 }

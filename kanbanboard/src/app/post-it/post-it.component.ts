@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
-import { UserService } from '../services/user.service';
+import { ProjectService } from '../services/project.service';
 
 import { PostItService } from '../services/post-it.service';
 //import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -17,7 +17,7 @@ export class PostItComponent implements OnInit {
   typePost = new FormControl('to do');
 
   constructor(private router: Router, private route: ActivatedRoute,  private postItService: PostItService,
-              private userService: UserService) { }
+    private projectService: ProjectService) { }
 
   nome_postIt: string = "";
   descrizione_postIt: string = "";
@@ -33,7 +33,7 @@ export class PostItComponent implements OnInit {
       descrizione_postIt: this.descrizione_postIt,
       colore_postIt: this.panelColor.value,
       tipologia: this.typePost.value,
-      id_progetto: this.userService.progettoAttivo
+      id_progetto: this.projectService.progetto.id
     }
     console.log(postIt);
 

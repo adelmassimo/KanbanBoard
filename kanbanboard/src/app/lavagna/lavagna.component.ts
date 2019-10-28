@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogConfig } from "@angular/material";
-
-import { PostItService } from '../services/post-it.service';
+import { ProjectService } from '../services/project.service';
 import { UserService } from '../services/user.service';
 
+import { MatDialog, MatDialogConfig } from "@angular/material";
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
-import { ImpostazioniProgettoDialogComponent } from '../impostazioni-progetto-dialog/impostazioni-progetto-dialog.component';
 
 @Component({
   selector: 'app-lavagna',
@@ -15,12 +13,10 @@ import { ImpostazioniProgettoDialogComponent } from '../impostazioni-progetto-di
 })
 export class LavagnaComponent implements OnInit {
 
-  constructor(
-    private router: Router,
+  constructor(private router: Router, private projectService: ProjectService,
     private userService: UserService,
-    private postitservice: PostItService,
     private dialog: MatDialog
-  ) { }
+    ){ }
 
 
   ngOnInit() {
@@ -35,7 +31,6 @@ export class LavagnaComponent implements OnInit {
   done: Array<any> = [];
   accepted: Array<any> = [];
 
-
   colore: string = "orange";
 
   creaPostIt() {
@@ -46,10 +41,9 @@ export class LavagnaComponent implements OnInit {
     this.router.navigate(['/pu']);
   }
 
-  visualizzaPostIt() {
-    this.userService.getPostItProgetto().subscribe(
+  visualizzaPostIt(){
+    this.projectService.getPostItProgetto().subscribe(
       succ =>{
-        console.log(succ)
         //controllo se mi arriva almeno una entry dal database
         if (succ[0] != null) {
           //svuoto tutti i vettori per ricaricare i post-it presenti nel DB
@@ -62,12 +56,10 @@ export class LavagnaComponent implements OnInit {
           //riempio il vettore postIt[] con tutti i post-it dell'progetto selezionato
           for (let post of succ) {
             this.postIt.push(post);
-            console.log(this.postIt);
           }
-
+          console.log(this.postIt);
           //mostrare i postIt sull'html
           for(let post of this.postIt){
-            console.log(post.tipologia);
             if(post.tipologia == "to do"){
               this.toDo.push(post);
             } else if (post.tipologia == "doing") {
@@ -78,9 +70,9 @@ export class LavagnaComponent implements OnInit {
               this.accepted.push(post);
             }
           }
-          console.log(this.toDo);
-          console.log("to do: " + this.toDo + " doing: " + this.doing + " done: " + this.done +
-            " accepted: " + this.accepted);
+
+          //imposto il titolo del progetto
+          this.nomeProgetto = this.projectService.progetto.nomeProgetto;
         }
       },
       err => {
@@ -89,43 +81,12 @@ export class LavagnaComponent implements OnInit {
     );
   }
 
+
   //dialog visualizza postit
   openDialog(post) {
 
-    const dialogConfig = new MatDialogConfig();
+    console.log("post selezionato:",post);
 
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = false;
-
-    dialogConfig.width = '500px';
-    dialogConfig.height= '100%';
-
-    dialogConfig.data = post;
-
-    //this.dialog.open(CourseDialogComponent, dialogConfig);
-
-    const dialogRef = this.dialog.open(CourseDialogComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(
-      data => {
-        if(data.action === 'delete'){
-          this.postitservice.eliminaPostit(data.postIt).subscribe(
-            success => {
-              this.visualizzaPostIt();
-            }
-          )
-        }else if(data.action === 'update'){
-          this.postitservice.updatePostit(data.postIt).subscribe(
-            success => {
-              this.visualizzaPostIt();
-            }
-          )
-        }
-      });
-
-  }
-
-  onClickUpdate() {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -133,8 +94,16 @@ export class LavagnaComponent implements OnInit {
 
     dialogConfig.width = '500px';
     //dialogConfig.maxHeight= '500px';
+    
+    dialogConfig.data = post;
 
-    const dialogRef = this.dialog.open(ImpostazioniProgettoDialogComponent, dialogConfig);
+    //this.dialog.open(CourseDialogComponent, dialogConfig);
+
+    const dialogRef = this.dialog.open(CourseDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => console.log("Dialog output:", data)
+    );
   }
 
 }
