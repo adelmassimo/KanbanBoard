@@ -142,7 +142,7 @@ export class LavagnaComponent implements OnInit {
     //dialogConfig.autoFocus = true;
 
     dialogConfig.width = '500px';
-    //dialogConfig.maxHeight= '500px';
+    dialogConfig.height= '500px';
     dialogConfig.data = this.projectservice.progetto;
     console.log("rubio",this.projectservice.progetto)
     const dialogRef = this.dialog.open(ImpostazioniProgettoDialogComponent, dialogConfig);
