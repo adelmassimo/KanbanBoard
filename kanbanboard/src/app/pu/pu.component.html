@@ -3,7 +3,8 @@
   <ul class="navbar-nav mr-auto">
     <select class="custom-select mr-sm-2">
       <option>Cerca progetti..</option>
-      <option *ngFor="let progetto of listaProgetti">{{progetto.progetto}}</option>
+      <option *ngFor="let progetto of listaProgetti" (click)="openProject(progetto.id_progetto)">
+        {{progetto.nome_progetto}}</option>
     </select>
     <li class="nav-item">
       <div class="col-sm">
@@ -11,7 +12,7 @@
           <div class="input-group-prepend">
             <input type="text" class="form-control" placeholder="Certa tra i progetti" name="ricercaProgetto"
               [(ngModel)]="ricercaProgetto">
-            <button type="button" class="btn btn-secondary" (click)="onClickSearchProject(ricercaProgetto)">
+            <button type="button" class="btn btn-secondary" (click)="onClickSearchProject()">
               <i class="fa fa-search"></i>
             </button>
           </div>
@@ -51,30 +52,24 @@
   Preview progetti-->
 
 <!--Bottoni end pagina-->
-<div class="row">
-  <div class="col-sm">
-    <button type="button" class="btn btn-secondary button-util" [routerLink]="['/project']"><i
-        class="fa fa-plus"></i></button>
+<div id="bottoni">
+  <div class="row">
+    <div class="col-sm">
+      <button type="button" class="btn btn-secondary " id='add' [routerLink]="['/project']"><i
+          class="fa fa-plus"></i></button>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-sm">
-    <button type="button" class="btn btn-secondary button-util" (click)="onClickSearchMenu()"><i
-        class="fa fa-search"></i></button>
+  <div class="row">
+    <div class="col-sm">
+      <button type="button" class="btn btn-secondary " id='search' (click)="onClickSearchMenu()"><i
+          class="fa fa-search"></i></button>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-sm">
-    <button type="button" class="btn btn-secondary button-util" (click)="toggleSort()">
-      <i *ngIf="sortDown" class="fa fa-sort-alpha-down"></i>
-      <i *ngIf="!sortDown" class="fa fa-sort-alpha-up"></i>
-    </button>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm">
-    <button type="button" class="btn btn-secondary button-util" (click)="createCard()"><i
-        class="fa fa-redo-alt"></i></button>
+  <div class="row">
+    <div class="col-sm">
+      <button type="button" class="btn btn-secondary " id='refresh' (click)="onClickRefresh()">
+        <i class="fa fa-sync" aria-hidden="true"></i></button>
+    </div>
   </div>
 </div>
 <!--Bottoni end pagina-->
