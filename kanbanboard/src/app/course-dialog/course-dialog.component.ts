@@ -48,7 +48,7 @@ export class CourseDialogComponent implements OnInit {
        nome_progetto: data.nome_progetto, 
        descrizione_progetto: data.descrizione_progetto
       }
-    this.coloreSfondo = "bg-" + data.colore_postIt;
+    this.coloreSfondo = data.colore_postIt;
     this.titolo = data.nome_postIt;
     this.descrizione = data.descrizione_postIt;
     this.panelColor.setValue(data.colore_postIt);
@@ -64,14 +64,15 @@ export class CourseDialogComponent implements OnInit {
   }
   annulla(){
     this.modifica = false;
-    this.coloreSfondo = "bg-" + this.post.colore_postIt;
+    this.coloreSfondo = this.post.colore_postIt;
     this.titolo = this.post.nome_postIt;
     this.descrizione = this.post.descrizione_postIt;
     this.panelColor.setValue(this.post.colore_postIt);
     this.typePost.setValue(this.post.tipologia);
   }
   onChangeColor(){
-    this.coloreSfondo = "bg-"+this.panelColor.value;
+    this.coloreSfondo = this.panelColor.value;
+    console.log("change color: ",this.coloreSfondo);
   }
 
   ngOnInit() {
