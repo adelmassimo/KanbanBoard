@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+//import { HeaderPaginaComponent } from '../header-pagina/header-pagina.component';
 
 @Component({
   selector: 'app-pu',
@@ -11,8 +12,8 @@ import { Router } from '@angular/router';
 export class PUComponent implements OnInit {
 
   // apertura menu superiore
-  isMenuVisibile = false;
   isNoProgetto = false;
+  isMenuVisibile = false;
 
   // variabile per visualizzare la barra (rossa se non c'è il progetto, verde se il progetto esiste)
   isVisible = false;
@@ -30,7 +31,8 @@ export class PUComponent implements OnInit {
   idProgettoTrovato: any;
 
   constructor(private projectService: ProjectService,
-    private userService: UserService, private router: Router) { }
+    private userService: UserService,
+    private router: Router) { }
 
   ngOnInit() {
     this.createCard();
