@@ -67,8 +67,16 @@
   </div>
   <div class="row">
     <div class="col-sm">
-      <button type="button" class="btn btn-secondary " id='refresh' (click)="onClickRefresh()">
-        <i class="fa fa-sync" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-secondary " id='sort' (click)="toggleSort()">
+        <i *ngIf="sortDown" class="fa fa-sort-alpha-down" aria-hidden="true"></i>
+        <i *ngIf="!sortDown" class="fa fa-sort-alpha-up" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <button type="button" class="btn btn-secondary " id='refresh' (click)="createCard()">
+        <i class="fa fa-redo-alt" aria-hidden="true"></i></button>
     </div>
   </div>
 </div>

@@ -19,10 +19,15 @@
     top: 16%;
 }
 
+#sort{
+    border-radius: 2em;
+}
+
 #refresh{
     float: right;
     border-top: 1em;
     border-radius: 2em;
+    margin-top: 10px;
 }
 
 #cross{
