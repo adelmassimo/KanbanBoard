@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
-//import { HeaderPaginaComponent } from '../header-pagina/header-pagina.component';
 
 @Component({
   selector: 'app-pu',
@@ -27,6 +26,7 @@ export class PUComponent implements OnInit {
 
   //variabile per fare toggle sul sort button. sortDown = true --> ordinamento dalla A alla Z
   sortDown: boolean = true;
+  
   // listaProgetti: any[] = [{ 'idCard': "", 'progetto': "", 'descrizione': "" }];
   idProgettoTrovato: any;
 
@@ -123,7 +123,6 @@ export class PUComponent implements OnInit {
   onClickCanc() {
     this.isVisible = false;
   }
-
 
   openProject(id) {
     // carico sullo user service il progetto selezionato dell'utente

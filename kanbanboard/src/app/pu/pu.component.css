@@ -7,7 +7,6 @@
 
 #add{
     margin-top: 10px;
-
     border-top: 1em;
     border-radius: 2em;
 }
@@ -63,7 +62,7 @@ select{
     width: 25%;
     float: left;
     margin-top: 2.5em;
-    margin-left: 1em;
+    margin-left: 2em;
     margin-bottom: 0.5em;
 }
 

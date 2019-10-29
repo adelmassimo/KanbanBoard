@@ -39,7 +39,6 @@
 <!--Se l'utente non ha progetti-->
 
 <!--Se l'utente ha dei progetti-->
-<div class="container">
   <div class="card" id="card" *ngFor="let card of listaProgetti">
     <img src="../assets/table.png" class="card-img-top">
     <div class="card-body" id={{card.idid_progetto}}>
@@ -50,7 +49,6 @@
       <button (click)="openProject(card.id_progetto)" class="btn btn-primary">Apri Progetto</button>
       <p class="card-text" id="idProgetto">ID Progetto: {{card.id_progetto}}</p>
     </div>
-  </div>
   </div>
 <!--Se l'utente ha dei progetti
 
