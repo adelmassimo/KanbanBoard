@@ -25,7 +25,7 @@ export class PUComponent implements OnInit {
   descrizione: any[] = [];
   listaProgetti: any[] = [];
 
-  //variabile per fare toggle sul sort button
+  //variabile per fare toggle sul sort button. sortDown = true --> ordinamento dalla A alla Z
   sortDown: boolean = true;
   // listaProgetti: any[] = [{ 'idCard': "", 'progetto': "", 'descrizione': "" }];
   idProgettoTrovato: any;
@@ -34,16 +34,23 @@ export class PUComponent implements OnInit {
     private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    this.createCard('asc');
+    this.createCard();
   }
 
-  createCard(ordinamento:string){
+  ngDoCheck(){
+    //se l'utente non è loggato viene reindirizzato alla homepage
+    if(this.userService.user.id == ""){
+      this.router.navigate(['/']);
+    }
+  }
+
+  createCard(){
     this.listaProgetti.splice(0);
 
-    //nella query viene fatto l'ordinamento dalla a alla z del nome_progettos
+    //nella query viene fatto l'ordinamento dalla a alla z del nome_progetto
     this.projectService.getProgettiUtente().subscribe(
       success => {
-        if(ordinamento == 'asc'){
+        if(this.sortDown){
           for (let i = 0; i < success.length; i++) {
             this.listaProgetti.push({ 
               id_progetto: success[i].id_progetto, 
@@ -150,19 +157,15 @@ export class PUComponent implements OnInit {
     //this.router.navigate(['/lavagna']);
   }
 
-  onClickRefresh() {
-
-  }
-
   toggleSort(){
     //funzione per creare toggle dell'ordinamento alfabetico
     if(this.sortDown){
+      //ordinamento dalla z alla a 
       this.sortDown = false;
-      this.createCard('desc');
     }else{
-      this.sortDown = true;
       //ordinamento dalla a alla z
-      this.createCard('asc');
+      this.sortDown = true;
     }
+    this.createCard();
   }
 }

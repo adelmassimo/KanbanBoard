@@ -31,6 +31,13 @@ export class LavagnaComponent implements OnInit {
     this.visualizzaPostIt();
   }
 
+  ngDoCheck(){
+    //se l'utente non è loggato viene reindirizzato alla homepage
+    if(this.userService.user.id == ""){
+      this.router.navigate(['/']);
+    }
+  }
+
   nomeProgetto: string = "nome progetto";
   postIt: Array<any> = [];
 
