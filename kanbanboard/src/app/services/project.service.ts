@@ -37,7 +37,7 @@ export class ProjectService {
     console.log(ricerca);
     console.log('id Utente');
     console.log(this.userService.user.id);
-    return this.http.post(this.base_url + "/api/cercaProgetti/", { 'nome_progetto': ricerca, 'id': this.userService.user.id });
+    return this.http.post(this.base_url + "/api/cercaProgettiUtente/", { 'nome_progetto': ricerca, 'id': this.userService.user.id });
   }
 
   getProgettoById(id): Observable<any>{
