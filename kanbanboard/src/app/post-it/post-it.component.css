@@ -2,3 +2,31 @@
     text-align: center;
     margin-bottom: 20px;
 }
+.postIt{
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+    cursor: auto;
+
+}
+.postIt-title{
+    font-size: 15px;
+}
+.postIt-desc{
+    font-size: 10px;
+}
+.anteprima{
+    position: absolute;
+    top: 32%;
+    right: 17%
+}
+.titAnt{
+    font-style: italic;
+    margin-bottom: 15px ;
+}
+
+
+.stacca{
+    margin-left: 20px;
+ }
+
