@@ -1,12 +1,22 @@
-.button-util{
-    float: right;
+#add{
+    margin-top: 10px;
+    
     border-top: 1em;
     border-radius: 2em;
-    margin-top: 12px;
 }
 
-#refresh{
-    float: right;
+#search{
+    
+    border-top: 1em;
+    border-radius: 2em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#bottoni{
+    position: fixed;
+    right: 13%;
+    top: 16%;
 }
 
 #refresh{
@@ -28,6 +38,7 @@ select{
 #error{
     display: block;
     margin: 1em;
+    margin-right: 3em;
 }
 
 #card{
