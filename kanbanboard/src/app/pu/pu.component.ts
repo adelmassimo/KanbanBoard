@@ -11,39 +11,47 @@ import { Router } from '@angular/router';
 export class PUComponent implements OnInit {
 
   // apertura menu superiore
-  isMenuVisibile = false;
   isNoProgetto = false;
+  isMenuVisibile = false;
 
   // variabile per visualizzare la barra (rossa se non c'è il progetto, verde se il progetto esiste)
   isVisible = false;
   isSuccess: boolean;
 
   //variabile per la creazione e visualizzazione delle card
-  ricercaProgetto: string;
+  ricercaProgetto: string = "";
   idCard: any[] = [];
-  progetto: any[] = [];
   descrizione: any[] = [];
   listaProgetti: any[] = [];
 
-  //variabile per fare toggle sul sort button
+  //variabile per fare toggle sul sort button. sortDown = true --> ordinamento dalla A alla Z
   sortDown: boolean = true;
+  
   // listaProgetti: any[] = [{ 'idCard': "", 'progetto': "", 'descrizione': "" }];
   idProgettoTrovato: any;
 
   constructor(private projectService: ProjectService,
-    private userService: UserService, private router: Router) { }
+    private userService: UserService,
+    private router: Router) { }
 
   ngOnInit() {
-    this.createCard('asc');
+    this.createCard();
   }
 
-  createCard(ordinamento:string){
+  ngDoCheck(){
+    //se l'utente non è loggato viene reindirizzato alla homepage
+    if(this.userService.user.id == ""){
+      this.router.navigate(['/']);
+    }
+  }
+
+  createCard(){
     this.listaProgetti.splice(0);
 
-    //nella query viene fatto l'ordinamento dalla a alla z del nome_progettos
+    //nella query viene fatto l'ordinamento dalla a alla z del nome_progetto
     this.projectService.getProgettiUtente().subscribe(
       success => {
-        if(ordinamento == 'asc'){
+        if(this.sortDown){
           for (let i = 0; i < success.length; i++) {
             this.listaProgetti.push({ 
               id_progetto: success[i].id_progetto, 
@@ -64,7 +72,6 @@ export class PUComponent implements OnInit {
       error => {
         console.log("ERRORE");
       });
-
   }
 
   onClickSearchMenu() {
@@ -75,55 +82,47 @@ export class PUComponent implements OnInit {
     }
   }
 
-  onClickSearchProject(nome_progetto: string) {
-    this.ricercaProgetto = nome_progetto;
-    this.isVisible = true;
-    this.isSuccess = false;
+  onClickSearchProject() {
 
-    this.projectService.getProgettiUtente().subscribe(
-      success=>{
-        console.log('ricerca')
-        console.log(this.listaProgetti);
-        for (let i = 0; i < success.length; i++){
-          if (this.progetto == this.listaProgetti[i].progetto) {
-            console.log("Progetto Trovato!");
-            /*
+    if (this.ricercaProgetto == "") {
+      this.listaProgetti.splice(0);
+      this.isVisible = false;
+      this.createCard();
+    }
+    else {
+      this.isVisible = true;
+      this.projectService.getCercaProgetti(this.ricercaProgetto).subscribe(
+        success => {
+          console.log(success);
+          this.listaProgetti.splice(0);
+          if (success.length != 0) {
             for (var i = 0; i < success.length; i++) {
-              if (this.ricercaProgetto == this.listaProgetti[i].progetto) {
-                this.idProgettoTrovato = this.listaProgetti[i].idCard;
-                this.progetto.push(success[i].nome_progetto);
-                this.isSuccess = true;
-              }
-            }
-            */
-            if (this.isSuccess = true) {
-              console.log('trovato');
-              this.projectService.getCercaProgetti(this.ricercaProgetto).subscribe(
-                success => {
-
-
-                },
-                error => {
-
-                }
-              )
-              console.log(this.listaProgetti);
-              console.log(this.idProgettoTrovato);
+              //this.indiceLista = i;
+              this.listaProgetti.push({
+                'id': success[i].id_progetto,
+                'nome_progetto': success[i].nome_progetto,
+                'descrizione': success[i].descrizione_progetto
+              });
+              //this.isVisible = true;
+              this.isSuccess = true;
             }
           }
-        }
-      },
-      error => {
-        this.isSuccess = false;
-      }
-    );
-
+          else {
+            console.log('nessun risultato');
+            //this.isVisible = true;
+            this.isSuccess = false;
+            console.log(this.listaProgetti);
+          }
+        },
+        error => {
+          console.log('errore');
+        });
+    }
   }
 
   onClickCanc() {
     this.isVisible = false;
   }
-
 
   openProject(id) {
     // carico sullo user service il progetto selezionato dell'utente
@@ -135,6 +134,7 @@ export class PUComponent implements OnInit {
             'nome_progetto': succ[0].nome_progetto,
             'descrizione': succ[0].descrizione_progetto
           }
+          console.log(progetto);
           this.projectService.setProgetto(progetto)
 
           this.router.navigate(['/lavagna']);
@@ -150,19 +150,15 @@ export class PUComponent implements OnInit {
     //this.router.navigate(['/lavagna']);
   }
 
-  onClickRefresh() {
-
-  }
-
   toggleSort(){
     //funzione per creare toggle dell'ordinamento alfabetico
     if(this.sortDown){
+      //ordinamento dalla z alla a 
       this.sortDown = false;
-      this.createCard('desc');
     }else{
-      this.sortDown = true;
       //ordinamento dalla a alla z
-      this.createCard('asc');
+      this.sortDown = true;
     }
+    this.createCard();
   }
 }

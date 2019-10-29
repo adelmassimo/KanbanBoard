@@ -1,0 +1,10 @@
+.contenuto{
+    margin-top: 8%;
+}
+.navFixed{
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    z-index: 10;
+}
