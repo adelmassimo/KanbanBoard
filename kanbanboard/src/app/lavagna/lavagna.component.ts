@@ -24,7 +24,7 @@ export class LavagnaComponent implements OnInit {
     private projectservice: ProjectService,
     private newprojectservice: NewProjectService,
     private dialog: MatDialog
-    ){ }
+  ) { }
 
 
   ngOnInit() {
@@ -56,9 +56,9 @@ export class LavagnaComponent implements OnInit {
     this.router.navigate(['/pu']);
   }
 
-  visualizzaPostIt(){
+  visualizzaPostIt() {
     this.projectService.getPostItProgetto().subscribe(
-      succ =>{
+      succ => {
         //controllo se mi arriva almeno una entry dal database
         if (succ[0] != null) {
           //svuoto tutti i vettori per ricaricare i post-it presenti nel DB
@@ -74,8 +74,8 @@ export class LavagnaComponent implements OnInit {
           }
           console.log(this.postIt);
           //mostrare i postIt sull'html
-          for(let post of this.postIt){
-            if(post.tipologia == "to do"){
+          for (let post of this.postIt) {
+            if (post.tipologia == "to do") {
               this.toDo.push(post);
             } else if (post.tipologia == "doing") {
               this.doing.push(post);
@@ -100,7 +100,7 @@ export class LavagnaComponent implements OnInit {
   //dialog visualizza postit
   openDialog(post) {
 
-    console.log("post selezionato:",post);
+    console.log("post selezionato:", post);
 
     const dialogConfig = new MatDialogConfig();
 
@@ -118,13 +118,13 @@ export class LavagnaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       data => {
-        if(data.action === 'delete'){
+        if (data.action === 'delete') {
           this.postitservice.eliminaPostit(data.postIt).subscribe(
             success => {
               this.visualizzaPostIt();
             }
           )
-        }else if(data.action === 'update'){
+        } else if (data.action === 'update') {
           this.postitservice.updatePostit(data.postIt).subscribe(
             success => {
               this.visualizzaPostIt();
@@ -142,26 +142,26 @@ export class LavagnaComponent implements OnInit {
     //dialogConfig.autoFocus = true;
 
     dialogConfig.width = '500px';
-    //dialogConfig.maxHeight= '500px';
+    dialogConfig.height= '500px';
     dialogConfig.data = this.projectservice.progetto;
-    console.log("rubio",this.projectservice.progetto)
+    console.log("rubio", this.projectservice.progetto)
     const dialogRef = this.dialog.open(ImpostazioniProgettoDialogComponent, dialogConfig);
 
 
     dialogRef.afterClosed().subscribe(
       data => {
 
-            if(data.action === 'modifica'){
+        if (data.action === 'modifica') {
 
-              this.newprojectservice.updateProject(data.progetto).subscribe(
-                success =>{
-                  this.visualizzaPostIt();
-                  this.projectService.setProgetto(data.progetto);
-                  this.nomeProgetto = this.projectService.progetto.nomeProgetto;
-                }
-
-              );
+          this.newprojectservice.updateProject(data.progetto).subscribe(
+            success => {
+              this.visualizzaPostIt();
+              this.projectService.setProgetto(data.progetto);
+              this.nomeProgetto = this.projectService.progetto.nomeProgetto;
             }
+
+          );
+        }
       }
     )
 

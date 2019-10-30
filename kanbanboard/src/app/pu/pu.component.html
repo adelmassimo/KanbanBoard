@@ -47,8 +47,19 @@
     <p class="card-text">{{card.descrizione}}</p>
   </div>
   <div class="card-body">
-    <button (click)="openProject(card.id_progetto)" class="btn btn-primary">Apri Progetto</button>
-    <p class="card-text" id="idProgetto">ID Progetto: {{card.id_progetto}}</p>
+    <div class="row">
+      <div class="col-12">
+        <p class="card-text" id="idProgetto">ID Progetto: {{card.id_progetto}}</p>
+      </div>
+      <div class="col-8">
+        <button (click)="openProject(card.id_progetto)" class="btn btn-primary">Apri Progetto</button>
+      </div>
+      <div class="col-4" align="right">
+        <button class="btn bottone" (click)="delete(card)">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 

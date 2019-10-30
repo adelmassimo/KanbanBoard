@@ -3,13 +3,16 @@
     <div class="col">
       <h1 class="nomeProgetto">{{nomeProgetto}}</h1>
     </div>
+
+    <!-- bottone modifica progetto-->
     <div class="col">
-
-      <button mat-raised-button>
-        <h2><i class="fas fa-wrench cursor-pointer" (click)="onClickUpdate()"></i> </h2>
+      <button mat-raised-button title="Modifica progetto" (click)="onClickUpdate()">
+        <h2><i class="fas fa-wrench cursor-pointer"></i> </h2>
       </button>
-
     </div>
+    <!-- bottone modifica progetto-->
+
+
     <div class="col-3 d-flex flex-column">
       <button class="btn btn-success buttonLavagna" (click)="creaPostIt()">Crea post-it</button>
       <button class="btn btn-info buttonLavagna" (click)="visualizzaPostIt()">Aggiorna</button>

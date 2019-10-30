@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
+
 @Component({
   selector: 'app-impostazioni-progetto-dialog',
   templateUrl: './impostazioni-progetto-dialog.component.html',
@@ -27,11 +28,13 @@ export class ImpostazioniProgettoDialogComponent {
     this.descrizione_progetto = this.project.descrizione_progetto;
   }
 
+  
   salva() {
     this.project.nome_progetto = this.nome_progetto;
     this.project.descrizione_progetto = this.descrizione_progetto;
     this.close("modifica");
   }
+
   close(action) {
     this.dialogRef.close({
       'action': action,

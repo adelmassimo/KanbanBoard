@@ -11,12 +11,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+
+/*
 .example-panel-red.mat-select-panel {
 background: rgba(255, 0, 0, 0.5);
 }
 
+#colore_postIt-#ff0800.mat-select-panel{
+  background: rgba(255, 0, 0, 0.5);
+}
+
 .example-panel-green.mat-select-panel {
-background: rgba(0, 255, 0, 0.5);
+background: rgba(121, 121, 121, 0.671);
 }
 
 .example-panel-blue.mat-select-panel {
@@ -31,7 +37,7 @@ background: rgba(255, 0, 234, 0.5);
 .example-panel-yellow.mat-select-panel {
 background: rgba(234, 230, 0, 0.877);
 }
-
+*/
 /*questa roba si fa con le classi di bootstrap*/
 .nomeProgetto{
 font-size: 50px;
@@ -42,42 +48,6 @@ margin-top: 2em;
 /*questa roba si fa con le classi di bootstrap*/
 
 
-/*start dialog visualizza postit*/
-/*.example-panel-red.mat-select-panel {
-background: #FF6347;
-}
-
-.example-panel-green.mat-select-panel {
-background: #98FB98;
-}
-
-.example-panel-blue.mat-select-panel {
-background: #87CEEB;
-}
-
-.example-panel-pink.mat-select-panel {
-background: #FFC0CB;
-}
-
-
-.example-panel-yellow.mat-select-panel {
-background: 	#EEE8AA;
-}*/
-.bg-red{
-background-color: #FF6347;
-}
-.bg-green{
-background-color: #98FB98;
-}
-.bg-blue{
-background-color: #87CEEB;
-}
-.bg-pink{
-background-color: #FFC0CB;
-}
-.bg-yellow{
-background-color: #EEE8AA;
-}
 .mat-dialog-actions{
 margin: 10px 0 1px 20px !important;
 }
@@ -85,16 +55,17 @@ margin: 10px 0 1px 20px !important;
 background: none;
 box-shadow: none;
 overflow: hidden !important;
+height: 500px;
 }
 .mat-dialog-content{
 scrollbar-width: none; /* Firefox */
 -ms-overflow-style: none;  /* IE 10+ */
 overflow-y:scroll;
 overflow-x:hidden;
-/*
+
 width: 100%;
-height: 100%;
-overflow: hidden;*/
+height: 300px;
+
 }
 
 .bottone:hover{
