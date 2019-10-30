@@ -1,24 +1,43 @@
 <div class="p-3  text-break" [ngStyle]="{'background' : coloreSfondo}">
   <div class="row mr-3 d-flex justify-content-end">
-    <div *ngIf="modifica" class="col">
+    <div *ngIf="modifica && !modificaSelezionata" class="col">
       <button class="btn bottone" title="Modifiche Precedenti" (click)="openStoricoModifiche()">
-          <i class="fas fa-clipboard-list"></i>
+        <i class="fas fa-clipboard-list"></i>
       </button>
     </div>
-    <div class="col-1 mr-3">
+    <div *ngIf="modificaSelezionata" class="col">
+      <button class="btn bottone" title="Indietro" (click)="colseModificaSelezionata()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+    </div>
+    <div *ngIf="modificaSelezionata" class="col">
+      {{postItModifica.data}}
+    </div>
+    <div *ngIf="!modifica && !modificaSelezionata" class="col-1 mr-3">
       <button class="btn bottone" title="Modifica" (click)="openModifica()">
         <i class="fas fa-pencil-alt"></i>
       </button>
     </div>
-    <div class="col-1 mr-3">
+    <div *ngIf="!modifica && !modificaSelezionata" class="col-1 mr-3">
       <button class="btn bottone" title="Elimina" (click)="delete()">
         <i class="fas fa-trash-alt"></i>
+      </button>
+    </div>
+    <div *ngIf="modifica" class="col-1 mr-3">
+      <button class="btn bottone" title="Salva" (click)="save()">
+        <i class="far fa-save"></i>
+      </button>
+    </div>
+    <div *ngIf="modifica" class="col-1 mr-3">
+      <button class="btn bottone" title="Annulla" (click)="annulla()">
+        <i class="fas fa-undo"></i>
       </button>
     </div>
   </div>
   <div class="row mr-3 d-flex">
     <div class="col px-5">
       <h1 *ngIf="!modifica && !modifichePrecedenti" mat-dialog-title>{{post.nome_postIt}}</h1>
+      <h1 *ngIf="modificaSelezionata" mat-dialog-title>{{postItModifica.nome_postIt}}</h1>
       <mat-form-field *ngIf="modifica" class="w-75">
         <input matInput placeholder="Titolo" name="titolo" [(ngModel)]="titolo">
       </mat-form-field>
@@ -74,10 +93,26 @@
 
     <!--start modifiche precedenti-->
     <div *ngIf="modifichePrecedenti" class="col pl-5">
-       Lista delle date delle precedenti modifiche del postit: al click mostra il postit di quella modifica ... possivile sceglerlo per l'attuale modifica
+      <!--`id_postItOld`, `nome_PostItNew`, `descrizione_postItNew`, `colore_postItNew`, `tipologiaNew`-->
+      <div *ngFor="let modifica of storicoModifiche" class="row" (click)="showModifica(modifica)">
+        <div class="col">
+          {{modifica.data}}
+        </div>
+        <div class="col">
+          {{autore}}
+        </div>
+      </div>
     </div>
     <!--end modifiche precedenti-->
-    
+
+    <!--start modifica seelezionata-->
+    <div *ngIf="modificaSelezionata" class="row d-flex justify-content-end">
+      <div class="col pl-5">
+        {{postItModifica.descrizione_postIt}}
+      </div>
+    </div>
+    <!--end modifica selezionata-->
+
   </mat-dialog-content>
 
   <mat-dialog-actions>

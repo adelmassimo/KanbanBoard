@@ -24,10 +24,20 @@ export class PostItDialogComponent implements OnInit {
     nome_progetto: "",
     descrizione_progetto: ""
   }
+  poatItModifica: any = {
+    id_postIt: -1,
+    nome_postIt: "",
+    descrizione_postIt: "",
+    colore_postIt: "",
+    tipologia: "",
+    data: ""
+  }
 
   modifica: boolean = false;
 
   modifichePrecedenti: boolean = false;
+  storicoModifiche: Array<any> = [];
+  modificaSelezionata: boolean = false;
 
   titolo: string;
   descrizione: string;
@@ -79,10 +89,48 @@ export class PostItDialogComponent implements OnInit {
     this.typePost.setValue(this.post.tipologia);
   }
 
-  openStoricoModifiche(){
+  openStoricoModifiche() {
     this.modifichePrecedenti = true;
     this.modifica = false;
-    console.log(this.modifichePrecedenti);
+    this.getModifichePostIt();
+  }
+  showModifica(modifica){
+    this.modificaSelezionata = true;
+    /** `id_postItOld`, `nome_PostItNew`, `descrizione_postItNew`, `colore_postItNew`, `tipologiaNew` */
+    this.poatItModifica = {
+      id_postIt: modifica.id_postItOld,
+      nome_postIt: modifica.nome_PostItNew,
+      descrizione_postIt: modifica.descrizione_postItNew,
+      colore_postIt: modifica.colore_postItNew,
+      tipologia: modifica.tipologiaNew,
+      data: modifica.data
+    }
+    this.coloreSfondo = this.poatItModifica.colore_postIt;
+  }
+  colseModificaSelezionata(){
+    this.modificaSelezionata = false;
+    this.coloreSfondo = this.post.colore_postIt;
+  }
+
+  getModifichePostIt(){
+    this.postitservice.getModifichePostIt(this.post.id_postIt).subscribe(
+      succ => {
+        //controllo se mi arriva almeno una entry dal database
+        console.log('prima:',this.storicoModifiche);
+        if (succ[0] != null) {
+          //svuoto il vettore contenente lo storico delle modifiche
+          this.storicoModifiche.splice(0);
+          //riempio il vettore storicoModifiche[] con tutte  le modifiche del post-it 
+          for (let modifica of succ) {
+            this.storicoModifiche.push(modifica);
+          }
+          console.log('dopo',this.storicoModifiche);
+        }
+      },
+      err => {
+        console.log("errore connessione database!");
+      }
+    );
   }
 
   onChangeColor() {

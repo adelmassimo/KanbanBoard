@@ -79,6 +79,15 @@ postIt.post('/visualizzaPostItProgetto', function (req, res) {
       res.send(rows);
     });
 });
+//get modifiche per postit
+postIt.post('/visualizzaModifichePostIt', function (req, res) {
+  id_postIt = req.body.id_postIt;
+  var query = "SELECT * FROM modifiche WHERE id_postItOld = '"+id_postIt+"'";
+  sql_connection.query(query, function (err, rows, next) {
+      if (err) throw err;
+      res.send(rows);
+    });
+});
 
 
 //elimina postit

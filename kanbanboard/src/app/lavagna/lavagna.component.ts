@@ -99,9 +99,6 @@ export class LavagnaComponent implements OnInit {
 
   //dialog visualizza postit
   openDialog(post) {
-
-    console.log("post selezionato:", post);
-
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = false;
@@ -111,8 +108,6 @@ export class LavagnaComponent implements OnInit {
     //dialogConfig.maxHeight= '500px';
 
     dialogConfig.data = post;
-
-    //this.dialog.open(PostItDialogComponent, dialogConfig);
 
     const dialogRef = this.dialog.open(PostItDialogComponent, dialogConfig);
 
@@ -131,6 +126,9 @@ export class LavagnaComponent implements OnInit {
             }
           )
         }
+      },
+      undefined => {
+        this.visualizzaPostIt();
       });
 
   }
