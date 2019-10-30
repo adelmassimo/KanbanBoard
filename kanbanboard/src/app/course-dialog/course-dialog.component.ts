@@ -17,13 +17,13 @@ export class CourseDialogComponent implements OnInit {
 
 
   post: any = {
-    id_postIt: 57, 
-     nome_postIt: "efewf", 
-     descrizione_postIt: "efwefwefwef", 
-     colore_postIt: "blue",
-     tipologia: "to do",
-     nome_progetto: "progetto", 
-     descrizione_progetto: "prrrrrrrrogetto" 
+    id_postIt: -1, 
+     nome_postIt: "", 
+     descrizione_postIt: "", 
+     colore_postIt: "",
+     tipologia: "",
+     nome_progetto: "", 
+     descrizione_progetto: "" 
     }
   
   coloreSfondo: string = "";
@@ -31,7 +31,8 @@ export class CourseDialogComponent implements OnInit {
   modifica: boolean = false;
   titolo: string;
   descrizione: string;
-  //panelColor: string;
+  
+  action: string = "";
 
 
   constructor(
@@ -56,7 +57,8 @@ export class CourseDialogComponent implements OnInit {
   }
 
   delete() {
-    this.close('delete');
+    this.action = "delete";
+    this.close();
   }
 
   openModifica() {
@@ -72,14 +74,12 @@ export class CourseDialogComponent implements OnInit {
   }
   onChangeColor(){
     this.coloreSfondo = this.panelColor.value;
-    console.log("change color: ",this.coloreSfondo);
   }
 
   ngOnInit() {
     this.form = this.fb.group({
       titolo: this.titolo,
       descrizione: this.descrizione
-     // panelColor: this.panelColor
     });
   }
   save() {
@@ -87,12 +87,13 @@ export class CourseDialogComponent implements OnInit {
     this.post.descrizione_postIt = this.descrizione;
     this.post.colore_postIt = this.panelColor.value;
     this.post.tipologia = this.typePost.value;
-    this.close('update');
+    this.action = "update";
+    this.close();
   }
 
-  close(action) {
+  close() {
     this.dialogRef.close({
-      'action': action,
+      'action': this.action,
       'postIt': this.post
     });
   }
