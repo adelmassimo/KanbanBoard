@@ -14,7 +14,7 @@ import { ProjectService } from '../services/project.service';
 })
 export class PostItComponent implements OnInit {
 
-  panelColor = new FormControl('#ff0800');
+  panelColor = new FormControl('#FF6347');
   typePost = new FormControl('to do');
 
   constructor(private router: Router, private route: ActivatedRoute,  private postItService: PostItService,
