@@ -1,8 +1,9 @@
 .ricerca{
-    position: absolute;
+    position: fixed;
     top: 8.5%;
     left: 0%;
     width: 100%;
+    z-index: 2;
 }
 
 #add{
@@ -48,6 +49,7 @@ select{
 .spaziatura{
     width: 100%;
     height: 70px;
+    margin-bottom:2em;
 }
 
 #error{

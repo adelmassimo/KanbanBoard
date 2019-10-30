@@ -26,6 +26,7 @@
 
 <div *ngIf="isVisible" class="spaziatura">_</div>
 <!--Preview progetti-->
+
 <!--Se l'utente non ha progetti-->
 <div *ngIf="isVisible" id="error">
   <div *ngIf="!isSuccess" class="alert alert-danger" role="alert">
@@ -60,9 +61,9 @@
       </div>
     </div>
   </div>
-<!--Se l'utente ha dei progetti
+</div>
 
-  Preview progetti-->
+<!--Se l'utente ha dei progetti Preview progetti-->
 
 <!--Bottoni end pagina-->
 <div id="bottoni">
@@ -74,7 +75,7 @@
   </div>
   <div class="row">
     <div class="col-sm">
-      <button type="button" class="btn btn-secondary " id='search' (click)="onClickSearchMenu()"><i
+      <button type="button" class="btn btn-secondary " id='search' (click)="onClickSearchMenu()" href="#top"><i
           class="fa fa-search"></i></button>
     </div>
   </div>
