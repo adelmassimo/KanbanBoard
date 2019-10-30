@@ -1,18 +1,38 @@
-.button-util{
-    float: right;
+.ricerca{
+    position: absolute;
+    top: 8.5%;
+    left: 0%;
+    width: 100%;
+}
+
+#add{
+    margin-top: 10px;
     border-top: 1em;
     border-radius: 2em;
-    margin-top: 12px;
+}
+
+#search{
+    border-top: 1em;
+    border-radius: 2em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#bottoni{
+    position: fixed;
+    right: 13%;
+    top: 18%;
+}
+
+#sort{
+    border-radius: 2em;
 }
 
 #refresh{
     float: right;
-}
-
-#refresh{
-    float: right;
     border-top: 1em;
     border-radius: 2em;
+    margin-top: 10px;
 }
 
 #cross{
@@ -25,16 +45,25 @@ select{
   width: 200px;
 }
 
+.spaziatura{
+    width: 100%;
+    height: 70px;
+}
+
 #error{
-    display: block;
-    margin: 1em;
+    position: absolute;
+    top:7%;
+    width: 70%;
+    margin-right: 3em;
+    margin-top:5em;
 }
 
 #card{
-    width: 18rem;
-    margin-top: 1em;
-    margin-left: 1em;
+    width: 25%;
     float: left;
+    margin-top: 2.5em;
+    margin-left: 2em;
+    margin-bottom: 0.5em;
 }
 
 #idProgetto{
