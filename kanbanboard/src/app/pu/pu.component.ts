@@ -169,7 +169,7 @@ export class PUComponent implements OnInit {
   delete(progetto){
     this.newProjectService.deleteProject(progetto).subscribe(
       success => {
-        this.createCard('asc');
+        this.createCard();
       }
     )
   }
