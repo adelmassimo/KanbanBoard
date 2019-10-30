@@ -85,11 +85,9 @@ export class PostItComponent implements OnInit {
   ngDoCheck(){
     this.colore_postIt = this.panelColor.value;
 
-    /*
     //se l'utente non è loggato viene reindirizzato alla homepage
     if(this.userService.user.id == ""){
       this.router.navigate(['/']);
     }
-    */
   }
 }
