@@ -11,12 +11,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+
+/*
 .example-panel-red.mat-select-panel {
 background: rgba(255, 0, 0, 0.5);
 }
 
+#colore_postIt-#ff0800.mat-select-panel{
+  background: rgba(255, 0, 0, 0.5);
+}
+
 .example-panel-green.mat-select-panel {
-background: rgba(0, 255, 0, 0.5);
+background: rgba(121, 121, 121, 0.671);
 }
 
 .example-panel-blue.mat-select-panel {
@@ -31,7 +37,7 @@ background: rgba(255, 0, 234, 0.5);
 .example-panel-yellow.mat-select-panel {
 background: rgba(234, 230, 0, 0.877);
 }
-
+*/
 /*questa roba si fa con le classi di bootstrap*/
 .nomeProgetto{
 font-size: 50px;

@@ -14,7 +14,7 @@ import { ProjectService } from '../services/project.service';
 })
 export class PostItComponent implements OnInit {
 
-  panelColor = new FormControl('yellow');
+  panelColor = new FormControl('#ff0800');
   typePost = new FormControl('to do');
 
   constructor(private router: Router, private route: ActivatedRoute,  private postItService: PostItService,
@@ -79,16 +79,17 @@ export class PostItComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.panelColor.value);
+    
   }
 
   ngDoCheck(){
+    this.colore_postIt = this.panelColor.value;
 
-    //questo if controlla se l'utente è loggato altrimenti si viene reindrizzati alla homepage
-    //if(this.localstorageservice.isEmpty()){
-      //se non è loggato nessuno si viene reindirizzati alla homepage
-      //this.router.navigate(['']);
-    //}
+    /*
+    //se l'utente non è loggato viene reindirizzato alla homepage
+    if(this.userService.user.id == ""){
+      this.router.navigate(['/']);
+    }
+    */
   }
-
 }

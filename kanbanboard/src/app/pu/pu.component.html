@@ -26,6 +26,7 @@
 
 <div *ngIf="isVisible" class="spaziatura">_</div>
 <!--Preview progetti-->
+
 <!--Se l'utente non ha progetti-->
 <div *ngIf="isVisible" id="error">
   <div *ngIf="!isSuccess" class="alert alert-danger" role="alert">
@@ -39,20 +40,30 @@
 <!--Se l'utente non ha progetti-->
 
 <!--Se l'utente ha dei progetti-->
-  <div class="card" id="card" *ngFor="let card of listaProgetti">
-    <img src="../assets/table.png" class="card-img-top">
-    <div class="card-body" id={{card.idid_progetto}}>
-      <h5 class="card-title">{{card.nome_progetto}}</h5>
-      <p class="card-text">{{card.descrizione}}</p>
-    </div>
-    <div class="card-body">
-      <button (click)="openProject(card.id_progetto)" class="btn btn-primary">Apri Progetto</button>
-      <p class="card-text" id="idProgetto">ID Progetto: {{card.id_progetto}}</p>
+<div class="card" id="card" *ngFor="let card of listaProgetti">
+  <img src="../assets/table.png" class="card-img-top">
+  <div class="card-body" id={{card.idid_progetto}}>
+    <h5 class="card-title">{{card.nome_progetto}}</h5>
+    <p class="card-text">{{card.descrizione}}</p>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12">
+        <p class="card-text" id="idProgetto">ID Progetto: {{card.id_progetto}}</p>
+      </div>
+      <div class="col-8">
+        <button (click)="openProject(card.id_progetto)" class="btn btn-primary">Apri Progetto</button>
+      </div>
+      <div class="col-4" align="right">
+        <button class="btn bottone" (click)="delete(card)">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </div>
     </div>
   </div>
-<!--Se l'utente ha dei progetti
+</div>
 
-  Preview progetti-->
+<!--Se l'utente ha dei progetti Preview progetti-->
 
 <!--Bottoni end pagina-->
 <div id="bottoni">
@@ -64,7 +75,7 @@
   </div>
   <div class="row">
     <div class="col-sm">
-      <button type="button" class="btn btn-secondary " id='search' (click)="onClickSearchMenu()"><i
+      <button type="button" class="btn btn-secondary " id='search' (click)="onClickSearchMenu()" href="#top"><i
           class="fa fa-search"></i></button>
     </div>
   </div>

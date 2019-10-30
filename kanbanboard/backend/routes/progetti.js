@@ -15,7 +15,7 @@ progetti.post('/visualizzaProgettiUtenti/', function (req, res) {
     console.log('ProgettoUtente entrato')
     console.log("id: " + id);
     sql_connection.query('SELECT utenti.nome_utente, ' +
-        'progetti.nome_progetto, ' + 
+        'progetti.nome_progetto, ' +
         'progetti.descrizione_progetto, ' +
         'utenti_x_progetti.id_utente, ' +
         'utenti_x_progetti.id_progetto ' +
@@ -23,7 +23,7 @@ progetti.post('/visualizzaProgettiUtenti/', function (req, res) {
         'left outer join utenti on utenti.id_utente = utenti_x_progetti.id_utente ' +
         'left OUTER join progetti on progetti.id_progetto = utenti_x_progetti.id_progetto ' +
         'WHERE utenti.id_utente = "' + id + '" ORDER BY progetti.nome_progetto ASC', function (err, rows, next) {
-        console.log(rows)
+            console.log(rows)
             if (err) throw err;
             res.send(rows);
         });
@@ -31,15 +31,16 @@ progetti.post('/visualizzaProgettiUtenti/', function (req, res) {
 
 });
 
-progetti.post('/visualizzaProgettoById/', function(req, res){
+progetti.post('/visualizzaProgettoById/', function (req, res) {
     id = req.body.id;
-    sql_connection.query('SELECT * FROM progetti WHERE id_progetto= "' + 
-    id + '"', function(err, rows, next){
-        if (err) throw err;
-        res.send(rows);
-    })
+    sql_connection.query('SELECT * FROM progetti WHERE id_progetto= "' +
+        id + '"', function (err, rows, next) {
+            if (err) throw err;
+            res.send(rows);
+        })
 });
 
+/* RICERCA PROGETTO ALL'INTERNO DEL AREA UTENTE */ 
 progetti.post('/cercaProgettiUtente/', function (req, res) {
     nome_progetto = req.body.nome_progetto;
     id = req.body.id;
@@ -48,24 +49,32 @@ progetti.post('/cercaProgettiUtente/', function (req, res) {
     console.log('Id_Utente');
     console.log(id);
 
-    sql_connection.query('SELECT progetti.*,' +
-        'utenti_x_progetti.id_progetto,' +
-        'utenti.id_utente ' +
-        'FROM progetti ' +
-        'left outer join utenti_x_progetti on utenti_x_progetti.id_progetto = progetti.id_progetto ' +
-        'left outer join utenti on utenti.id_utente = utenti_x_progetti.id_utente ' +
-        'WHERE progetti.nome_progetto = "' + nome_progetto + '" AND utenti_x_progetti.id_utente = "' + id + '"', function (err, rows, next) {
-            console.log('cercaProgetto');
-            console.log(rows);
-            if (err) throw err;
-            res.send(rows);
-        });
+    var query = 'SELECT progetti.*,' +
+        ' utenti_x_progetti.id_progetto,' +
+        ' utenti_x_progetti.id_utente' +
+        ' FROM progetti' +
+        ' join utenti_x_progetti on utenti_x_progetti.id_progetto = progetti.id_progetto' +
+        ' AND utenti_x_progetti.id_utente = "' + id + '"' +
+        ' WHERE progetti.nome_progetto LIKE "%' + nome_progetto + '%"' +
+        ' OR upper(progetti.nome_progetto) LIKE "%' + nome_progetto + '%"' +
+        ' OR lower(progetti.nome_progetto) LIKE "%' + nome_progetto + '%" ';
+
+    sql_connection.query(query, function (err, rows, next) {
+        console.log('cercaProgetto Lower');
+        console.log(rows);
+        if (err) throw err;
+        res.send(rows);
+    });
 })
-/*
-progetto.post('/cercaProgettiGlobali/',function(req,res){
+/* RICERCA PROGETTO ALL'INTERNO DEL AREA UTENTE */
+
+/* RICERCA GLOBALE DEI PROGETTI ALL'INTENDO DEL DB */
+progetti.post('/cercaProgettiGlobali/',function(req,res){
     ricercaProgetto = req.body.nome_progetto;
     console.log('NomeProgetto');
     console.log(ricercaProgetto);
     sql_connection.query('SELECT progetti.*')
-})*/
+})
+/* RICERCA GLOBALE DEI PROGETTI ALL'INTENDO DEL DB */
+
 module.exports = progetti;
