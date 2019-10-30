@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { UserService } from '../services/user.service';
+import { NewProjectService } from '../services/new-project.service';
+
 import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-pu',
@@ -9,6 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./pu.component.css']
 })
 export class PUComponent implements OnInit {
+
 
   // apertura menu superiore
   isNoProgetto = false;
@@ -26,13 +31,12 @@ export class PUComponent implements OnInit {
 
   //variabile per fare toggle sul sort button. sortDown = true --> ordinamento dalla A alla Z
   sortDown: boolean = true;
-  
+
   // listaProgetti: any[] = [{ 'idCard': "", 'progetto': "", 'descrizione': "" }];
   idProgettoTrovato: any;
 
   constructor(private projectService: ProjectService,
-    private userService: UserService,
-    private router: Router) { }
+    private userService: UserService, private router: Router, private newProjectService: NewProjectService) { }
 
   ngOnInit() {
     this.createCard();
@@ -53,18 +57,18 @@ export class PUComponent implements OnInit {
       success => {
         if(this.sortDown){
           for (let i = 0; i < success.length; i++) {
-            this.listaProgetti.push({ 
-              id_progetto: success[i].id_progetto, 
-              nome_progetto: success[i].nome_progetto, 
-              descrizione: success[i].descrizione_progetto 
+            this.listaProgetti.push({
+              id_progetto: success[i].id_progetto,
+              nome_progetto: success[i].nome_progetto,
+              descrizione: success[i].descrizione_progetto
             });
           }
         }else{
           for (let i = success.length-1; i >= 0; i--) {
-            this.listaProgetti.push({ 
-              id_progetto: success[i].id_progetto, 
-              nome_progetto: success[i].nome_progetto, 
-              descrizione: success[i].descrizione_progetto 
+            this.listaProgetti.push({
+              id_progetto: success[i].id_progetto,
+              nome_progetto: success[i].nome_progetto,
+              descrizione: success[i].descrizione_progetto
             });
           }
         }
@@ -153,7 +157,7 @@ export class PUComponent implements OnInit {
   toggleSort(){
     //funzione per creare toggle dell'ordinamento alfabetico
     if(this.sortDown){
-      //ordinamento dalla z alla a 
+      //ordinamento dalla z alla a
       this.sortDown = false;
     }else{
       //ordinamento dalla a alla z
@@ -161,4 +165,13 @@ export class PUComponent implements OnInit {
     }
     this.createCard();
   }
+
+  delete(progetto){
+    this.newProjectService.deleteProject(progetto).subscribe(
+      success => {
+        this.createCard('asc');
+      }
+    )
+  }
+
 }
