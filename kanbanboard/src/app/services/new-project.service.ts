@@ -34,4 +34,11 @@ export class NewProjectService {
     });
   }
 
+
+  deleteProject(project):Observable<any>{
+    return this.http.post(this.base_url + "/api/deleteProject", {
+      'id_progetto': project.id_progetto
+    }); 
+  }
+
 }

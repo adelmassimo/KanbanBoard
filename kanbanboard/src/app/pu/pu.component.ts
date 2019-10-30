@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { UserService } from '../services/user.service';
+import { NewProjectService } from '../services/new-project.service';
+
 import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-pu',
@@ -9,6 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./pu.component.css']
 })
 export class PUComponent implements OnInit {
+
 
   // apertura menu superiore
   isMenuVisibile = false;
@@ -31,7 +36,7 @@ export class PUComponent implements OnInit {
   idProgettoTrovato: any;
 
   constructor(private projectService: ProjectService,
-    private userService: UserService, private router: Router) { }
+    private userService: UserService, private router: Router, private newProjectService: NewProjectService) { }
 
   ngOnInit() {
     this.createCard('asc');
@@ -165,4 +170,13 @@ export class PUComponent implements OnInit {
       this.createCard('asc');
     }
   }
+
+  delete(progetto){
+    this.newProjectService.deleteProject(progetto).subscribe(
+      success => {
+        this.createCard('asc');
+      }
+    )
+  }
+
 }

@@ -52,4 +52,23 @@ project.post('/updateProject/', function (req, res) {
   });
 });   // fine UPDATE
 
+
+
+// DELETE 
+project.post('/deleteProject/', function (req, res) {
+  id_progetto = req.body.id_progetto;
+  console.log('sto eliminando:', id_progetto);
+
+  var query = "DELETE FROM utenti_x_progetti "
+    + "WHERE  id_progetto = '" + id_progetto + "'";
+  sql_connection.query(query, function (err, rows, fields) {
+    if (err) throw err;
+    console.log("PROGETTO eliminato");
+    res.send({ "eliminato": '1' });
+  });
+
+});  // fine DELETE
+
+
+
 module.exports = project;
