@@ -5,57 +5,63 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { PostItService } from '../services/post-it.service';
 
 @Component({
-  selector: 'app-course-dialog',
-  templateUrl: './course-dialog.component.html',
-  styleUrls: ['./course-dialog.component.css']
+  selector: 'app-postIt-dialog',
+  templateUrl: './postIt-dialog.component.html',
+  styleUrls: ['./postIt-dialog.component.css']
 })
-export class CourseDialogComponent implements OnInit {
+export class PostItDialogComponent implements OnInit {
 
   form: FormGroup;
   panelColor = new FormControl();
   typePost = new FormControl();
 
-
   post: any = {
-    id_postIt: -1, 
-     nome_postIt: "", 
-     descrizione_postIt: "", 
-     colore_postIt: "",
-     tipologia: "",
-     nome_progetto: "", 
-     descrizione_progetto: "" 
-    }
-  
-  coloreSfondo: string = "";
+    id_postIt: -1,
+    nome_postIt: "",
+    descrizione_postIt: "",
+    colore_postIt: "",
+    tipologia: "",
+    nome_progetto: "",
+    descrizione_progetto: ""
+  }
 
   modifica: boolean = false;
+
+  modifichePrecedenti: boolean = false;
+
   titolo: string;
   descrizione: string;
-  
+  coloreSfondo: string = "";
+
   action: string = "";
 
 
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<CourseDialogComponent>,
+    private dialogRef: MatDialogRef<PostItDialogComponent>,
     private postitservice: PostItService,
     @Inject(MAT_DIALOG_DATA) data) {
     this.post = {
-      id_postIt: data.id_postIt, 
-       nome_postIt: data.nome_postIt,
-       descrizione_postIt: data.descrizione_postIt,
-       colore_postIt: data.colore_postIt,
-       tipologia: data.tipologia,
-       nome_progetto: data.nome_progetto, 
-       descrizione_progetto: data.descrizione_progetto
-      }
+      id_postIt: data.id_postIt,
+      nome_postIt: data.nome_postIt,
+      descrizione_postIt: data.descrizione_postIt,
+      colore_postIt: data.colore_postIt,
+      tipologia: data.tipologia,
+      nome_progetto: data.nome_progetto,
+      descrizione_progetto: data.descrizione_progetto
+    }
     this.coloreSfondo = data.colore_postIt;
     this.titolo = data.nome_postIt;
     this.descrizione = data.descrizione_postIt;
     this.panelColor.setValue(data.colore_postIt);
     this.typePost.setValue(data.tipologia);
   }
-
+  ngOnInit() {
+    this.form = this.fb.group({
+      titolo: this.titolo,
+      descrizione: this.descrizione
+    });
+  }
   delete() {
     this.action = "delete";
     this.close();
@@ -64,7 +70,7 @@ export class CourseDialogComponent implements OnInit {
   openModifica() {
     this.modifica = true;
   }
-  annulla(){
+  annulla() {
     this.modifica = false;
     this.coloreSfondo = this.post.colore_postIt;
     this.titolo = this.post.nome_postIt;
@@ -72,16 +78,18 @@ export class CourseDialogComponent implements OnInit {
     this.panelColor.setValue(this.post.colore_postIt);
     this.typePost.setValue(this.post.tipologia);
   }
-  onChangeColor(){
+
+  openStoricoModifiche(){
+    this.modifichePrecedenti = true;
+    this.modifica = false;
+    console.log(this.modifichePrecedenti);
+  }
+
+  onChangeColor() {
     this.coloreSfondo = this.panelColor.value;
   }
 
-  ngOnInit() {
-    this.form = this.fb.group({
-      titolo: this.titolo,
-      descrizione: this.descrizione
-    });
-  }
+
   save() {
     this.post.nome_postIt = this.titolo;
     this.post.descrizione_postIt = this.descrizione;
@@ -98,6 +106,7 @@ export class CourseDialogComponent implements OnInit {
     });
   }
 
-  
+
+
 
 }

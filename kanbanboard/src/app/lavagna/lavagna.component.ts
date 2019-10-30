@@ -8,7 +8,7 @@ import { PostItService } from '../services/post-it.service';
 
 
 import { MatDialog, MatDialogConfig } from "@angular/material";
-import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
+import { PostItDialogComponent } from '../postIt-dialog/postIt-dialog.component';
 import { ImpostazioniProgettoDialogComponent } from '../impostazioni-progetto-dialog/impostazioni-progetto-dialog.component';
 
 @Component({
@@ -112,9 +112,9 @@ export class LavagnaComponent implements OnInit {
 
     dialogConfig.data = post;
 
-    //this.dialog.open(CourseDialogComponent, dialogConfig);
+    //this.dialog.open(PostItDialogComponent, dialogConfig);
 
-    const dialogRef = this.dialog.open(CourseDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(PostItDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
       data => {
