@@ -25,27 +25,29 @@ export class PostItService {
   /**start Elimina postit */
   eliminaPostit(postIt): Observable<any> {
     return this.http.post(this.base_url + "/api/deletePostIt/", {
-      'id_postIt': postIt.id_postIt
+      'id_postIt': postIt.id_postIt,
     });
   }
   /**end Elimina postit */
 
   /**start Update postit */
-  updatePostit(updatePostIt): Observable<any> {
+  updatePostit(updatePostIt, id_autore): Observable<any> {
     return this.http.post(this.base_url + "/api/updatePostIt/", {
       'id_postIt': updatePostIt.id_postIt,
       'nome_postIt': updatePostIt.nome_postIt,
       'descrizione_postIt': updatePostIt.descrizione_postIt,
       'colore_postIt': updatePostIt.colore_postIt,
-      'tipologia': updatePostIt.tipologia
+      'tipologia': updatePostIt.tipologia,
+      'id_autore': id_autore
     });
   }
   /**end Update postit */
 
   /**start GetModifichePostIt postit */
-  getModifichePostIt(postIt): Observable<any> {
-    return this.http.post(this.base_url + "/api/visualizzaModifichePostIt", {
-      'id_postIt' : postIt.id_postIt
+  getModifichePostIt(id_postIt): Observable<any> {
+    //console.log("postiti",id_postIt);
+    return this.http.post(this.base_url + "/api/visualizzaModifichePostIt/", {
+      'id_postIt' : id_postIt
     });
   }
   /**end GetModifichePostIt postit */

@@ -24,13 +24,15 @@ export class PostItDialogComponent implements OnInit {
     nome_progetto: "",
     descrizione_progetto: ""
   }
-  poatItModifica: any = {
+  postItModifica: any = {
     id_postIt: -1,
     nome_postIt: "",
     descrizione_postIt: "",
     colore_postIt: "",
     tipologia: "",
-    data: ""
+    data: "",
+    nome_utente: "",
+    cognome_utent: ""
   }
 
   modifica: boolean = false;
@@ -94,18 +96,24 @@ export class PostItDialogComponent implements OnInit {
     this.modifica = false;
     this.getModifichePostIt();
   }
+  closeStoricoModifiche(){
+    this.modifichePrecedenti = false;
+    this.modifica = false;
+  }
   showModifica(modifica){
     this.modificaSelezionata = true;
     /** `id_postItOld`, `nome_PostItNew`, `descrizione_postItNew`, `colore_postItNew`, `tipologiaNew` */
-    this.poatItModifica = {
+    this.postItModifica = {
       id_postIt: modifica.id_postItOld,
       nome_postIt: modifica.nome_PostItNew,
       descrizione_postIt: modifica.descrizione_postItNew,
       colore_postIt: modifica.colore_postItNew,
       tipologia: modifica.tipologiaNew,
-      data: modifica.data
+      data: modifica.data,
+      nome_utente: modifica.nome_utente,
+      cognome_utente: modifica.cognome_utente
     }
-    this.coloreSfondo = this.poatItModifica.colore_postIt;
+    this.coloreSfondo = this.postItModifica.colore_postIt;
   }
   colseModificaSelezionata(){
     this.modificaSelezionata = false;
@@ -116,7 +124,7 @@ export class PostItDialogComponent implements OnInit {
     this.postitservice.getModifichePostIt(this.post.id_postIt).subscribe(
       succ => {
         //controllo se mi arriva almeno una entry dal database
-        console.log('prima:',this.storicoModifiche);
+        console.log('prima:',this.storicoModifiche, succ);
         if (succ[0] != null) {
           //svuoto il vettore contenente lo storico delle modifiche
           this.storicoModifiche.splice(0);

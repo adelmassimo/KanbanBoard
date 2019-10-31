@@ -120,7 +120,7 @@ export class LavagnaComponent implements OnInit {
             }
           )
         } else if (data.action === 'update') {
-          this.postitservice.updatePostit(data.postIt).subscribe(
+          this.postitservice.updatePostit(data.postIt, this.userService.user.id).subscribe(
             success => {
               this.visualizzaPostIt();
             }

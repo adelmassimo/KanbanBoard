@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from "@angular/material";
 
 import { AppComponent } from './app.component';
@@ -69,6 +70,7 @@ import { LocalStorageService } from './services/local-storage.service';
     ReactiveFormsModule,
     MatButtonModule,
     MatSelectModule,
+    MatDividerModule,
     MatDialogModule
   ],
   providers: [LocalStorageService],
