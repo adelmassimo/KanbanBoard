@@ -41,4 +41,11 @@ export class NewProjectService {
     }); 
   }
 
+  columnProject(col, id_progetto):Observable<any>{
+    return this.http.post(this.base_url + "/api/insertColumnProject", {
+      'arrayColonne': col,
+      'id_progetto': id_progetto
+    })
+  }
+
 }
