@@ -42,16 +42,24 @@ postIt.post('/updatePostIt/', function (req, res) {
   descrizione_postIt = req.body.descrizione_postIt;
   colore_postIt = req.body.colore_postIt;
   tipologia = req.body.tipologia;
-  
-  var query =  "UPDATE `kanbanboard`.`postit` SET `nome_postIt`='"+nome_postIt+"', "+
-  " `descrizione_postIt`='"+descrizione_postIt+"', "+
-  " `colore_postIt`='"+colore_postIt+"', "+
-  " `tipologia`='"+tipologia+"' "+
-  " WHERE  `id_postIt`='"+id_postIt+"'";
+
+  var query = "UPDATE `kanbanboard`.`postit` SET `nome_postIt`='" + nome_postIt + "', " +
+    " `descrizione_postIt`='" + descrizione_postIt + "', " +
+    " `colore_postIt`='" + colore_postIt + "', " +
+    " `tipologia`='" + tipologia + "' " +
+    " WHERE  `id_postIt`='" + id_postIt + "'";
 
   sql_connection.query(query, function (err) {
     if (err) throw err;
     console.log("POST-IT MODIFICATO");
+    //AGGIUNGO INA MODIFICA
+    var queryInserimentpModifica = "INSERT INTO `kanbanboard`.`modifiche` (`id_postItOld`, `nome_PostItNew`, `descrizione_postItNew`, `colore_postItNew`, `tipologiaNew`) " +
+      " VALUES ('" + id_postIt + "', '" + nome_postIt + "', '" + descrizione_postIt + "', '" + colore_postIt + "', '" + tipologia + "')";
+    sql_connection.query(queryInserimentpModifica, function (err) {
+      if (err) throw err;
+      console.log("MODIFICA INSERITA");
+    });
+
     res.send({ "modificato": '1' });
 
   });
@@ -71,6 +79,15 @@ postIt.post('/visualizzaPostItProgetto', function (req, res) {
       res.send(rows);
     });
 });
+//get modifiche per postit
+postIt.post('/visualizzaModifichePostIt', function (req, res) {
+  id_postIt = req.body.id_postIt;
+  var query = "SELECT * FROM modifiche WHERE id_postItOld = '"+id_postIt+"'";
+  sql_connection.query(query, function (err, rows, next) {
+      if (err) throw err;
+      res.send(rows);
+    });
+});
 
 
 //elimina postit
@@ -83,6 +100,16 @@ postIt.post('/deletePostIt/', function (req, res) {
   sql_connection.query(query, function (err, rows, fields) {
     if (err) throw err;
     console.log("POST-IT eliminato");
+
+    //elimino modifiche del postit
+    var queryInserimentpModifica = "DELETE FROM `kanbanboard`.`modifiche` WHERE `id_postItOld`='"+id_postIt+"'";
+    sql_connection.query(queryInserimentpModifica, function (err) {
+      if (err) throw err;
+      console.log("MODIFICE ELIMINATE");
+    });
+
+
+
     res.send({ "eliminato": '1' });
   });
 
