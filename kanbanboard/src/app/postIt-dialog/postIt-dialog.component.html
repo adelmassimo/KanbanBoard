@@ -1,33 +1,44 @@
 <div class="p-3  text-break" [ngStyle]="{'background' : coloreSfondo}">
+  <!--START RIGA PULSANTI -->
   <div class="row mr-3 d-flex justify-content-end">
+    <!--APRI STORICO MODIFICHE-->
     <div *ngIf="!modificaSelezionata && !modifichePrecedenti" class="col">
       <button class="btn bottone" title="Modifiche Precedenti" (click)="openStoricoModifiche()">
         <i class="fas fa-clipboard-list"></i>
       </button>
     </div>
+    <!--storico modifiche-->
+    <!--CHIUDI STORICO MODIFICHE-->
     <div *ngIf="!modificaSelezionata && modifichePrecedenti" class="col">
-        <button class="btn bottone" title="Indietro" (click)="closeStoricoModifiche()">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-      </div>
+      <button class="btn bottone" title="Indietro" (click)="closeStoricoModifiche()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+    </div>
+    <!--modifica selezionata-->
     <div *ngIf="modificaSelezionata" class="col">
       <button class="btn bottone" title="Indietro" (click)="colseModificaSelezionata()">
         <i class="fas fa-chevron-left"></i>
       </button>
     </div>
     <div *ngIf="modificaSelezionata" class="col-10 d-flex justify-content-end">
-        {{postItModifica.data | date:'medium'}} - {{postItModifica.nome_utente}} {{postItModifica.cognome_utente}}
+      {{postItModifica.data | date:'medium'}} - {{postItModifica.nome_utente}} {{postItModifica.cognome_utente}}
     </div>
+    <!--modifica selezionata-->
+
+    <!--storico modifiche-->
+    <!--MODIFICA-->
     <div *ngIf="!modifica && !modificaSelezionata" class="col-1 mr-3">
       <button class="btn bottone" title="Modifica" (click)="openModifica()">
         <i class="fas fa-pencil-alt"></i>
       </button>
     </div>
+    <!--ELIMINA-->
     <div *ngIf="!modifica && !modificaSelezionata" class="col-1 mr-3">
       <button class="btn bottone" title="Elimina" (click)="delete()">
         <i class="fas fa-trash-alt"></i>
       </button>
     </div>
+    <!--modifica-->
     <div *ngIf="modifica" class="col-1 mr-3">
       <button class="btn bottone" title="Salva" (click)="save()">
         <i class="far fa-save"></i>
@@ -39,20 +50,25 @@
       </button>
     </div>
   </div>
+  <!--modifica-->
+
+  <!--END RIGA PULSANTI -->
+  <!--TITOLO-->
   <div class="row mr-3 d-flex">
     <div class="col px-5">
       <h1 *ngIf="!modifica && !modifichePrecedenti" mat-dialog-title>{{post.nome_postIt}}</h1>
-      
+
       <h1 *ngIf="modificaSelezionata" mat-dialog-title>{{postItModifica.nome_postIt}}</h1>
       <h1 *ngIf="!modificaSelezionata && modifichePrecedenti && !modifica" mat-dialog-title>Storico delle Modifiche</h1>
-      
+
       <mat-form-field *ngIf="modifica" class="w-75">
         <input matInput placeholder="Titolo" name="titolo" [(ngModel)]="titolo">
       </mat-form-field>
     </div>
   </div>
+  <!--TITOLO-->
 
-
+  <!--CONTENUTO-->
   <mat-dialog-content>
 
     <div *ngIf="!modifica && !modifichePrecedenti" class="row d-flex justify-content-end">
@@ -130,6 +146,7 @@
     <!--end modifica selezionata-->
 
   </mat-dialog-content>
+  <!--CONTENUTO-->
 
   <mat-dialog-actions>
 
