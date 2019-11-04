@@ -1,8 +1,9 @@
 <!--Seconda parte Header Menu-->
 
 <div class="ricerca">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary row" *ngIf="isMenuVisibile">
-    <div class="col-2">
+  <nav class="docs-navbar-header row pt-1" *ngIf="isMenuVisibile">
+
+    <div class="col-2 ml-3">
       <mat-form-field>
         <select matNativeControl>
           <option class="select">Cerca progetti..</option>
@@ -13,6 +14,7 @@
         </select>
       </mat-form-field>
     </div>
+
     <div class="col-3">
       <form class="example-form">
         <mat-form-field class="example-full-width">
@@ -22,7 +24,8 @@
         <button class="mat-raised-button" (click)="onClickSearchProject()"><i class="fa fa-search"></i></button>
       </form>
     </div>
-    <div class="col-1">
+
+    <div class="col-1 mt-2">
       <button class="mat-raised-button" (click)="onClickSearchGlobal()">Progetti globali</button>
     </div>
   </nav>
@@ -61,7 +64,7 @@
           <p class="card-text" id="idProgetto">ID Progetto: {{card.id_progetto}}</p>
         </div>
         <div class="col-8">
-          <button (click)="openProject(card.id_progetto)" class="btn btn-primary">Apri Progetto</button>
+          <button (click)="openProject(card.id_progetto)" class="mat-raised-button" id="button">Apri Progetto</button>
         </div>
         <div class="col-4" align="right">
           <button class="btn bottone" (click)="delete(card)">
@@ -89,7 +92,7 @@
             <p class="card-text" id="idProgetto">ID Progetto: {{cardGlobal.id_progetto}}</p>
           </div>
           <div class="col-8">
-            <button (click)="openProject(cardGlobal.id_progetto)" class="btn btn-primary">Apri Progetto</button>
+            <button (click)="openProject(cardGlobal.id_progetto)" class="mat-raised-button" id="button">Apri Progetto</button>
           </div>
           <div class="col-4" align="right">
             <button class="btn bottone" (click)="add(cardGlobal)">
