@@ -20,8 +20,10 @@
     margin-top: 50px;
 }
 .postIt{
-    height: 100px;
+    height: 105px;
     overflow: hidden;
+    cursor: move;
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 .postIt-title{
     font-size: 15px;
@@ -31,6 +33,7 @@
 }
 .tabella{
     border-right: 1px solid rgb(168, 167, 167);
+    display: inline-block;
 }
 .divPost{
     margin-top: 10px;
@@ -46,4 +49,19 @@
 :host-context(.orange) div {
     background-color: orange;
 }
+
+.modificaProgetto{
+    border: 1px solid black;
+}
+
+
+
+
+
+    
+
+
+
+
+
 

@@ -14,8 +14,6 @@ export class NewProjectService {
   //3000 è la porta sulla quale resta in ascolto il serve
   base_url = 'http://localhost:3000';
 
-
-
   inserimentoProject(project):Observable<any>{
     return this.http.post(this.base_url + "/api/insertProject/", {
       'nome_progetto': project.nome_progetto,
@@ -23,7 +21,6 @@ export class NewProjectService {
       'id_utente': this.userService.user.id
     });
   }
-
 
 
   updateProject(updateProject):Observable<any>{
@@ -35,10 +32,20 @@ export class NewProjectService {
   }
 
 
-  deleteProject(project):Observable<any>{
+  deleteProject(project): Observable<any> {
     return this.http.post(this.base_url + "/api/deleteProject", {
       'id_progetto': project.id_progetto
-    }); 
+    });
+  }
+
+
+  addProject(project): Observable<any>{
+    console.log(this.userService.user.id);
+    console.log(project.id_progetto);
+    return this.http.post(this.base_url + "/api/addProject", {
+      'id_progetto': project.id_progetto,
+      'id': this.userService.user.id
+    });
   }
 
   columnProject(col, id_progetto):Observable<any>{

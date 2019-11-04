@@ -6,10 +6,12 @@ import { NewProjectService } from '../services/new-project.service';
 import { UserService } from '../services/user.service';
 import { PostItService } from '../services/post-it.service';
 
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { PostItDialogComponent } from '../postIt-dialog/postIt-dialog.component';
 import { ImpostazioniProgettoDialogComponent } from '../impostazioni-progetto-dialog/impostazioni-progetto-dialog.component';
+import { post } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-lavagna',
@@ -43,9 +45,9 @@ export class LavagnaComponent implements OnInit {
     this.visualizzaPostIt();
   }
 
-  ngDoCheck(){
+  ngDoCheck() {
     //se l'utente non è loggato viene reindirizzato alla homepage
-    if(this.userService.user.id == ""){
+    if (this.userService.user.id == "") {
       this.router.navigate(['/']);
     }
 
@@ -74,6 +76,9 @@ export class LavagnaComponent implements OnInit {
         if(succ[0] != null){
           //riempio il vettore postIt[] con tutti i post-it dell'progetto selezionato
           for (let post of succ) {
+            post.inBreve = post.descrizione_postIt.length < 40
+              ? post.descrizione_postIt
+              : post.descrizione_postIt.substr(0, 37) + '...';
             this.postIt.push(post);
           }
         }
@@ -85,7 +90,6 @@ export class LavagnaComponent implements OnInit {
       }
     );
   }
-
 
   //dialog visualizza postit
   openDialog(post) {
@@ -138,18 +142,11 @@ export class LavagnaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       data => {
-
-        if (data.action === 'modifica') {
-
-          this.newprojectservice.updateProject(data.progetto).subscribe(
-            success => {
-              this.visualizzaPostIt();
-              this.projectService.setProgetto(data.progetto);
-              this.nomeProgetto = this.projectService.progetto.nomeProgetto;
-            }
-
-          );
-        }
+        this.postitservice.updatePostit(data.postIt,this.userService.user.id).subscribe(
+          success => {
+            this.visualizzaPostIt();
+          }
+        )
       }
     )
   }
@@ -158,4 +155,32 @@ export class LavagnaComponent implements OnInit {
     this.visualizzaPostIt();
   }
 
+  // INIZIO MOVIMENTO POST-IT
+ 
+  drop(event: CdkDragDrop<string[]>, colonna:string) {
+    //IF SPOSTAMENTO NELLA STESSA COLONNA
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      //SPOSTAMENTO DEL POST-IT IN UN'ALTRA COLONNA
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+      console.log("ricevuto click");
+      console.log(colonna,event.container.data ,event.currentIndex);
+      
+      const postit: any = event.container.data[event.currentIndex];
+      postit.tipologia = colonna;
+
+      this.postitservice.updatePostit(postit,this.userService.user.id).subscribe(
+        success => {
+          this.visualizzaPostIt();
+        }
+      )
+  
+    } // fine if
+  }
+  
+  // FINE MOVIMENTO POST-IT
 }

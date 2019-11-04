@@ -10,12 +10,14 @@ postIt.post('/post-it/', function (req, res) {
   descrizione_postIt = req.body.descrizione_postIt;
   colore_postIt = req.body.colore_postIt;
   tipologia = req.body.tipologia;
+  difficolta = req.body.difficolta;
 
-  var query = "INSERT INTO postit ( nome_postIt, descrizione_postIt, colore_postIt, tipologia) VALUES (" +
+  var query = "INSERT INTO postit ( nome_postIt, descrizione_postIt, colore_postIt, tipologia, difficolta) VALUES (" +
     "'" + nome_postIt + "'," +
     "'" + descrizione_postIt + "'," +
     "'" + colore_postIt + "'," +
-    "'" + tipologia + "');";
+    "'" + tipologia + "'," + 
+    "'" + difficolta + "')";
   console.log(query);
   sql_connection.query(query, function (err, rows, fields) {
     if (err) throw err;
@@ -120,6 +122,22 @@ postIt.post('/deletePostIt/', function (req, res) {
   });
 
 });
+
+postIt.post('/aggiornaPostIt/', function (req, res) {
+  id_postIt = req.body.id_postIt;
+  tipologia = req.body.tipologia;
+  
+  var query =  "UPDATE `kanbanboard`.`postit` SET `tipologia`='"+tipologia+"' "+
+  " WHERE  `id_postIt`='"+id_postIt+"'";
+
+  sql_connection.query(query, function (err) {
+    if (err) throw err;
+    console.log("POST-IT AGGIORNATO");
+    res.send({ "aggiornato": '1' });
+
+  });
+}); // fine postIt.post('/aggiornaPostIt/', function (req, res) {
+
 
 
 module.exports = postIt;

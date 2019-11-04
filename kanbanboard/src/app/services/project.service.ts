@@ -13,10 +13,10 @@ export class ProjectService {
 
   base_url = 'http://localhost:3000';
 
-  progetto={
-    'id':'',
-    'nomeProgetto':'',
-    'descrizione':''
+  progetto = {
+    'id': '',
+    'nomeProgetto': '',
+    'descrizione': ''
   };
 
   arrayColonne = [];
@@ -46,20 +46,26 @@ export class ProjectService {
   getProgettiUtente(): Observable<any> {
     return this.http.post(this.base_url + "/api/visualizzaProgettiUtenti/", { 'id': this.userService.user.id });
   }
-  
+
   getCercaProgetti(ricerca): Observable<any> {
-    console.log('nomeProgetto');
-    console.log(ricerca);
-    console.log('id Utente');
-    console.log(this.userService.user.id);
     return this.http.post(this.base_url + "/api/cercaProgettiUtente/", { 'nome_progetto': ricerca, 'id': this.userService.user.id });
   }
 
-  getProgettoById(id): Observable<any>{
-    return this.http.post(this.base_url + "/api/visualizzaProgettoById/", {'id': id});
+  getCercaProgettiGlobali(): Observable<any> {
+    return this.http.post(this.base_url + "/api/cercaProgettiGlobali/", {});
+  }
+  
+  /*
+    getcercaProgettiNoUtente(): Observable<any>{
+      return this.http.post(this.base_url + "/api/cercaProgettiNoUtente/", { 'id': this.userService.user.id });
+    }
+  */
+
+  getProgettoById(id): Observable<any> {
+    return this.http.post(this.base_url + "/api/visualizzaProgettoById/", { 'id': id });
   }
 
-  getPostItProgetto():Observable<any>{
-    return this.http.post(this.base_url + "/api/visualizzaPostItProgetto/", {'idProgetto': this.progetto.id});
+  getPostItProgetto(): Observable<any> {
+    return this.http.post(this.base_url + "/api/visualizzaPostItProgetto/", { 'idProgetto': this.progetto.id });
   }
 }
