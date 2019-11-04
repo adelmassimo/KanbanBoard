@@ -152,7 +152,7 @@ export class LavagnaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       data => {
-        this.postitservice.updatePostit(data.postIt).subscribe(
+        this.postitservice.updatePostit(data.postIt,this.userService.user.id).subscribe(
           success => {
             this.visualizzaPostIt();
           }
@@ -181,7 +181,7 @@ export class LavagnaComponent implements OnInit {
       const postit: any = event.container.data[event.currentIndex];
       postit.tipologia = colonna;
 
-      this.postitservice.updatePostit(postit).subscribe(
+      this.postitservice.updatePostit(postit,this.userService.user.id).subscribe(
         success => {
           this.visualizzaPostIt();
         }
