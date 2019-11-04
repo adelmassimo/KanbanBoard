@@ -27,6 +27,8 @@ export class PostItComponent implements OnInit {
   myMessage: string = "";
   error: boolean = false;
   aggiunto: boolean = false;
+  
+  colonne: Array<any> = [];
 
   onSaveSubmit(){
     const postIt: any = {
@@ -79,7 +81,18 @@ export class PostItComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.colonne.splice(0);
+    this.projectService.getColonneProgetto().subscribe(
+      succ=>{
+        for(let riga of succ){
+          this.colonne.push(riga.nome_colonna);
+        }
+        console.log(this.colonne);
+      },
+      err=>{
+        console.log("errore connessione database!");
+      }
+    )
   }
 
   ngDoCheck(){

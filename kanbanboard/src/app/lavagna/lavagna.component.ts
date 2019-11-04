@@ -21,11 +21,23 @@ export class LavagnaComponent implements OnInit {
   constructor(private router: Router, private projectService: ProjectService,
     private userService: UserService,
     private postitservice: PostItService,
-    private projectservice: ProjectService,
     private newprojectservice: NewProjectService,
     private dialog: MatDialog
   ) { }
 
+
+  nomeProgetto: string = "nome progetto";
+  postIt: Array<any> = [];
+
+  arrayColonne: any[] = [];
+  arrayPostIt: any[] = [];
+
+  toDo: Array<any> = [];
+  doing: Array<any> = [];
+  done: Array<any> = [];
+  accepted: Array<any> = [];
+
+  colore: string = "orange";
 
   ngOnInit() {
     this.visualizzaPostIt();
@@ -36,17 +48,9 @@ export class LavagnaComponent implements OnInit {
     if(this.userService.user.id == ""){
       this.router.navigate(['/']);
     }
+
+    this.visualizzaTabella();
   }
-
-  nomeProgetto: string = "nome progetto";
-  postIt: Array<any> = [];
-
-  toDo: Array<any> = [];
-  doing: Array<any> = [];
-  done: Array<any> = [];
-  accepted: Array<any> = [];
-
-  colore: string = "orange";
 
   creaPostIt() {
     this.router.navigate(['/post-it']);
@@ -56,36 +60,22 @@ export class LavagnaComponent implements OnInit {
     this.router.navigate(['/pu']);
   }
 
+  visualizzaTabella(){
+    this.arrayColonne.splice(0);
+    for(let i = 0; i < this.projectService.arrayColonne.length; i++){
+      this.arrayColonne.push(this.projectService.arrayColonne[i]);
+    }
+  }
+
   visualizzaPostIt() {
+    this.postIt.splice(0);
     this.projectService.getPostItProgetto().subscribe(
       succ => {
-        //controllo se mi arriva almeno una entry dal database
-        if (succ[0] != null) {
-          //svuoto tutti i vettori per ricaricare i post-it presenti nel DB
-          this.postIt.splice(0);
-          this.toDo.splice(0);
-          this.doing.splice(0);
-          this.done.splice(0);
-          this.accepted.splice(0);
-
+        if(succ[0] != null){
           //riempio il vettore postIt[] con tutti i post-it dell'progetto selezionato
           for (let post of succ) {
             this.postIt.push(post);
           }
-          console.log(this.postIt);
-          //mostrare i postIt sull'html
-          for (let post of this.postIt) {
-            if (post.tipologia == "to do") {
-              this.toDo.push(post);
-            } else if (post.tipologia == "doing") {
-              this.doing.push(post);
-            } else if (post.tipologia == "done") {
-              this.done.push(post);
-            } else if (post.tipologia == "accepted") {
-              this.accepted.push(post);
-            }
-          }
-
         }
         //imposto il titolo del progetto
         this.nomeProgetto = this.projectService.progetto.nomeProgetto;
@@ -141,8 +131,8 @@ export class LavagnaComponent implements OnInit {
 
     dialogConfig.width = '500px';
     dialogConfig.height= '500px';
-    dialogConfig.data = this.projectservice.progetto;
-    console.log("rubio", this.projectservice.progetto)
+    dialogConfig.data = this.projectService.progetto;
+    console.log("rubio", this.projectService.progetto)
     const dialogRef = this.dialog.open(ImpostazioniProgettoDialogComponent, dialogConfig);
 
 
@@ -162,8 +152,10 @@ export class LavagnaComponent implements OnInit {
         }
       }
     )
+  }
 
-
+  onClickRefresh(){
+    this.visualizzaPostIt();
   }
 
 }

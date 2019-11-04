@@ -52,7 +52,7 @@
       <div class="d-flex justify-content-center">
         <button *ngIf="!isCreate" mat-raised-button color="primary" type="button" (click)="onClickGo()"
           class="buttonCrea">Avanti</button>
-        <button *ngIf="isCreate" mat-raised-button color="primary" type="button" (click)="onProjectSubmit(nomeColonnaInput)"
+        <button *ngIf="isCreate" mat-raised-button color="primary" type="button" (click)="onProjectSubmit()"
           class="buttonCrea">Crea</button>
 
         <button *ngIf="isCreate" mat-raised-button class="buttonCancel" type="button" (click)="onClickReturn()">Indietro</button>
@@ -64,7 +64,7 @@
     <div *ngIf="error" class="alert alert-danger" role="alert" style="margin-top: 15px;">
       {{myMessage}}
     </div>
-    <div *ngIf="creato" class="alert alert-success" role="alert" style="margin-top: 15px;">
+    <div *ngIf="progettoCreato" class="alert alert-success" role="alert" style="margin-top: 15px;">
       {{myMessage}}
     </div>
   </div>
