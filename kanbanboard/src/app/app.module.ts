@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from "@angular/material";
 
 import { AppComponent } from './app.component';
@@ -23,7 +24,7 @@ import { HeaderPaginaComponent } from './header-pagina/header-pagina.component';
 import { LavagnaComponent } from './lavagna/lavagna.component';
 import { PostItComponent } from './post-it/post-it.component';
 import { ProjectComponent } from './project/project.component';
-import { CourseDialogComponent } from './course-dialog/course-dialog.component';
+import { PostItDialogComponent } from './postIt-dialog/postIt-dialog.component';
 import { ImpostazioniProgettoDialogComponent } from './impostazioni-progetto-dialog/impostazioni-progetto-dialog.component'
 
 import { LoginService } from './services/login.service';
@@ -53,7 +54,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ProjectComponent,
     LavagnaComponent,
     PostItComponent,
-    CourseDialogComponent,
+    PostItDialogComponent,
     ImpostazioniProgettoDialogComponent
   ],
   imports: [
@@ -77,7 +78,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   providers: [LocalStorageService],
   bootstrap: [AppComponent],
   entryComponents: [
-    CourseDialogComponent, 
+    PostItDialogComponent, 
     ImpostazioniProgettoDialogComponent
   ]
 })

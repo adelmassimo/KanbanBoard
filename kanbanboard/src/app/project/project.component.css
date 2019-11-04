@@ -10,3 +10,10 @@ form{
     color: white;
     margin-left: 80px;
 }
+ol{
+    margin-left: 8%;
+    width: 100%;
+}
+.titoloNominaColonne{
+    text-align: center;
+}

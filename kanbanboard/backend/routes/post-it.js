@@ -42,16 +42,25 @@ postIt.post('/updatePostIt/', function (req, res) {
   descrizione_postIt = req.body.descrizione_postIt;
   colore_postIt = req.body.colore_postIt;
   tipologia = req.body.tipologia;
-  
-  var query =  "UPDATE `kanbanboard`.`postit` SET `nome_postIt`='"+nome_postIt+"', "+
-  " `descrizione_postIt`='"+descrizione_postIt+"', "+
-  " `colore_postIt`='"+colore_postIt+"', "+
-  " `tipologia`='"+tipologia+"' "+
-  " WHERE  `id_postIt`='"+id_postIt+"'";
+  id_autore = req.body.id_autore;
+
+  var query = "UPDATE `kanbanboard`.`postit` SET `nome_postIt`='" + nome_postIt + "', " +
+    " `descrizione_postIt`='" + descrizione_postIt + "', " +
+    " `colore_postIt`='" + colore_postIt + "', " +
+    " `tipologia`='" + tipologia + "' " +
+    " WHERE  `id_postIt`='" + id_postIt + "'";
 
   sql_connection.query(query, function (err) {
     if (err) throw err;
     console.log("POST-IT MODIFICATO");
+    //AGGIUNGO INA MODIFICA
+    var queryInserimentpModifica = "INSERT INTO `kanbanboard`.`modifiche` (`id_postItOld`, `id_autore`, `nome_PostItNew`, `descrizione_postItNew`, `colore_postItNew`, `tipologiaNew`) " +
+      " VALUES ('" + id_postIt + "', '" + id_autore + "', '" + nome_postIt + "', '" + descrizione_postIt + "', '" + colore_postIt + "', '" + tipologia + "')";
+    sql_connection.query(queryInserimentpModifica, function (err) {
+      if (err) throw err;
+      console.log("MODIFICA INSERITA");
+    });
+
     res.send({ "modificato": '1' });
 
   });
@@ -59,6 +68,7 @@ postIt.post('/updatePostIt/', function (req, res) {
 
 postIt.post('/visualizzaPostItProgetto', function (req, res) {
   id = req.body.idProgetto;
+  console.log("------------------------- ",req.body.idProgetto);
   sql_connection.query('SELECT postit.*, ' +
     'progetti.nome_progetto, ' +
     'progetti.descrizione_progetto ' +
@@ -68,6 +78,19 @@ postIt.post('/visualizzaPostItProgetto', function (req, res) {
     'WHERE progetti.id_progetto = "' + id + '"', function (err, rows, next) {
       //console.log(rows)
       if (err) throw err;
+      res.send(rows);
+    });
+});
+//get modifiche per postit
+postIt.post('/visualizzaModifichePostIt', function (req, res) {
+  id_postIt = req.body.id_postIt;
+  console.log("visualizzaModifichePostIt, id: ",req.body.id_postIt);
+  var query = "SELECT modifiche.*, utenti.nome_utente, utenti.cognome_utente " + 
+    " FROM modifiche JOIN utenti ON utenti.id_utente = modifiche.id_autore " + 
+    " WHERE id_postItOld = '"+id_postIt+"'";
+  sql_connection.query(query, function (err, rows, next) {
+      if (err) throw err;
+      console.log(rows);
       res.send(rows);
     });
 });
@@ -83,6 +106,16 @@ postIt.post('/deletePostIt/', function (req, res) {
   sql_connection.query(query, function (err, rows, fields) {
     if (err) throw err;
     console.log("POST-IT eliminato");
+
+    //elimino modifiche del postit
+    var queryInserimentpModifica = "DELETE FROM `kanbanboard`.`modifiche` WHERE `id_postItOld`='"+id_postIt+"'";
+    sql_connection.query(queryInserimentpModifica, function (err) {
+      if (err) throw err;
+      console.log("MODIFICE ELIMINATE");
+    });
+
+
+
     res.send({ "eliminato": '1' });
   });
 

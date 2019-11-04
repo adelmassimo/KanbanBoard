@@ -109,6 +109,6 @@ progetti.post('/cercaProgettiNoUtente/', function (req, res) {
         res.send(rows);
     });
 })
-*/
+/* RICERCA GLOBALE DEI PROGETTI ALL'INTENDO DEL DB */
 
 module.exports = progetti;

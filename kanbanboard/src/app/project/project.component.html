@@ -5,22 +5,58 @@
 
     <form action="javascript:void(0)">
       <!--Nome progetto-->
-      <div class="mb-3 d-flex justify-content-center">
+      <div class="mb-3 d-flex justify-content-center" *ngIf="!isCreate">
         <mat-form-field class="w-75">
-          <input matInput placeholder="Nome progetto" id="nome_progetto" name="nome_progetto" [(ngModel)]="nome_progetto">
+          <input matInput placeholder="Nome progetto" id="nome_progetto" name="nome_progetto"
+            [(ngModel)]="nome_progetto">
         </mat-form-field>
       </div>
       <!--Descrizione progetto-->
-      <div class="mb-3 d-flex justify-content-center">
+      <div class="mb-3 d-flex justify-content-center" *ngIf="!isCreate">
         <mat-form-field class="w-75">
-          <textarea rows="3" matInput placeholder="Descrizione progetto" id="descrizione_progetto" type="text" name="descrizione_progetto" [(ngModel)]="descrizione_progetto"></textarea>
+          <textarea rows="3" matInput placeholder="Descrizione progetto" id="descrizione_progetto" type="text"
+            name="descrizione_progetto" [(ngModel)]="descrizione_progetto"></textarea>
         </mat-form-field>
       </div>
-      <!-- bottone crea e annulla-->
+      <!--creazione colonne-->
+      <div class="mb-3 d-flex justify-content-center" *ngIf="!isCreate">
+        <mat-form-field class="w-75">
+          <input matInput type="number" placeholder="Numero colonne" name="numero_colonne"
+            [(ngModel)]="numero_colonne">
+        </mat-form-field>
+
+      </div>
+      <!--elenco puntato per nominare le colonne-->
+      <div class="mb-3 d-flex flex-column" *ngIf="isCreate">
+        <div class="titoloNominaColonne">
+          <h3>Nomina le colonne</h3>
+        </div>
+        <form >
+          <ol>
+            <div *ngFor="let col of arrayColonne; let i = index;">
+              <li>
+                <mat-form-field class="w-75">
+                  <!--
+                    La direttiva [(ngModel)] serve per fare il doppio binding e quindi far comunicare l'html con in ts in 
+                    entrambi i sensi a differenza della direttiva [ngModel]
+                  -->
+                  <input matInput placeholder="Nome colonna {{i+1}}" id="nome-colonna-{{i}}" name="col[{{i}}].nomeColonna"
+                  [(ngModel)]="col.nomeColonna">
+                </mat-form-field>
+              </li>
+            </div>
+          </ol>
+        </form>
+      </div>
+      <!--bottone crea e annulla-->
       <div class="d-flex justify-content-center">
-        <button mat-raised-button color="primary" type="button" (click)="onProjectSubmit()" [routerLink]="['/pu']"
-        class="buttonCrea">Crea</button>
-        <button mat-raised-button class="buttonCancel" type="button" [routerLink]="['/pu']">Annulla</button>
+        <button *ngIf="!isCreate" mat-raised-button color="primary" type="button" (click)="onClickGo()"
+          class="buttonCrea">Avanti</button>
+        <button *ngIf="isCreate" mat-raised-button color="primary" type="button" (click)="onProjectSubmit(nomeColonnaInput)"
+          class="buttonCrea">Crea</button>
+
+        <button *ngIf="isCreate" mat-raised-button class="buttonCancel" type="button" (click)="onClickReturn()">Indietro</button>
+        <button *ngIf="!isCreate" mat-raised-button class="buttonCancel" type="button" [routerLink]="['/pu']">Annulla</button>
       </div>
 
     </form>

@@ -25,7 +25,7 @@ project.post('/project/', function (req, res) {
 
     });
 
-    res.send({ "creato": '1' });
+    res.send({ "creato": '1', 'id_progetto': id_progetto });
     console.log("PROGETTO INSERITO");
   });
 });   // fine INSERT
@@ -85,6 +85,21 @@ project.post('/addProject/', function (req, res) {
 });
 //insert
 
+//INSERT colonne progetto
+project.post('/insertColumnProject/', function(req, res) {
+  arrayColonne = req.body.arrayColonne;
+  id_progetto = req.body.id_progetto;
+  console.log(arrayColonne);
+  for(let i = 0; i < arrayColonne.length; i++){
+    var query = "INSERT INTO colonne_x_progetti (id_progetto, id_colonna, nome_colonna) " + 
+              "VALUES ('" + id_progetto + "', '" + arrayColonne[i].id + "', '" + arrayColonne[i].nomeColonna + "')";
+    sql_connection.query(query, function(err, rows, fields) {
+      if (err) throw err;
+      
+    });
+  }
+  res.send({"inserito" : '1'});
+}); //fine INSERT
 
 
 module.exports = project;
