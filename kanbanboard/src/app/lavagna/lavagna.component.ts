@@ -9,7 +9,7 @@ import { PostItService } from '../services/post-it.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 import { MatDialog, MatDialogConfig } from "@angular/material";
-import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
+import { PostItDialogComponent } from '../postIt-dialog/postIt-dialog.component';
 import { ImpostazioniProgettoDialogComponent } from '../impostazioni-progetto-dialog/impostazioni-progetto-dialog.component';
 import { post } from 'selenium-webdriver/http';
 
@@ -33,9 +33,9 @@ export class LavagnaComponent implements OnInit {
     this.visualizzaPostIt();
   }
 
-  ngDoCheck(){
+  ngDoCheck() {
     //se l'utente non è loggato viene reindirizzato alla homepage
-    if(this.userService.user.id == ""){
+    if (this.userService.user.id == "") {
       this.router.navigate(['/']);
     }
   }
@@ -72,6 +72,9 @@ export class LavagnaComponent implements OnInit {
 
           //riempio il vettore postIt[] con tutti i post-it dell'progetto selezionato
           for (let post of succ) {
+            post.inBreve = post.descrizione_postIt.length < 40
+              ? post.descrizione_postIt
+              : post.descrizione_postIt.substr(0, 37) + '...';
             this.postIt.push(post);
           }
           console.log(this.postIt);
@@ -100,9 +103,6 @@ export class LavagnaComponent implements OnInit {
 
   //dialog visualizza postit
   openDialog(post) {
-
-    console.log("post selezionato:", post);
-
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = false;
@@ -113,9 +113,7 @@ export class LavagnaComponent implements OnInit {
 
     dialogConfig.data = post;
 
-    //this.dialog.open(CourseDialogComponent, dialogConfig);
-
-    const dialogRef = this.dialog.open(CourseDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(PostItDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
       data => {
@@ -126,12 +124,15 @@ export class LavagnaComponent implements OnInit {
             }
           )
         } else if (data.action === 'update') {
-          this.postitservice.updatePostit(data.postIt).subscribe(
+          this.postitservice.updatePostit(data.postIt, this.userService.user.id).subscribe(
             success => {
               this.visualizzaPostIt();
             }
           )
         }
+      },
+      undefined => {
+        this.visualizzaPostIt();
       });
 
   }
@@ -143,7 +144,7 @@ export class LavagnaComponent implements OnInit {
     //dialogConfig.autoFocus = true;
 
     dialogConfig.width = '500px';
-    dialogConfig.height= '500px';
+    dialogConfig.height = '500px';
     dialogConfig.data = this.projectservice.progetto;
     console.log("rubio", this.projectservice.progetto)
     const dialogRef = this.dialog.open(ImpostazioniProgettoDialogComponent, dialogConfig);
