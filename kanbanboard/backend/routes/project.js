@@ -39,9 +39,9 @@ project.post('/updateProject/', function (req, res) {
   descrizione_progetto = req.body.descrizione_progetto;
   id_progetto = req.body.id_progetto;
 
- /* var query = "UPDATE progetti SET nome_progetto = '" + nome_progetto + "', "
-    + " descrizione_progetto = '" + descrizione_progetto + "', "
-    + " WHERE id_progetto = '" + id_progetto + "'";*/
+  /* var query = "UPDATE progetti SET nome_progetto = '" + nome_progetto + "', "
+     + " descrizione_progetto = '" + descrizione_progetto + "', "
+     + " WHERE id_progetto = '" + id_progetto + "'";*/
   var query = "UPDATE `kanbanboard`.`progetti` SET `nome_progetto`='" + nome_progetto + "', " +
     " `descrizione_progetto`='" + descrizione_progetto + "' " +
     " WHERE  `id_progetto`='" + id_progetto + "'";
@@ -68,6 +68,22 @@ project.post('/deleteProject/', function (req, res) {
   });
 
 });  // fine DELETE
+
+//Insert
+project.post('/addProject/', function (req, res) {
+  id_progetto = req.body.id_progetto;
+  id_utente=req.body.id;
+  console.log('sto aggiungendo:' + id_progetto + "all' utente " +id);
+
+  var query = "INSERT INTO utenti_x_progetti (id_utente, id_progetto) VALUES (" + id_utente + ", " + id_progetto + ")";
+  sql_connection.query(query, function (err, rows, fields) {
+    if (err) throw err;
+    console.log("PROGETTO Inserito");
+    res.send({ "Inserito": '1' });
+  });
+
+});
+//insert
 
 
 

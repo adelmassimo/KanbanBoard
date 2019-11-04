@@ -41,4 +41,13 @@ export class NewProjectService {
     }); 
   }
 
+  addProject(project): Observable<any>{
+    console.log(this.userService.user.id);
+    console.log(project.id_progetto);
+    return this.http.post(this.base_url + "/api/addProject", {
+      'id_progetto': project.id_progetto,
+      'id': this.userService.user.id
+    }); 
+  }
+
 }

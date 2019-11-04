@@ -36,6 +36,8 @@ import { NewProjectService } from './services/new-project.service';
 import { LocalStorageService } from './services/local-storage.service';
 
 
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; 
+
 
 
 
@@ -69,7 +71,8 @@ import { LocalStorageService } from './services/local-storage.service';
     ReactiveFormsModule,
     MatButtonModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   providers: [LocalStorageService],
   bootstrap: [AppComponent],

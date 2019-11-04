@@ -1,36 +1,39 @@
 <!--Seconda parte Header Menu-->
 <div class="ricerca">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="isMenuVisibile">
-    <ul class="navbar-nav mr-auto">
-      <select class="custom-select mr-sm-2">
-        <option>Cerca progetti..</option>
-        <option *ngFor="let progetto of listaProgetti" (click)="openProject(progetto.id_progetto)">
-          {{progetto.nome_progetto}}</option>
-      </select>
-      <li class="nav-item">
-        <div class="col-sm">
-          <form class="form-inline">
-            <div class="input-group-prepend">
-              <input type="text" class="form-control" placeholder="Certa tra i progetti" name="ricercaProgetto"
-                [(ngModel)]="ricercaProgetto">
-              <button type="button" class="btn btn-secondary" (click)="onClickSearchProject()">
-                <i class="fa fa-search"></i>
-              </button>
-            </div>
-          </form>
-        </div>
-      </li>
-    </ul>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary row" *ngIf="isMenuVisibile">
+    <div class="col-2">
+      <mat-form-field>
+        <select matNativeControl>
+          <option class="select">Cerca progetti..</option>
+          <option class="selectBlack" *ngFor="let progetto of listaProgetti"
+            (click)="openProject(progetto.id_progetto)">
+            {{progetto.nome_progetto}}
+          </option>
+        </select>
+      </mat-form-field>
+    </div>
+    <div class="col-3">
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input matInput type="text" placeholder="Certa tra i progetti" name="ricercaProgetto"
+            [(ngModel)]="ricercaProgetto">
+        </mat-form-field>
+        <button class="mat-raised-button" (click)="onClickSearchProject()"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+    <div class="col-1">
+      <button class="mat-raised-button" (click)="onClickSearchGlobal()">Progetti globali</button>
+    </div>
   </nav>
 </div>
 
-<div *ngIf="isVisible" class="spaziatura">_</div>
+<div *ngIf="isVisible" class="spaziatura"></div>
 <!--Preview progetti-->
 
 <!--Se l'utente non ha progetti-->
 <div *ngIf="isVisible" id="error">
   <div *ngIf="!isSuccess" class="alert alert-danger" role="alert">
-    Progetto non Esistente <a href="javascript:void(0)" (click)="onClickCanc()"><i class="fas fa-times"
+    Progetto non Esistente o Nessun Progetto<a href="javascript:void(0)" (click)="onClickCanc()"><i class="fas fa-times"
         id="cross"></i></a>
   </div>
   <div *ngIf="isSuccess" class="alert alert-success" role="alert">
@@ -40,30 +43,59 @@
 <!--Se l'utente non ha progetti-->
 
 <!--Se l'utente ha dei progetti-->
-<div class="card" id="card" *ngFor="let card of listaProgetti">
-  <img src="../assets/table.png" class="card-img-top">
-  <div class="card-body" id={{card.idid_progetto}}>
-    <h5 class="card-title">{{card.nome_progetto}}</h5>
-    <p class="card-text">{{card.descrizione}}</p>
-  </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col-12">
-        <p class="card-text" id="idProgetto">ID Progetto: {{card.id_progetto}}</p>
-      </div>
-      <div class="col-8">
-        <button (click)="openProject(card.id_progetto)" class="btn btn-primary">Apri Progetto</button>
-      </div>
-      <div class="col-4" align="right">
-        <button class="btn bottone" (click)="delete(card)">
-          <i class="fas fa-trash-alt"></i>
-        </button>
+<div class="row">
+  <div class="card col-3" id="card" *ngFor="let card of listaProgetti">
+    <img src="../assets/table.png" class="card-img-top">
+    <div class="card-body" id={{card.id_progetto}}>
+      <h5 class="card-title">{{card.nome_progetto}}</h5>
+      <p class="card-text">{{card.descrizione}}</p>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12">
+          <p class="card-text" id="idProgetto">ID Progetto: {{card.id_progetto}}</p>
+        </div>
+        <div class="col-8">
+          <button (click)="openProject(card.id_progetto)" class="btn btn-primary">Apri Progetto</button>
+        </div>
+        <div class="col-4" align="right">
+          <button class="btn bottone" (click)="delete(card)">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
 <!--Se l'utente ha dei progetti Preview progetti-->
+
+<div *ngIf="isGlobal">
+  <h1>Progetti Globali</h1>
+  <div class="row">
+    <div class="card col-3" id="cardGlobal" *ngFor="let cardGlobal  of listaProgettiGlobaliNoUtente">
+      <img src="../assets/table.png" class="card-img-top">
+      <div class="card-body" id={{cardGlobal.idid_progetto}}>
+        <h5 class="card-title">{{cardGlobal.nome_progetto}}</h5>
+        <p class="card-text">{{cardGlobal.descrizione}}</p>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <p class="card-text" id="idProgetto">ID Progetto: {{cardGlobal.id_progetto}}</p>
+          </div>
+          <div class="col-8">
+            <button (click)="openProject(cardGlobal.id_progetto)" class="btn btn-primary">Apri Progetto</button>
+          </div>
+          <div class="col-4" align="right">
+            <button class="btn bottone" (click)="add(cardGlobal)">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!--Bottoni end pagina-->
 <div id="bottoni">
