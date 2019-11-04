@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -69,7 +70,8 @@ import { LocalStorageService } from './services/local-storage.service';
     ReactiveFormsModule,
     MatButtonModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    DragDropModule
   ],
   providers: [LocalStorageService],
   bootstrap: [AppComponent],
