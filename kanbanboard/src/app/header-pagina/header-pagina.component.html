@@ -1,9 +1,21 @@
-<nav class="navbar navbar-dark bg-primary">
-    <img *ngIf="isUtenteLoggedin" src="{{avatar}}" class="rounded-circle mw-100">
-    <img *ngIf="!isUtenteLoggedin" src="../../assets/img/icona.png">
-    <a class="navbar-brand" [routerLink]="['#']">{{ nome }} {{ cognome }}</a>
-    <form class="form-inline">
-        <button mat-flat-button color="warn" *ngIf="isUtenteLoggedin" [routerLink]="['/']"
-            (click)="onClickExit()">Exit</button>
-    </form>
+<nav class="docs-navbar-header">
+    <div class="row">
+
+        <div class="col-5">
+            <img *ngIf="isUtenteLoggedin" src="{{avatar}}" class="rounded-circle mw-100">
+            <img *ngIf="!isUtenteLoggedin" src="../../assets/img/icona.png">
+        </div>
+
+        <div class="col-6">
+            <a class="navbar-brand" [routerLink]="['#']">{{ nome }} {{ cognome }}</a>
+        </div>
+
+        <div class="col-1">
+            <form class="form-inline mt-1">
+                <button mat-flat-button color="warn" *ngIf="isUtenteLoggedin" [routerLink]="['/']"
+                    (click)="onClickExit()">Exit</button>
+            </form>
+        </div>
+
+    </div>
 </nav>

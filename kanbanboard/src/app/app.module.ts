@@ -38,7 +38,7 @@ import { NewProjectService } from './services/new-project.service';
 import { LocalStorageService } from './services/local-storage.service';
 
 
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; 
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -81,7 +81,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   providers: [LocalStorageService],
   bootstrap: [AppComponent],
   entryComponents: [
-    PostItDialogComponent, 
+    PostItDialogComponent,
     ImpostazioniProgettoDialogComponent
   ]
 })
