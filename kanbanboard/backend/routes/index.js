@@ -6,7 +6,6 @@ router.use('/api/', require('./register'));
 router.use('/api/', require('./login'));
 router.use('/api/', require('./progetti'));
 router.use('/api/', require('./post-it'));
-router.use('/api/', require('./project'));
 
 
 module.exports = router;

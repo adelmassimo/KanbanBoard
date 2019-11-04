@@ -123,5 +123,21 @@ postIt.post('/deletePostIt/', function (req, res) {
 
 });
 
+postIt.post('/aggiornaPostIt/', function (req, res) {
+  id_postIt = req.body.id_postIt;
+  tipologia = req.body.tipologia;
+  
+  var query =  "UPDATE `kanbanboard`.`postit` SET `tipologia`='"+tipologia+"' "+
+  " WHERE  `id_postIt`='"+id_postIt+"'";
+
+  sql_connection.query(query, function (err) {
+    if (err) throw err;
+    console.log("POST-IT AGGIORNATO");
+    res.send({ "aggiornato": '1' });
+
+  });
+}); // fine postIt.post('/aggiornaPostIt/', function (req, res) {
+
+
 
 module.exports = postIt;

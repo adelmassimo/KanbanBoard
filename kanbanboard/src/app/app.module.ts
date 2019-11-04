@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -37,7 +38,7 @@ import { NewProjectService } from './services/new-project.service';
 import { LocalStorageService } from './services/local-storage.service';
 
 
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; 
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -73,13 +74,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatButtonModule,
     MatSelectModule,
     MatDialogModule,
+    DragDropModule,
     MatProgressSpinnerModule,
     MatDividerModule
   ],
   providers: [LocalStorageService],
   bootstrap: [AppComponent],
   entryComponents: [
-    PostItDialogComponent, 
+    PostItDialogComponent,
     ImpostazioniProgettoDialogComponent
   ]
 })
