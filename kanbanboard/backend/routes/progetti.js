@@ -69,12 +69,12 @@ progetti.post('/cercaProgettiUtente/', function (req, res) {
 /* RICERCA PROGETTO ALL'INTERNO DEL AREA UTENTE */
 
 /* RICERCA GLOBALE DEI PROGETTI ALL'INTENDO DEL DB */
-progetto.post('/cercaProgettiGlobali/',function(req,res){
+progetti.post('/cercaProgettiGlobali/',function(req,res){
     ricercaProgetto = req.body.nome_progetto;
     console.log('NomeProgetto');
     console.log(ricercaProgetto);
     sql_connection.query('SELECT progetti.*')
 })
-/* RICERCA GLOBALE DEI PROGETTI ALL'INTENDO DEL DB /
+/* RICERCA GLOBALE DEI PROGETTI ALL'INTENDO DEL DB */
 
 module.exports = progetti;

@@ -18,6 +18,7 @@ export class PostItService {
       'descrizione_postIt': postIt.descrizione_postIt,
       'colore_postIt': postIt.colore_postIt,
       'tipologia' : postIt.tipologia,
+      'difficolta' : postIt.difficolta,
       'id_progetto': postIt.id_progetto
     });
   } // fine inserimentoPostit(postIt):Observable<any>

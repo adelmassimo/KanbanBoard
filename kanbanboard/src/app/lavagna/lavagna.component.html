@@ -6,7 +6,7 @@
 
     <!-- bottone modifica progetto-->
     <div class="col">
-      <button mat-raised-button title="Modifica progetto" (click)="onClickUpdate()">
+      <button mat-flat-button title="Modifica progetto" (click)="onClickUpdate()">
         <h2><i class="fas fa-wrench cursor-pointer"></i> </h2>
       </button>
     </div>
@@ -23,7 +23,7 @@
 
 <!-- vertical layout -->
 
-<div class="row lavagna">
+<div class="row lavagna text-break">
 
   <div class="col-3 tabella">
     <h2>TO DO</h2>
@@ -32,7 +32,7 @@
       <div *ngFor="let post of toDo" class="col-6 divPost cursor-pointer" (click)="openDialog(post)">
         <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
           <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
-          <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>
+          <mat-card-content class="postIt-desc">{{post.inBreve}}</mat-card-content>
         </mat-card>
       </div>
       <!-- -->
@@ -45,7 +45,7 @@
       <div *ngFor="let post of doing" class="col-6 divPost cursor-pointer" (click)="openDialog(post)">
         <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
           <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
-          <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>
+          <mat-card-content class="postIt-desc">{{post.inBreve}}</mat-card-content>
         </mat-card>
       </div>
       <!-- -->
@@ -58,7 +58,7 @@
       <div *ngFor="let post of done" class="col-6 divPost cursor-pointer" (click)="openDialog(post)">
         <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
           <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
-          <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>
+          <mat-card-content class="postIt-desc">{{post.inBreve}}</mat-card-content>
         </mat-card>
       </div>
       <!-- -->
@@ -71,7 +71,7 @@
       <div *ngFor="let post of accepted" class="col-6 divPost cursor-pointer" (click)="openDialog(post)">
         <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
           <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
-          <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>
+          <mat-card-content class="postIt-desc">{{post.inBreve}}</mat-card-content>
         </mat-card>
       </div>
       <!-- -->

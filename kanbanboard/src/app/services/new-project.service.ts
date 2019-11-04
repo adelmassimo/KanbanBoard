@@ -16,7 +16,7 @@ export class NewProjectService {
 
 
 
-  inserimentoProject(project):Observable<any>{
+  inserimentoProject(project): Observable<any> {
     return this.http.post(this.base_url + "/api/project/", {
       'nome_progetto': project.nome_progetto,
       'descrizione_progetto': project.descrizione_progetto,
@@ -26,7 +26,7 @@ export class NewProjectService {
 
 
 
-  updateProject(updateProject):Observable<any>{
+  updateProject(updateProject): Observable<any> {
     return this.http.post(this.base_url + "/api/updateProject/", {
       'nome_progetto': updateProject.nome_progetto,
       'descrizione_progetto': updateProject.descrizione_progetto,
@@ -35,10 +35,10 @@ export class NewProjectService {
   }
 
 
-  deleteProject(project):Observable<any>{
+  deleteProject(project): Observable<any> {
     return this.http.post(this.base_url + "/api/deleteProject", {
       'id_progetto': project.id_progetto
-    }); 
+    });
   }
 
 }

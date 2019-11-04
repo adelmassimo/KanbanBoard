@@ -1,4 +1,4 @@
-<div class="p-3" [ngStyle]="{'background' : coloreSfondo}">
+<div class="p-3 text-break" [ngStyle]="{'background' : coloreSfondo}">
 
   <div class="row mr-3 d-flex justify-content-end">
     <div class="col px-5">
@@ -26,6 +26,8 @@
         {{post.descrizione_postIt}}
       </div>
     </div>
+
+
     <!--start form modifica-->
 
     <div *ngIf="modifica" class="row d-flex justify-content-end">
@@ -52,8 +54,8 @@
         <div class="d-flex justify-content-center">
           <mat-form-field class="w-75">
             <mat-label>Tipologia</mat-label>
-            <mat-select [formControl]="typePost" panelClass="example-panel" id="tipologia"
-              name="tipologia" [ngStyle]="{'background' : coloreSfondo}">
+            <mat-select [formControl]="typePost" panelClass="example-panel" id="tipologia" name="tipologia"
+              [ngStyle]="{'background' : coloreSfondo}">
               <mat-option value="to do">TO DO</mat-option>
               <mat-option value="doing">DOING</mat-option>
               <mat-option value="done">DONE</mat-option>
@@ -66,6 +68,10 @@
     <!--end form modifica-->
 
   </mat-dialog-content>
+
+  <div *ngIf="!modifica" class="row">
+    <div class="col 12 text-center">Difficoltà post-it: {{post.difficolta}}</div>
+  </div>
 
   <mat-dialog-actions>
 

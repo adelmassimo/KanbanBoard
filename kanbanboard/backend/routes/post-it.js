@@ -10,12 +10,14 @@ postIt.post('/post-it/', function (req, res) {
   descrizione_postIt = req.body.descrizione_postIt;
   colore_postIt = req.body.colore_postIt;
   tipologia = req.body.tipologia;
+  difficolta = req.body.difficolta;
 
-  var query = "INSERT INTO postit ( nome_postIt, descrizione_postIt, colore_postIt, tipologia) VALUES (" +
+  var query = "INSERT INTO postit ( nome_postIt, descrizione_postIt, colore_postIt, tipologia, difficolta) VALUES (" +
     "'" + nome_postIt + "'," +
     "'" + descrizione_postIt + "'," +
     "'" + colore_postIt + "'," +
-    "'" + tipologia + "');";
+    "'" + tipologia + "'," + 
+    "'" + difficolta + "')";
   console.log(query);
   sql_connection.query(query, function (err, rows, fields) {
     if (err) throw err;

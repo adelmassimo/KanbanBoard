@@ -14,6 +14,7 @@ export class CourseDialogComponent implements OnInit {
   form: FormGroup;
   panelColor = new FormControl();
   typePost = new FormControl();
+  difficoltaPost = new FormControl();
 
 
   post: any = {
@@ -22,6 +23,7 @@ export class CourseDialogComponent implements OnInit {
      descrizione_postIt: "efwefwefwef", 
      colore_postIt: "blue",
      tipologia: "to do",
+     difficolta: "0",
      nome_progetto: "progetto", 
      descrizione_progetto: "prrrrrrrrogetto" 
     }
@@ -45,6 +47,7 @@ export class CourseDialogComponent implements OnInit {
        descrizione_postIt: data.descrizione_postIt,
        colore_postIt: data.colore_postIt,
        tipologia: data.tipologia,
+       difficolta: data.difficolta,
        nome_progetto: data.nome_progetto, 
        descrizione_progetto: data.descrizione_progetto
       }
