@@ -1,19 +1,19 @@
 <nav class="docs-navbar-header">
     <div class="row">
 
-        <div class="col-5">
+        <div class="col-5 my-2">
             <img *ngIf="isUtenteLoggedin" src="{{avatar}}" class="rounded-circle mw-100">
-            <img *ngIf="!isUtenteLoggedin" src="../../assets/img/icona.png">
+            <img *ngIf="!isUtenteLoggedin" src="../../assets/img/icona.png" class="">
         </div>
 
-        <div class="col-6">
+        <div class="col-6 my-2">
             <a class="navbar-brand" [routerLink]="['#']">{{ nome }} {{ cognome }}</a>
         </div>
 
-        <div class="col-1">
-            <form class="form-inline mt-1">
+        <div class="col-1 my-2">
+            <form class="form-inline">
                 <button mat-flat-button color="warn" *ngIf="isUtenteLoggedin" [routerLink]="['/']"
-                    (click)="onClickExit()">Exit</button>
+                    class="mt-1" (click)="onClickExit()">Exit</button>
             </form>
         </div>
 

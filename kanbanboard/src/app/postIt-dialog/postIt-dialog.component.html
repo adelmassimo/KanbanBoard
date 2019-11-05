@@ -82,13 +82,13 @@
     <div *ngIf="modifica" class="row d-flex justify-content-end">
       <div class="col pl-5">
         <div class="d-flex justify-content-center">
-          <mat-form-field class="w-75">
+          <mat-form-field class="w-100">
             <textarea rows="3" matInput placeholder="Descrizione" type="text" name="descrizione"
               [(ngModel)]="descrizione" value="{{post.descrizione_postIt}}"></textarea>
           </mat-form-field>
         </div>
         <div class="d-flex justify-content-center">
-          <mat-form-field class="w-75">
+          <mat-form-field class="w-100">
             <mat-label>Colore POST-IT</mat-label>
             <mat-select [formControl]="panelColor" panelClass="example-panel-{{panelColor.value}}" id="colore_postIt"
               name="colore_postIt">
@@ -101,7 +101,7 @@
           </mat-form-field>
         </div>
         <div class="d-flex justify-content-center">
-          <mat-form-field class="w-75">
+          <mat-form-field class="w-100">
             <mat-label>Tipologia</mat-label>
             <mat-select [formControl]="typePost" panelClass="example-panel" id="tipologia" name="tipologia"
               [ngStyle]="{'background' : coloreSfondo}">
@@ -153,9 +153,9 @@
 
     <div class="row w-100">
 
-        <div class="col-12 d-flex justify-content-center">
-            Story point: {{post.difficolta}}
-          </div>
+      <div class="col-12 d-flex justify-content-center">
+          Story point: {{post.difficolta}}
+      </div>
 
       <!-- <div class="col-9">
        <button class="mat-stroked-button" color="primary" (click)="close()">Chiudi</button>
