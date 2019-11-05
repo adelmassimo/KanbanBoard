@@ -22,7 +22,8 @@ export class PostItDialogComponent implements OnInit {
     colore_postIt: "",
     tipologia: "",
     nome_progetto: "",
-    descrizione_progetto: ""
+    descrizione_progetto: "",
+    difficolta: ""
   }
   postItModifica: any = {
     id_postIt: -1,
@@ -60,7 +61,8 @@ export class PostItDialogComponent implements OnInit {
       colore_postIt: data.colore_postIt,
       tipologia: data.tipologia,
       nome_progetto: data.nome_progetto,
-      descrizione_progetto: data.descrizione_progetto
+      descrizione_progetto: data.descrizione_progetto,
+      difficolta: data.difficolta
     }
     this.coloreSfondo = data.colore_postIt;
     this.titolo = data.nome_postIt;

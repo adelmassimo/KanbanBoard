@@ -16,7 +16,8 @@ export class PostItComponent implements OnInit {
 
   panelColor = new FormControl('#FF6347');
   typePost = new FormControl('to do');
-
+  difficoltaPost = new FormControl('0');
+  
   constructor(private router: Router, private route: ActivatedRoute,  private postItService: PostItService,
               private userService: UserService, private projectService: ProjectService) { }
 
@@ -24,9 +25,12 @@ export class PostItComponent implements OnInit {
   descrizione_postIt: string = "";
   colore_postIt: string = "";
   tipologia: string = "";
+  difficolta: string = "";
   myMessage: string = "";
   error: boolean = false;
   aggiunto: boolean = false;
+  
+  colonne: Array<any> = [];
 
   onSaveSubmit(){
     const postIt: any = {
@@ -34,6 +38,7 @@ export class PostItComponent implements OnInit {
       descrizione_postIt: this.descrizione_postIt,
       colore_postIt: this.panelColor.value,
       tipologia: this.typePost.value,
+      difficolta: this.difficoltaPost.value,
       id_progetto: this.projectService.progetto.id
     }
     console.log(postIt);
@@ -42,7 +47,8 @@ export class PostItComponent implements OnInit {
     if (this.nome_postIt != undefined && this.nome_postIt != ""
       && this.descrizione_postIt != undefined && this.descrizione_postIt != ""
       && this.panelColor.value != undefined && this.panelColor.value != ""
-      && this.typePost.value != undefined && this.typePost.value != "") {
+      && this.typePost.value != undefined && this.typePost.value != ""
+      && this.difficoltaPost.value != undefined && this.difficoltaPost.value != "") {
 
         this.postItService.inserimentoPostit(postIt).subscribe(
           successo => {
@@ -79,7 +85,18 @@ export class PostItComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.colonne.splice(0);
+    this.projectService.getColonneProgetto().subscribe(
+      succ=>{
+        for(let riga of succ){
+          this.colonne.push(riga.nome_colonna);
+        }
+        console.log(this.colonne);
+      },
+      err=>{
+        console.log("errore connessione database!");
+      }
+    )
   }
 
   ngDoCheck(){

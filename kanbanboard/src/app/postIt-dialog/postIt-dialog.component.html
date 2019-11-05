@@ -76,6 +76,7 @@
         {{post.descrizione_postIt}}
       </div>
     </div>
+    
     <!--start form modifica-->
 
     <div *ngIf="modifica" class="row d-flex justify-content-end">
@@ -151,6 +152,11 @@
   <mat-dialog-actions>
 
     <div class="row w-100">
+
+        <div class="col-12 d-flex justify-content-center">
+            Story point: {{post.difficolta}}
+          </div>
+
       <!-- <div class="col-9">
        <button class="mat-stroked-button" color="primary" (click)="close()">Chiudi</button>
         <button *ngIf="modifica" class="mat-stroked-button ml-3" color="primary" (click)="save()">Salva</button>

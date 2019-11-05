@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ProgettiDisponibili } from '../models/mock.project';
 import { UserService } from './user.service';
 import { Observable } from 'rxjs';
-import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +19,28 @@ export class ProjectService {
     'descrizione': ''
   };
 
-  setProgetto(progetto: any) {
-    console.log('Progetto', progetto);
-    this.progetto.id = progetto.id_progetto;
+  arrayColonne = [];
+
+  setProgetto(progetto:any){
+    this.progetto.id=progetto.id_progetto;
     this.progetto.nomeProgetto = progetto.nome_progetto;
     this.progetto.descrizione = progetto.descrizione;
+
+    this.getColonneProgetto().subscribe(
+      succ=>{
+        this.arrayColonne.splice(0);
+        for(let i = 0; i < succ.length; i++){
+          this.arrayColonne.push(succ[i]);
+        }
+      },
+      err=>{
+        console.log("errore collegamento database!");
+      }
+    )
+  }
+
+  getColonneProgetto():Observable<any>{
+    return this.http.post(this.base_url + "/api/getColonneProgetto/", {'idProgetto': this.progetto.id})
   }
 
   getProgettiUtente(): Observable<any> {
