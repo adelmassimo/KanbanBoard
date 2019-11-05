@@ -73,6 +73,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatButtonModule,
     MatSelectModule,
     MatDialogModule,
+    MatDividerModule,
     MatProgressSpinnerModule
   ],
   providers: [LocalStorageService],
