@@ -6,6 +6,7 @@ import { NewProjectService } from '../services/new-project.service';
 import { Router } from '@angular/router';
 import { BrowserStack } from 'protractor/built/driverProviders';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { BooleanStorageTranscoder } from 'ngx-webstorage-service';
 
 @Component({
   selector: 'app-pu',
@@ -27,6 +28,7 @@ export class PUComponent implements OnInit {
 
   //variabile per la visualizzazione delle card Globali
   isGlobal = false;
+  flag: boolean;
 
   //variabile per la creazione e visualizzazione delle card
   ricercaProgetto: string = "";
@@ -35,8 +37,8 @@ export class PUComponent implements OnInit {
 
   //lista progetti Utenti / Globale
   listaProgetti: any[] = [];
-  listaProgettiSupporto: any[] = [];
-  listaProgettiGlobaliNoUtente: any[] = [];
+  supporto: any[] = [];
+  risultato: any[] = [];
 
   //variabile per fare toggle sul sort button. sortDown = true --> ordinamento dalla A alla Z
   sortDown: boolean = true;
@@ -151,24 +153,15 @@ export class PUComponent implements OnInit {
     this.projectService.getCercaProgettiGlobali().subscribe(
       success => {
         console.log(success);
-        this.listaProgettiGlobaliNoUtente.splice(0);
-        console.log(this.listaProgetti);
-        for (let j = 0; j < success.length; j++) {
-          /*for (let i = 0; i < this.listaProgetti.length; i++) {
-           if (this.listaProgettiSupporto[j].id_progetto == this.listaProgetti[i].id_progetto) {
-           }
-          }*/
-          this.inCaricamento = false;
-          this.listaProgettiGlobaliNoUtente.push({
-            'id_progetto': success[j].id_progetto,
-            'nome_progetto': success[j].nome_progetto,
-            'descrizione': success[j].descrizione
-          });
-          console.log('listaGlobaleNOUtente');
-          console.log(this.listaProgettiGlobaliNoUtente);
-          //break;
-        }
-        if (this.listaProgettiGlobaliNoUtente.length == 0) {
+        let progetto = success.filter(item => this.listaProgetti.indexOf(item));
+        let oggetto = this.listaProgetti.filter(item => success.indexOf(item));
+        this.risultato = progetto;
+
+        oggetto.forEach(element => {
+          this.risultato.splice(progetto.indexOf(element), 1);
+        });
+
+        if (this.risultato.length == 0) {
           this.isGlobal = false;
         } else {
           this.isGlobal = true;
