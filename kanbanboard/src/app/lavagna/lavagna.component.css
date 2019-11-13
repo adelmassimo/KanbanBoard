@@ -60,10 +60,13 @@
 .titoloColonna{
     text-align: center;
 }
+.carosello{
+    position: relative;
+}
 .lineaSeparazione{
     position: absolute;
     top: 0;
-    right: -11px;
+    right: 3px;
     height: 100%;
     width: 0.5px;
     background: black;

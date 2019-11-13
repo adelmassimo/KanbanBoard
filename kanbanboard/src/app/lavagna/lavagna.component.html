@@ -23,16 +23,14 @@
 
 <!--inizio ngu-carousel-->
 <ngu-carousel #myCarousel [inputs]="carouselTile" [dataSource]="arrayColonne">
-  <ngu-tile *nguCarouselDef="let item; let i = index; let last = last">
+  <ngu-tile *nguCarouselDef="let item; let i = index; let last = last" class="carosello">
     <!--[class.tabellaLeft] questa direttiva serve a dire che se first è true allora viene aggiunta la classe tabellaLeft-->
     <!-- [class.tabellaLeft]="first" -->
+    <!--creo le linee di separazione-->
+    <div *ngIf="!last">
+      <div class="lineaSeparazione"></div>
+    </div>
     <div class="colonne-carosello">
-
-      <!--creo le linee di separazione-->
-      <div *ngIf="!last">
-        <div class="lineaSeparazione"></div>
-      </div>
-
       <h2 class="titoloColonna">{{item.nome_colonna}}</h2>
       <div class="row">
         <div *ngFor="let post of postIt">
