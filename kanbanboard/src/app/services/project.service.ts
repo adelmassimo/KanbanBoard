@@ -24,27 +24,27 @@ export class ProjectService {
 
   arrayColonne = [];
 
-  setProgetto(progetto:any){
-    this.progetto.id=progetto.id_progetto;
+  setProgetto(progetto: any) {
+    this.progetto.id = progetto.id_progetto;
     this.progetto.nomeProgetto = progetto.nome_progetto;
     this.progetto.descrizione = progetto.descrizione;
 
     this.getColonneProgetto().subscribe(
-      succ=>{
+      succ => {
         this.arrayColonne.splice(0);
-        for(let i = 0; i < succ.length; i++){
+        for (let i = 0; i < succ.length; i++) {
           this.arrayColonne.push(succ[i]);
         }
         this.router.navigate(['/lavagna']);
       },
-      err=>{
+      err => {
         console.log("errore collegamento database!");
       }
     )
   }
 
-  getColonneProgetto():Observable<any>{
-    return this.http.post(this.base_url + "/api/getColonneProgetto/", {'idProgetto': this.progetto.id})
+  getColonneProgetto(): Observable<any> {
+    return this.http.post(this.base_url + "/api/getColonneProgetto/", { 'idProgetto': this.progetto.id })
   }
 
   getProgettiUtente(): Observable<any> {
@@ -56,13 +56,13 @@ export class ProjectService {
   }
 
   getCercaProgettiGlobali(): Observable<any> {
-    return this.http.post(this.base_url + "/api/cercaProgettiGlobali/", {});
+    return this.http.post(this.base_url + "/api/cercaProgettiGlobali/", { 'id': this.userService.user.id });
   }
-  
-  /*
-    getcercaProgettiNoUtente(): Observable<any>{
-      return this.http.post(this.base_url + "/api/cercaProgettiNoUtente/", { 'id': this.userService.user.id });
-    }
+
+/*
+  getcercaProgettiNoUtente(): Observable<any> {
+    return this.http.post(this.base_url + "/api/cercaProgettiNoUtente/", { 'id': this.userService.user.id });
+  }
   */
 
   getProgettoById(id): Observable<any> {

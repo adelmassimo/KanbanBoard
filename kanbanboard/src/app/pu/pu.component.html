@@ -1,8 +1,6 @@
 <!--Seconda parte Header Menu-->
-
 <div class="ricerca">
   <nav class="docs-navbar-header row pt-1" *ngIf="isMenuVisibile">
-
     <div class="col-2 ml-3">
       <mat-form-field>
         <select matNativeControl>
@@ -14,7 +12,6 @@
         </select>
       </mat-form-field>
     </div>
-
     <div class="col-3">
       <form class="example-form">
         <mat-form-field class="example-full-width">
@@ -24,31 +21,25 @@
         <button class="mat-raised-button" (click)="onClickSearchProject()"><i class="fa fa-search"></i></button>
       </form>
     </div>
-
     <div class="col-1 mt-2">
       <button class="mat-raised-button" (click)="onClickSearchGlobal()">Progetti globali</button>
     </div>
   </nav>
 </div>
-
 <div *ngIf="isVisible" class="spaziatura"></div>
 <!--Preview progetti-->
 
 <!--Se l'utente non ha progetti-->
 <div *ngIf="isVisible" id="error">
-
   <div *ngIf="!isSuccess" class="alert alert-danger" role="alert">
     Progetto non Esistente o Nessun Progetto<a href="javascript:void(0)" (click)="onClickCanc()"><i class="fas fa-times"
         id="cross"></i></a>
   </div>
-
   <div *ngIf="isSuccess" class="alert alert-success" role="alert">
     Progetto esistente <a href="javascript:void(0)" (click)="onClickCanc()"><i class="fas fa-times" id="cross"></i></a>
   </div>
-
 </div>
 <!--Se l'utente non ha progetti-->
-
 
 <!--Se l'utente ha dei progetti-->
 <div class="row">
@@ -80,11 +71,11 @@
 <div *ngIf="isGlobal">
   <h1>Progetti Globali</h1>
   <div class="row">
-    <div class="card col-3" id="cardGlobal" *ngFor="let cardGlobal  of listaProgettiGlobaliNoUtente">
+    <div class="card col-3" id="cardGlobal" *ngFor="let cardGlobal of risultato">
       <img src="../assets/table.png" class="card-img-top">
-      <div class="card-body" id={{cardGlobal.idid_progetto}}>
+      <div class="card-body" id={{cardGlobal.id_progetto}}>
         <h5 class="card-title">{{cardGlobal.nome_progetto}}</h5>
-        <p class="card-text">{{cardGlobal.descrizione}}</p>
+        <p class="card-text">{{cardGlobal.descrizione_progetto}}</p>
       </div>
       <div class="card-body">
         <div class="row">
@@ -92,7 +83,8 @@
             <p class="card-text" id="idProgetto">ID Progetto: {{cardGlobal.id_progetto}}</p>
           </div>
           <div class="col-8">
-            <button (click)="openProject(cardGlobal.id_progetto)" class="mat-raised-button" id="button">Apri Progetto</button>
+            <button (click)="openProject(cardGlobal.id_progetto)" class="mat-raised-button" id="button">Apri
+              Progetto</button>
           </div>
           <div class="col-4" align="right">
             <button class="btn bottone" (click)="add(cardGlobal)">
@@ -101,7 +93,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
@@ -114,14 +105,12 @@
           class="fa fa-plus"></i></button>
     </div>
   </div>
-
   <div class="row">
     <div class="col-sm">
       <button type="button" class="btn btn-secondary " id='search' (click)="onClickSearchMenu()" href="#top"><i
           class="fa fa-search"></i></button>
     </div>
   </div>
-
   <div class="row">
     <div class="col-sm">
       <button type="button" class="btn btn-secondary " id='sort' (click)="toggleSort()">
@@ -130,13 +119,11 @@
       </button>
     </div>
   </div>
-
   <div class="row">
     <div class="col-sm">
       <button type="button" class="btn btn-secondary " id='refresh' (click)="createCard()">
         <i class="fa fa-redo-alt" aria-hidden="true"></i></button>
     </div>
   </div>
-
 </div>
 <!--Bottoni end pagina-->
