@@ -3,13 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 
+import { Router } from '@angular/router';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
 
   constructor(private http: HttpClient,
-    private userService: UserService) { }
+    private userService: UserService,
+    private router: Router) { }
 
   base_url = 'http://localhost:3000';
 
@@ -32,6 +35,7 @@ export class ProjectService {
         for(let i = 0; i < succ.length; i++){
           this.arrayColonne.push(succ[i]);
         }
+        this.router.navigate(['/lavagna']);
       },
       err=>{
         console.log("errore collegamento database!");

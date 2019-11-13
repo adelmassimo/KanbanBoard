@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NguCarouselModule } from '@ngu/carousel';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -41,9 +42,6 @@ import { LocalStorageService } from './services/local-storage.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +74,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatDialogModule,
     DragDropModule,
     MatProgressSpinnerModule,
-    MatDividerModule
+    MatDividerModule,
+    NguCarouselModule
   ],
   providers: [LocalStorageService],
   bootstrap: [AppComponent],

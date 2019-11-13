@@ -33,10 +33,13 @@
 }
 .tabella{
     border-right: 1px solid rgb(168, 167, 167);
-    display: inline-block;
+}
+.tabellaLeft{
+    border-left: 1px solid rgb(168, 167, 167);
 }
 .divPost{
     margin-top: 10px;
+    width: 100%;
 }
 .lavagna{
     margin-top: 50px;
@@ -54,14 +57,22 @@
     border: 1px solid black;
 }
 
+.colonne-carosello{
+    position: relative;
+    min-height: 200px;
+    background: none;
+    padding-bottom: 10px;
+}
 
+.titoloColonna{
+    text-align: center;
+}
 
-
-
-    
-
-
-
-
-
-
+.lineaSeparazione{
+    position: absolute;
+    top: 0;
+    right: -11px;
+    height: 100%;
+    width: 0.5px;
+    background: black;
+}

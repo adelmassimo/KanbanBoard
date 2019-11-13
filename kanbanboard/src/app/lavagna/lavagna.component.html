@@ -21,12 +21,68 @@
   </div>
 </div>
 
-<!-- lavagna dinamica -->
+<!--inizio ngu-carousel-->
+<ngu-carousel #myCarousel [inputs]="carouselTile" [dataSource]="arrayColonne">
+  <ngu-tile *nguCarouselDef="let item; let i = index; let last = last">
+    <!--[class.tabellaLeft] questa direttiva serve a dire che se first è true allora viene aggiunta la classe tabellaLeft-->
+    <!-- [class.tabellaLeft]="first" -->
+    <div class="colonne-carosello">
 
+      <!--creo le linee di separazione-->
+      <div *ngIf="!last">
+        <div class="lineaSeparazione"></div>
+      </div>
+
+      <h2 class="titoloColonna">{{item.nome_colonna}}</h2>
+      <div class="row">
+        <div *ngFor="let post of postIt" class="col-6">
+          <div *ngIf="post.tipologia==item.nome_colonna">
+            <div class="divPost cursor-pointer" (click)="openDialog(post)">
+              <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
+                <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
+                <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ngu-tile>
+  <button NguCarouselPrev class="leftRs" [style.opacity]="myCarousel.isFirst ? 0:1">&lt;</button>
+  <button NguCarouselNext class="rightRs" [style.opacity]="myCarousel.isLast ? 0:1">&gt;</button>
+  <!-- codice per mostrare i punti sotto le slide del carosello
+  <ul class="myPoint" NguCarouselPoint>
+    <li *ngFor="let i of myCarousel.pointNumbers; let i = index" [class.active]="i==myCarousel.activePoint" (click)="myCarousel.moveTo(i)"
+      [style.background]="'url(' + carouselTileItems[i] + ')'"></li>
+  </ul>
+  -->
+</ngu-carousel>
+<!--fine ngu-carousel-->
+
+<!-- //codice funzionante in parte
+  <div class="row">
+        <div *ngFor="let post of postIt" class="col-6 divPost cursor-pointer" (click)="openDialog(post)">
+          <div *ngIf="post.tipologia==item.nome_colonna">
+            <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
+              <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
+              <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div> 
+-->
+
+
+
+
+
+<!-- lavagna dinamica -->
+<!--
 <div class="row">
   <div class="col-3" *ngFor="let col of arrayColonne">
-    <h2>{{col.nome_colonna}}</h2>
-    <!-- rappresentazione grafica del post-it -->
+    <h2>{{col.nome_colonna}}</h2>-->
+<!-- rappresentazione grafica del post-it -->
+<!--
     <div *ngFor="let post of postIt" class="col-6 divPost cursor-pointer" (click)="openDialog(post)">
       <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}" *ngIf="post.tipologia == col.nome_colonna">
         <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
@@ -36,62 +92,4 @@
   </div>
 </div>
 
-<!-- vertical layout -->
-<div class="row lavagna text-break" cdkDropListGroup>
-  <div class="col-3 tabella" cdkDropList [cdkDropListData]="toDo" cdkDropListSortingDisabled
-    (cdkDropListDropped)="drop($event,'to do')">
-    <h2>TO DO</h2>
-    <div class="row">
-      <!-- rappresentazione grafica del post-it -->
-      <div *ngFor="let post of toDo" class="col-6 divPost cursor-pointer" (click)="openDialog(post)" cdkDrag> {{item}}
-        <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
-          <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
-          <mat-card-content class="postIt-desc">{{post.inBreve}}</mat-card-content>
-        </mat-card>
-      </div>
-      <!-- -->
-    </div>
-  </div>
-  <div class="col-3 tabella" cdkDropList [cdkDropListData]="doing" (cdkDropListDropped)="drop($event, 'doing')">
-    <h2>DOING</h2>
-    <div class="row">
-      <!-- rappresentazione grafica del post-it -->
-      <div *ngFor="let post of doing" class="col-6 divPost cursor-pointer" (click)="openDialog(post)" cdkDrag>
-        {{item}}
-        <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
-          <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
-          <mat-card-content class="postIt-desc">{{post.inBreve}}</mat-card-content>
-        </mat-card>
-      </div>
-      <!-- -->
-    </div>
-  </div>
-  <div class="col-3 tabella" cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event, 'done')">
-    <h2>DONE</h2>
-    <div class="row">
-      <!-- rappresentazione grafica del post-it -->
-      <div *ngFor="let post of done" class="col-6 divPost cursor-pointer" (click)="openDialog(post)" cdkDrag> {{item}}
-        <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
-          <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
-          <mat-card-content class="postIt-desc">{{post.inBreve}}</mat-card-content>
-        </mat-card>
-      </div>
-      <!-- -->
-    </div>
-  </div>
-  <div class="col-3" cdkDropList [cdkDropListData]="accepted" (cdkDropListDropped)="drop($event, 'accepted')">
-    <h2>DONE ACCEPTED</h2>
-    <div class="row">
-      <!-- rappresentazione grafica del post-it -->
-      <div *ngFor="let post of accepted" class="col-6 divPost cursor-pointer" (click)="openDialog(post)" cdkDrag>
-        {{item}}
-        <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
-          <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
-          <mat-card-content class="postIt-desc">{{post.inBreve}}</mat-card-content>
-        </mat-card>
-      </div>
-      <!-- -->
-    </div>
-    <!-- -->
-  </div>
-</div>
+-->

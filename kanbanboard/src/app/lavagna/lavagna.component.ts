@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { NguCarouselConfig } from '../carousel';
 
 import { ProjectService } from '../services/project.service';
-import { NewProjectService } from '../services/new-project.service';
 import { UserService } from '../services/user.service';
 import { PostItService } from '../services/post-it.service';
 
@@ -11,38 +11,62 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { PostItDialogComponent } from '../postIt-dialog/postIt-dialog.component';
 import { ImpostazioniProgettoDialogComponent } from '../impostazioni-progetto-dialog/impostazioni-progetto-dialog.component';
-import { post } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-lavagna',
   templateUrl: './lavagna.component.html',
-  styleUrls: ['./lavagna.component.css']
+  styleUrls: ['./lavagna.component.css', './lavagna.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LavagnaComponent implements OnInit {
 
   constructor(private router: Router, private projectService: ProjectService,
     private userService: UserService,
     private postitservice: PostItService,
-    private newprojectservice: NewProjectService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private cdr: ChangeDetectorRef
+  ) { 
+    //funzione che serve per chiamare lo script "loadScript()"
+    this.loadAPI = new Promise((resolve) => {
+      this.loadScript();
+      resolve(true);
+    });
+  }
 
 
   nomeProgetto: string = "nome progetto";
   postIt: Array<any> = [];
 
   arrayColonne: any[] = [];
-  arrayPostIt: any[] = [];
 
-  toDo: Array<any> = [];
-  doing: Array<any> = [];
-  done: Array<any> = [];
-  accepted: Array<any> = [];
+  /* inizio variabili ngu-carousel */
+  loadAPI: Promise<any>;
 
-  colore: string = "orange";
+  //quesa variabile serve per configurare il carosello
+  public carouselTile: NguCarouselConfig = {
+    grid: { xs: 2, sm: 2, md: 4, lg: 4, all: 0 },
+    slide: 1,
+    speed: 250,
+    point: {
+      visible: false, hideOnSingleSlide: true
+    },
+    load: 2,
+    velocity: 0,
+    touch: false,
+    easing: 'cubic-bezier(0, 0, 0.2, 1)'
+  };
+
+  /* fine variabili ngu-carousel */
 
   ngOnInit() {
+    //imposto il titolo del progetto
+    this.nomeProgetto = this.projectService.progetto.nomeProgetto;
+
     this.visualizzaPostIt();
+    this.visualizzaTabella();
+
+    this.loadScript();
+    this.ngDoCheck();
   }
 
   ngDoCheck() {
@@ -50,8 +74,10 @@ export class LavagnaComponent implements OnInit {
     if (this.userService.user.id == "") {
       this.router.navigate(['/']);
     }
+    this.cdr.detectChanges();
 
-    this.visualizzaTabella();
+    //richiamo script javascript
+    this.loadScript();
   }
 
   creaPostIt() {
@@ -82,8 +108,6 @@ export class LavagnaComponent implements OnInit {
             this.postIt.push(post);
           }
         }
-        //imposto il titolo del progetto
-        this.nomeProgetto = this.projectService.progetto.nomeProgetto;
       },
       err => {
         console.log("errore connessione database!");
@@ -152,7 +176,7 @@ export class LavagnaComponent implements OnInit {
   }
 
   onClickRefresh(){
-    this.visualizzaPostIt();
+    this.ngOnInit();
   }
 
   // INIZIO MOVIMENTO POST-IT
@@ -183,4 +207,12 @@ export class LavagnaComponent implements OnInit {
   }
   
   // FINE MOVIMENTO POST-IT
+
+  //script per levare la classe tile alle colonne
+  loadScript(){
+    var element = document.getElementsByClassName("tile");
+    for(let i = 0; i < element.length; i++){
+      element[i].classList.remove("tile");
+    }   
+  }
 }

@@ -4,8 +4,6 @@ import { UserService } from '../services/user.service';
 import { NewProjectService } from '../services/new-project.service';
 
 import { Router } from '@angular/router';
-import { BrowserStack } from 'protractor/built/driverProviders';
-import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-pu',
@@ -68,7 +66,6 @@ export class PUComponent implements OnInit {
       success => {
         if (success.length != 0) {
           if (this.sortDown) {
-            console.log(success);
             for (let i = 0; i < success.length; i++) {
               this.inCaricamento = false;
               this.listaProgetti.push({
@@ -91,7 +88,6 @@ export class PUComponent implements OnInit {
           this.isVisible = true;
           this.isSuccess = false;
         }
-        console.log(this.listaProgetti);
       },
       error => {
         console.log("errore connessione database!" + error);
@@ -195,9 +191,8 @@ export class PUComponent implements OnInit {
             'nome_progetto': succ[0].nome_progetto,
             'descrizione': succ[0].descrizione_progetto
           };
-          console.log(progetto);
           this.projectService.setProgetto(progetto);
-          this.router.navigate(['/lavagna']);
+          //il router.navigate lo faccio nel service per evitare problemi con la funzione asincrona
         } else {
           //id progetto non presente nel database
           this.router.navigate(['/']);
