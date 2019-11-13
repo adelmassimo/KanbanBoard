@@ -4,9 +4,6 @@ import { UserService } from '../services/user.service';
 import { NewProjectService } from '../services/new-project.service';
 
 import { Router } from '@angular/router';
-import { BrowserStack } from 'protractor/built/driverProviders';
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { BooleanStorageTranscoder } from 'ngx-webstorage-service';
 
 @Component({
   selector: 'app-pu',
