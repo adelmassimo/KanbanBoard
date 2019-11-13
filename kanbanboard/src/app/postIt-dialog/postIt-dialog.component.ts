@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 import { PostItService } from '../services/post-it.service';
+import { ProjectService } from '../services/project.service';
 
 @Component({
   selector: 'app-postIt-dialog',
@@ -48,12 +49,14 @@ export class PostItDialogComponent implements OnInit {
 
   action: string = "";
 
+  colonne: Array<any> = [];
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<PostItDialogComponent>,
     private postitservice: PostItService,
-    @Inject(MAT_DIALOG_DATA) data) {
+    @Inject(MAT_DIALOG_DATA) data,
+    private projectService: ProjectService) {
     this.post = {
       id_postIt: data.id_postIt,
       nome_postIt: data.nome_postIt,
@@ -75,6 +78,21 @@ export class PostItDialogComponent implements OnInit {
       titolo: this.titolo,
       descrizione: this.descrizione
     });
+
+    //INIZIO inizializzazione variabile colonne
+    this.colonne.splice(0);
+    this.projectService.getColonneProgetto().subscribe(
+      succ=>{
+        for(let riga of succ){
+          this.colonne.push(riga.nome_colonna);
+        }
+        console.log(this.colonne);
+      },
+      err=>{
+        console.log("errore connessione database!");
+      }
+    )
+    //FINE 
   }
   delete() {
     this.action = "delete";

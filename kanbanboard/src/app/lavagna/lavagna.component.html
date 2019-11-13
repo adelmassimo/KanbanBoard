@@ -35,9 +35,9 @@
 
       <h2 class="titoloColonna">{{item.nome_colonna}}</h2>
       <div class="row">
-        <div *ngFor="let post of postIt" class="col-6">
-          <div *ngIf="post.tipologia==item.nome_colonna">
-            <div class="divPost cursor-pointer" (click)="openDialog(post)">
+        <div *ngFor="let post of postIt">
+          <div *ngIf="post.tipologia==item.nome_colonna" class="col-12 divPost">
+            <div class="cursor-pointer" (click)="openDialog(post)">
               <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
                 <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
                 <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>

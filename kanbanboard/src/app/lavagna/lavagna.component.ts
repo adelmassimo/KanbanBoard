@@ -100,6 +100,7 @@ export class LavagnaComponent implements OnInit {
     this.projectService.getPostItProgetto().subscribe(
       succ => {
         if(succ[0] != null){
+          console.log(succ);
           //riempio il vettore postIt[] con tutti i post-it dell'progetto selezionato
           for (let post of succ) {
             post.inBreve = post.descrizione_postIt.length < 40

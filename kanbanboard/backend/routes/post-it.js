@@ -1,5 +1,3 @@
-
-
 var postIt = require('express').Router();
 var sql_connection = require('../db_connector');
 
@@ -70,7 +68,6 @@ postIt.post('/updatePostIt/', function (req, res) {
 
 postIt.post('/visualizzaPostItProgetto', function (req, res) {
   id = req.body.idProgetto;
-  console.log("------------------------- ",req.body.idProgetto);
   sql_connection.query('SELECT postit.*, ' +
     'progetti.nome_progetto, ' +
     'progetti.descrizione_progetto ' +
@@ -109,15 +106,17 @@ postIt.post('/deletePostIt/', function (req, res) {
     if (err) throw err;
     console.log("POST-IT eliminato");
 
-    //elimino modifiche del postit
-    var queryInserimentpModifica = "DELETE FROM `kanbanboard`.`modifiche` WHERE `id_postItOld`='"+id_postIt+"'";
-    sql_connection.query(queryInserimentpModifica, function (err) {
+    query = "DELETE FROM progetti_x_postit "
+    + "WHERE  id_postIt = '" + id_postIt + "'";
+    sql_connection.query(query, function (err, rows, fields) {
       if (err) throw err;
-      console.log("MODIFICE ELIMINATE");
+      //elimino modifiche del postit
+      var queryInserimentpModifica = "DELETE FROM `kanbanboard`.`modifiche` WHERE `id_postItOld`='"+id_postIt+"'";
+      sql_connection.query(queryInserimentpModifica, function (err) {
+        if (err) throw err;
+        console.log("MODIFICE ELIMINATE");
+      });
     });
-
-
-
     res.send({ "eliminato": '1' });
   });
 
