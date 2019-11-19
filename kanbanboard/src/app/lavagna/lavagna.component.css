@@ -26,10 +26,18 @@
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 .postIt-title{
-    font-size: 15px;
+    font-size: 13px;
 }
 .postIt-desc{
     font-size: 10px;
+}
+.epic-title{
+    text-align: center;
+    font-size: 16px;
+}
+.epica-desc{
+    text-align: center;
+    font-size: 14px;
 }
 .tabella{
     border-right: 1px solid rgb(168, 167, 167);
@@ -62,16 +70,21 @@
 }
 .carosello{
     position: relative;
+    border-right: 1px solid black;
 }
 .lineaSeparazione{
     position: absolute;
     top: 0;
-    right: 3px;
+    right: 2.2px;
     height: 100%;
     width: 0.5px;
     background: black;
 }
 .divPost{
     width: 8.89em;
+    margin-top: 10px;
+}
+.divPostEpic{
+    width: 17.78em;
     margin-top: 10px;
 }

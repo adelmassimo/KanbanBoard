@@ -103,9 +103,12 @@ export class LavagnaComponent implements OnInit {
           console.log(succ);
           //riempio il vettore postIt[] con tutti i post-it dell'progetto selezionato
           for (let post of succ) {
-            post.inBreve = post.descrizione_postIt.length < 40
+            post.inBreve = post.descrizione_postIt.length < 25
               ? post.descrizione_postIt
-              : post.descrizione_postIt.substr(0, 37) + '...';
+              : post.descrizione_postIt.substr(0, 24) + '...';
+            post.nomeInBreve = post.nome_postIt.length < 15
+              ? post.nome_postIt
+              : (post.nome_postIt.substr(0, 14) + '...');
             this.postIt.push(post);
           }
         }

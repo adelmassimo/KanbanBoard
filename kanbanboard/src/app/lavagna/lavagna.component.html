@@ -26,22 +26,35 @@
   <ngu-tile *nguCarouselDef="let item; let i = index; let last = last" class="carosello">
     <!--[class.tabellaLeft] questa direttiva serve a dire che se first è true allora viene aggiunta la classe tabellaLeft-->
     <!-- [class.tabellaLeft]="first" -->
-    <!--creo le linee di separazione-->
-    <div *ngIf="!last">
-      <div class="lineaSeparazione"></div>
-    </div>
     <div class="colonne-carosello">
       <h2 class="titoloColonna">{{item.nome_colonna}}</h2>
       <div class="row">
         <div *ngFor="let post of postIt">
-          <div *ngIf="post.tipologia==item.nome_colonna" class="col-12 divPost">
-            <div class="cursor-pointer" (click)="openDialog(post)">
-              <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
-                <mat-card-title class="postIt-title">{{post.nome_postIt}}</mat-card-title>
-                <mat-card-content class="postIt-desc">{{post.descrizione_postIt}}</mat-card-content>
-              </mat-card>
+
+          <!-- rappresentazione post-it -->
+          <div *ngIf="post.epica == 0">
+            <div *ngIf="post.tipologia==item.nome_colonna" class="col divPost">
+              <div class="cursor-pointer" (click)="openDialog(post)">
+                <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
+                  <mat-card-title class="postIt-title">{{post.nomeInBreve}}</mat-card-title>
+                  <mat-card-content class="postIt-desc">{{post.inBreve}}</mat-card-content>
+                </mat-card>
+              </div>
             </div>
           </div>
+
+          <!-- rappresentazione epica -->
+          <div *ngIf="post.epica == 1">
+            <div *ngIf="post.tipologia==item.nome_colonna" class="col divPostEpic">
+              <div class="cursor-pointer" (click)="openDialog(post)">
+                <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
+                  <mat-card-title class="epic-title">{{post.nomeInBreve}}</mat-card-title>
+                  <mat-card-content class="epic-desc">{{post.inBreve}}</mat-card-content>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

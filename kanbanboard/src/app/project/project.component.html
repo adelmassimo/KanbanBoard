@@ -31,7 +31,7 @@
         <div class="titoloNominaColonne">
           <h3>Nomina le colonne</h3>
         </div>
-        <form >
+        <form>
           <ol>
             <div *ngFor="let col of arrayColonne; let i = index;">
               <li>
@@ -40,7 +40,7 @@
                     La direttiva [(ngModel)] serve per fare il doppio binding e quindi far comunicare l'html con in ts in 
                     entrambi i sensi a differenza della direttiva [ngModel]
                   -->
-                  <input matInput placeholder="Nome colonna {{i+1}}" id="nome-colonna-{{i}}" name="col[{{i}}].nomeColonna"
+                  <input matInput placeholder="Nome colonna {{i+1}}" name="col[{{i}}].nomeColonna"
                   [(ngModel)]="col.nomeColonna">
                 </mat-form-field>
               </li>

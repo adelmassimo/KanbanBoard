@@ -53,6 +53,12 @@ export class PostItService {
   }
   /**end GetModifichePostIt postit */
 
+  inserimentoEpica(epica, arrayPostIt):Observable<any>{
+    return this.http.post(this.base_url + "/api/inserisciEpica", {
+      'epica': epica,
+      'arrayPostIt': arrayPostIt
+    });
+  }
 
   /*
     inserimentoProgettiPerPostIt(progettiPerPostIt):Observable<any>{
