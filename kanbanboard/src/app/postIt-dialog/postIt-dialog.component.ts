@@ -178,11 +178,6 @@ export class PostItDialogComponent implements OnInit {
     );
   }
 
-  onChangeColor() {
-    this.coloreSfondo = this.panelColor.value;
-  }
-
-
   save() {
     this.post.nome_postIt = this.titolo;
     this.post.descrizione_postIt = this.descrizione;
@@ -193,38 +188,40 @@ export class PostItDialogComponent implements OnInit {
   }
 
   saveDipendenti() {
+    this.postNuovo.difficolta = this.difficoltaPost.value;
+    this.postNuovo.tipologia = this.typePost.value;
+    this.postNuovo.colore_postIt = this.panelColor.value;
+    this.postNuovo.difficolta = this.difficoltaPost.value;
+    console.log(this.postNuovo.difficolta);
     if (this.postNuovo.nome_postIt != "" && this.postNuovo.descrizione_postIt != "" &&
-      this.postNuovo.colore_postIt != "" && this.postNuovo.tipologia != "") {
+      this.postNuovo.colore_postIt != "" && this.postNuovo.tipologia != "" &&
+      this.postNuovo.difficolta != null) {
 
       this.error = false;
       console.log("dati corretti");
 
-      this.postNuovo.difficolta = this.difficoltaPost.value;
-      this.postNuovo.tipologia = this.typePost.value;
-      this.postNuovo.colore_postIt = this.panelColor.value;
-
       this.postitservice.inserimentoPostitDipendente(this.postNuovo, this.post.id_postIt, this.projectService.progetto.id).subscribe(
-        succ=>{
-          if(succ.successo == 1){
+        succ => {
+          if (succ.successo == 1) {
             console.log("post-it dipendente inserito correttamente");
             this.error = false;
             this.action = "insert";
             this.close();
-          }else{
+          } else {
             console.log("post-it non inserito");
             this.message = "errore creazione post-it, prego riprovare";
             this.error = true;
           }
         },
-        err=>{
+        err => {
           console.log("errore collegamento database!");
         }
       );
 
     } else {
-      console.log("dati errati")
-      console.log(this.postNuovo.nome_postIt + this.postNuovo.descrizione_postIt + this.postNuovo.colore_postIt + this.postNuovo.tipologia)
-      this.message = "Dati errati, prego riprovare"
+      console.log("dati errati o incompleti");
+      console.log(this.postNuovo.nome_postIt + this.postNuovo.descrizione_postIt + this.postNuovo.colore_postIt + this.postNuovo.tipologia);
+      this.message = "Dati errati o incompleti, prego ricontrollare";
       this.error = true;
     }
   }

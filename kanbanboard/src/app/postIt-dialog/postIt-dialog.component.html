@@ -45,13 +45,13 @@
       </button>
     </div>
     <!--MODIFICA-->
-    <div *ngIf="!modifica && !modificaSelezionata" class="col-1 mr-3">
+    <div *ngIf="!modifica && !modificaSelezionata && !aggiungi" class="col-1 mr-3">
       <button class="btn bottone" title="Modifica" (click)="openModifica()">
         <i class="fas fa-pencil-alt"></i>
       </button>
     </div>
     <!--ELIMINA-->
-    <div *ngIf="!modifica && !modificaSelezionata" class="col-1 mr-3">
+    <div *ngIf="!modifica && !modificaSelezionata && !aggiungi" class="col-1 mr-3">
       <button class="btn bottone" title="Elimina" (click)="delete()">
         <i class="fas fa-trash-alt"></i>
       </button>

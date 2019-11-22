@@ -36,10 +36,11 @@ export class LavagnaComponent implements OnInit {
 
   nomeProgetto: string = "nome progetto";
   postIt: Array<any> = [];
+  postItEpiche: Array<any> = [];
 
   arrayColonne: any[] = [];
 
-  error:boolean = false;
+  error: boolean = false;
   success: boolean = false;
   message: string = "progetto modificato correttamente";
 
@@ -101,6 +102,7 @@ export class LavagnaComponent implements OnInit {
 
   visualizzaPostIt() {
     this.postIt.splice(0);
+    this.postItEpiche.splice(0);
     this.projectService.getPostItProgetto().subscribe(
       succ => {
         if (succ[0] != null) {
@@ -114,6 +116,9 @@ export class LavagnaComponent implements OnInit {
               ? post.nome_postIt
               : (post.nome_postIt.substr(0, 14) + '...');
             this.postIt.push(post);
+            if (post.epica == 1) {
+              this.postItEpiche.push(post);
+            }
           }
         }
       },
@@ -188,15 +193,15 @@ export class LavagnaComponent implements OnInit {
               this.message = "Nome progetto modificato correttamente";
               this.projectService.updateTitoloProgetto(success.nome_progetto);
               this.nomeProgetto = this.projectService.progetto.nomeProgetto;
-            }else{
+            } else {
               console.log("errore aggiornamento del nome progetto");
               this.error = true;
               this.message = "Errore, prego riprovare!";
             }
-            setTimeout(()=>{
+            setTimeout(() => {
               this.success = false;
               this.error = false;
-            },2000);
+            }, 2000);
           },
           err => {
             console.log("errore collegamento database!");
@@ -248,20 +253,39 @@ export class LavagnaComponent implements OnInit {
     }
   }
 
-  boxShadowScriptAdd(id_epica){
-    for(let post of this.postIt){
-      if(post.id_epica_riferimento == id_epica){
+  boxShadowEpicScriptAdd(id_epica) {
+    for (let post of this.postIt) {
+      if (post.id_epica_riferimento == id_epica) {
         var dip = document.getElementById(post.id_postIt);
         dip.classList.add("boxShadow");
       }
     }
   }
 
-  boxShadowScriptRemove(id_epica){
-    for(let post of this.postIt){
-      if(post.id_epica_riferimento == id_epica){
+  boxShadowEpicScriptRemove(id_epica) {
+    for (let post of this.postIt) {
+      if (post.id_epica_riferimento == id_epica) {
         var dip = document.getElementById(post.id_postIt);
         dip.classList.remove("boxShadow");
+      }
+    }
+  }
+  boxShadowScriptAdd(id_epica_riferimento) {
+    for (let epic of this.postItEpiche) {
+      if (id_epica_riferimento == epic.id_postIt) {
+        var dip = document.getElementById(epic.id_postIt);
+        dip.classList.add("boxShadow");
+        return;
+      }
+    }
+  }
+
+  boxShadowScriptRemove(id_epica_riferimento) {
+    for (let epic of this.postIt) {
+      if (id_epica_riferimento == epic.id_postIt) {
+        var dip = document.getElementById(epic.id_postIt);
+        dip.classList.remove("boxShadow");
+        return;
       }
     }
   }

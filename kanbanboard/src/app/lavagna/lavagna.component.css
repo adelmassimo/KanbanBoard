@@ -87,7 +87,7 @@
     width: 17.78em;
     margin-top: 10px;
 }
-.divEpic:hover{
+.divSelected:hover{
     box-shadow: 0px 0px 15px 0px rgba(212,175,55,1);
 }
 .boxShadow{
