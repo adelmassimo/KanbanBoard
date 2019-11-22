@@ -48,7 +48,7 @@ project.post('/updateProject/', function (req, res) {
   sql_connection.query(query, function (err, rows, fields) {
     if (err) throw err;
     console.log("PROGETTO MODIFICATO");
-    res.send({ "modificato": '1' });
+    res.send({nome_progetto});
   });
 });   // fine UPDATE
 

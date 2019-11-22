@@ -88,3 +88,17 @@
     width: 17.78em;
     margin-top: 10px;
 }
+.boxMsg{
+    position: absolute;
+    top: 8%;
+    left: 30%;
+    right: 30%;
+    z-index: 99;
+}
+.alert{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.msg{
+    font-size: 18px;
+}

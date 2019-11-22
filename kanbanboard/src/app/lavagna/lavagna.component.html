@@ -70,6 +70,18 @@
 </ngu-carousel>
 <!--fine ngu-carousel-->
 
+<!-- MESSAGGIO -->
+<div class="boxMsg">
+  <div *ngIf="success" class="alert alert-success">
+    <h4 class="msg">{{message}}</h4>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    <h4 class="msg">{{message}}</h4>
+  </div>
+</div>
+<!-- MESSAGGIO -->
+
 <!-- //codice funzionante in parte
   <div class="row">
         <div *ngFor="let post of postIt" class="col-6 divPost cursor-pointer" (click)="openDialog(post)">

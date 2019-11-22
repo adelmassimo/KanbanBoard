@@ -43,6 +43,18 @@ export class ProjectService {
     )
   }
 
+  updateProgetto(progetto): Observable<any> {
+    return this.http.post(this.base_url + "/api/updateProject/", {
+      'nome_progetto': progetto.nome_progetto,
+      'descrizione_progetto': progetto.descrizione_progetto,
+      'id_progetto': progetto.id_progetto
+    })
+  }
+
+  updateTitoloProgetto(nome){
+    this.progetto.nomeProgetto = nome;
+  }
+
   getColonneProgetto(): Observable<any> {
     return this.http.post(this.base_url + "/api/getColonneProgetto/", { 'idProgetto': this.progetto.id })
   }

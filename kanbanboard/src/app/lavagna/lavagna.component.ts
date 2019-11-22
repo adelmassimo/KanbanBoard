@@ -25,7 +25,7 @@ export class LavagnaComponent implements OnInit {
     private postitservice: PostItService,
     private dialog: MatDialog,
     private cdr: ChangeDetectorRef
-  ) { 
+  ) {
     //funzione che serve per chiamare lo script "loadScript()"
     this.loadAPI = new Promise((resolve) => {
       this.loadScript();
@@ -38,6 +38,10 @@ export class LavagnaComponent implements OnInit {
   postIt: Array<any> = [];
 
   arrayColonne: any[] = [];
+
+  error:boolean = false;
+  success: boolean = false;
+  message: string = "progetto modificato correttamente";
 
   /* inizio variabili ngu-carousel */
   loadAPI: Promise<any>;
@@ -88,9 +92,9 @@ export class LavagnaComponent implements OnInit {
     this.router.navigate(['/pu']);
   }
 
-  visualizzaTabella(){
+  visualizzaTabella() {
     this.arrayColonne.splice(0);
-    for(let i = 0; i < this.projectService.arrayColonne.length; i++){
+    for (let i = 0; i < this.projectService.arrayColonne.length; i++) {
       this.arrayColonne.push(this.projectService.arrayColonne[i]);
     }
   }
@@ -99,7 +103,7 @@ export class LavagnaComponent implements OnInit {
     this.postIt.splice(0);
     this.projectService.getPostItProgetto().subscribe(
       succ => {
-        if(succ[0] != null){
+        if (succ[0] != null) {
           console.log(succ);
           //riempio il vettore postIt[] con tutti i post-it dell'progetto selezionato
           for (let post of succ) {
@@ -147,7 +151,7 @@ export class LavagnaComponent implements OnInit {
               this.visualizzaPostIt();
             }
           )
-        } else if(data.action === 'insert') {
+        } else if (data.action === 'insert') {
           this.visualizzaPostIt();
         }
       },
@@ -164,7 +168,7 @@ export class LavagnaComponent implements OnInit {
     //dialogConfig.autoFocus = true;
 
     dialogConfig.width = '500px';
-    dialogConfig.height= '500px';
+    dialogConfig.height = '500px';
     dialogConfig.data = this.projectService.progetto;
     console.log("rubio", this.projectService.progetto)
     const dialogRef = this.dialog.open(ImpostazioniProgettoDialogComponent, dialogConfig);
@@ -172,53 +176,74 @@ export class LavagnaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       data => {
-        this.postitservice.updatePostit(data.postIt,this.userService.user.id).subscribe(
+        console.log(data);
+
+        this.projectService.updateProgetto(data.progetto).subscribe(
           success => {
-            this.visualizzaPostIt();
+            console.log(success);
+            if (success != null) {
+              console.log("nome progetto modificato correttamente");
+              this.visualizzaPostIt();
+              this.success = true;
+              this.message = "Nome progetto modificato correttamente";
+              this.projectService.updateTitoloProgetto(success.nome_progetto);
+              this.nomeProgetto = this.projectService.progetto.nomeProgetto;
+            }else{
+              console.log("errore aggiornamento del nome progetto");
+              this.error = true;
+              this.message = "Errore, prego riprovare!";
+            }
+            setTimeout(()=>{
+              this.success = false;
+              this.error = false;
+            },2000);
+          },
+          err => {
+            console.log("errore collegamento database!");
           }
         )
       }
     )
   }
 
-  onClickRefresh(){
+  onClickRefresh() {
     this.ngOnInit();
   }
 
   // INIZIO MOVIMENTO POST-IT
- 
-  drop(event: CdkDragDrop<string[]>, colonna:string) {
+
+  drop(event: CdkDragDrop<string[]>, colonna: string) {
     //IF SPOSTAMENTO NELLA STESSA COLONNA
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       //SPOSTAMENTO DEL POST-IT IN UN'ALTRA COLONNA
       transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
       console.log("ricevuto click");
-      console.log(colonna,event.container.data ,event.currentIndex);
-      
+      console.log(colonna, event.container.data, event.currentIndex);
+
       const postit: any = event.container.data[event.currentIndex];
       postit.tipologia = colonna;
 
-      this.postitservice.updatePostit(postit,this.userService.user.id).subscribe(
+      this.postitservice.updatePostit(postit, this.userService.user.id).subscribe(
         success => {
           this.visualizzaPostIt();
         }
       )
-  
+
     } // fine if
   }
-  
+
   // FINE MOVIMENTO POST-IT
 
   //script per levare la classe tile alle colonne
-  loadScript(){
+  loadScript() {
     var element = document.getElementsByClassName("tile");
-    for(let i = 0; i < element.length; i++){
+    for (let i = 0; i < element.length; i++) {
       element[i].classList.remove("tile");
-    }   
+    }
   }
 }
