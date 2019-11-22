@@ -22,7 +22,6 @@
 .postIt{
     height: 105px;
     overflow: hidden;
-    cursor: move;
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 .postIt-title{
@@ -87,6 +86,12 @@
 .divPostEpic{
     width: 17.78em;
     margin-top: 10px;
+}
+.divEpic:hover{
+    box-shadow: 0px 0px 15px 0px rgba(212,175,55,1);
+}
+.boxShadow{
+    box-shadow: 0px 0px 15px 0px rgba(212,175,55,1);
 }
 .boxMsg{
     position: absolute;

@@ -239,11 +239,30 @@ export class LavagnaComponent implements OnInit {
 
   // FINE MOVIMENTO POST-IT
 
+  //SCRIPT
   //script per levare la classe tile alle colonne
   loadScript() {
     var element = document.getElementsByClassName("tile");
     for (let i = 0; i < element.length; i++) {
       element[i].classList.remove("tile");
+    }
+  }
+
+  boxShadowScriptAdd(id_epica){
+    for(let post of this.postIt){
+      if(post.id_epica_riferimento == id_epica){
+        var dip = document.getElementById(post.id_postIt);
+        dip.classList.add("boxShadow");
+      }
+    }
+  }
+
+  boxShadowScriptRemove(id_epica){
+    for(let post of this.postIt){
+      if(post.id_epica_riferimento == id_epica){
+        var dip = document.getElementById(post.id_postIt);
+        dip.classList.remove("boxShadow");
+      }
     }
   }
 }
