@@ -15,6 +15,7 @@ export class PostItDialogComponent implements OnInit {
   form: FormGroup;
   panelColor = new FormControl();
   typePost = new FormControl();
+  difficoltaPost = new FormControl();
 
   post: any = {
     id_postIt: -1,
@@ -36,8 +37,16 @@ export class PostItDialogComponent implements OnInit {
     nome_utente: "",
     cognome_utent: ""
   }
+  postNuovo: any = {
+    nome_postIt: "",
+    descrizione_postIt: "",
+    colore_postIt: "",
+    tipologia: "",
+    difficolta: 0
+  }
 
   modifica: boolean = false;
+  aggiungi: boolean = false;
 
   modifichePrecedenti: boolean = false;
   storicoModifiche: Array<any> = [];
@@ -50,6 +59,9 @@ export class PostItDialogComponent implements OnInit {
   action: string = "";
 
   colonne: Array<any> = [];
+
+  error: boolean = false;
+  message: string = "messaggio di prova";
 
   constructor(
     private fb: FormBuilder,
@@ -82,13 +94,13 @@ export class PostItDialogComponent implements OnInit {
     //INIZIO inizializzazione variabile colonne
     this.colonne.splice(0);
     this.projectService.getColonneProgetto().subscribe(
-      succ=>{
-        for(let riga of succ){
+      succ => {
+        for (let riga of succ) {
           this.colonne.push(riga.nome_colonna);
         }
         console.log(this.colonne);
       },
-      err=>{
+      err => {
         console.log("errore connessione database!");
       }
     )
@@ -98,12 +110,17 @@ export class PostItDialogComponent implements OnInit {
     this.action = "delete";
     this.close();
   }
-
+  aggiungiDipendenti() {
+    this.aggiungi = true;
+    this.postNuovo.colore_postIt = this.panelColor.value;
+    this.postNuovo.tipologia = this.typePost.value;
+  }
   openModifica() {
     this.modifica = true;
   }
   annulla() {
     this.modifica = false;
+    this.aggiungi = false;
     this.coloreSfondo = this.post.colore_postIt;
     this.titolo = this.post.nome_postIt;
     this.descrizione = this.post.descrizione_postIt;
@@ -116,11 +133,11 @@ export class PostItDialogComponent implements OnInit {
     this.modifica = false;
     this.getModifichePostIt();
   }
-  closeStoricoModifiche(){
+  closeStoricoModifiche() {
     this.modifichePrecedenti = false;
     this.modifica = false;
   }
-  showModifica(modifica){
+  showModifica(modifica) {
     this.modificaSelezionata = true;
     /** `id_postItOld`, `nome_PostItNew`, `descrizione_postItNew`, `colore_postItNew`, `tipologiaNew` */
     this.postItModifica = {
@@ -135,16 +152,16 @@ export class PostItDialogComponent implements OnInit {
     }
     this.coloreSfondo = this.postItModifica.colore_postIt;
   }
-  colseModificaSelezionata(){
+  colseModificaSelezionata() {
     this.modificaSelezionata = false;
     this.coloreSfondo = this.post.colore_postIt;
   }
 
-  getModifichePostIt(){
+  getModifichePostIt() {
     this.postitservice.getModifichePostIt(this.post.id_postIt).subscribe(
       succ => {
         //controllo se mi arriva almeno una entry dal database
-        console.log('prima:',this.storicoModifiche, succ);
+        console.log('prima:', this.storicoModifiche, succ);
         if (succ[0] != null) {
           //svuoto il vettore contenente lo storico delle modifiche
           this.storicoModifiche.splice(0);
@@ -152,7 +169,7 @@ export class PostItDialogComponent implements OnInit {
           for (let modifica of succ) {
             this.storicoModifiche.push(modifica);
           }
-          console.log('dopo',this.storicoModifiche);
+          console.log('dopo', this.storicoModifiche);
         }
       },
       err => {
@@ -175,14 +192,47 @@ export class PostItDialogComponent implements OnInit {
     this.close();
   }
 
+  saveDipendenti() {
+    if (this.postNuovo.nome_postIt != "" && this.postNuovo.descrizione_postIt != "" &&
+      this.postNuovo.colore_postIt != "" && this.postNuovo.tipologia != "") {
+
+      this.error = false;
+      console.log("dati corretti");
+
+      this.postNuovo.difficolta = this.difficoltaPost.value;
+      this.postNuovo.tipologia = this.typePost.value;
+      this.postNuovo.colore_postIt = this.panelColor.value;
+
+      this.postitservice.inserimentoPostitDipendente(this.postNuovo, this.post.id_postIt, this.projectService.progetto.id).subscribe(
+        succ=>{
+          if(succ.successo == 1){
+            console.log("post-it dipendente inserito correttamente");
+            this.error = false;
+            this.action = "insert";
+            this.close();
+          }else{
+            console.log("post-it non inserito");
+            this.message = "errore creazione post-it, prego riprovare";
+            this.error = true;
+          }
+        },
+        err=>{
+          console.log("errore collegamento database!");
+        }
+      );
+
+    } else {
+      console.log("dati errati")
+      console.log(this.postNuovo.nome_postIt + this.postNuovo.descrizione_postIt + this.postNuovo.colore_postIt + this.postNuovo.tipologia)
+      this.message = "Dati errati, prego riprovare"
+      this.error = true;
+    }
+  }
+
   close() {
     this.dialogRef.close({
       'action': this.action,
       'postIt': this.post
     });
   }
-
-
-
-
 }

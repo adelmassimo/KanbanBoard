@@ -1,4 +1,4 @@
-<div class="p-3  text-break" [ngStyle]="{'background' : coloreSfondo}">
+<div class="p-3  text-break contenutoDialog" [ngStyle]="{'background' : panelColor.value}">
   <!--START RIGA PULSANTI -->
   <div class="row mr-3 d-flex justify-content-end">
     <!--APRI STORICO MODIFICHE-->
@@ -26,6 +26,24 @@
     <!--modifica selezionata-->
 
     <!--storico modifiche-->
+    <!--AGGIUNGI DIPENDENTI-->
+    <div *ngIf="!modifica && !modificaSelezionata && !aggiungi" class="col-1 mr-3">
+      <button class="btn bottone" title="Aggiungi dipendenti" (click)="aggiungiDipendenti()">
+        <i class="fa fa-plus"></i>
+      </button>
+    </div>
+    <!--salva modifiche-->
+    <div *ngIf="aggiungi" class="col-1 mr-3">
+      <button class="btn bottone" title="Salva" (click)="saveDipendenti()">
+        <i class="far fa-save"></i>
+      </button>
+    </div>
+    <!--annulla modifiche-->
+    <div *ngIf="!modifica && !modificaSelezionata && aggiungi" class="col-1 mr-3">
+      <button class="btn bottone" title="Annulla" (click)="annulla()">
+        <i class="fas fa-undo"></i>
+      </button>
+    </div>
     <!--MODIFICA-->
     <div *ngIf="!modifica && !modificaSelezionata" class="col-1 mr-3">
       <button class="btn bottone" title="Modifica" (click)="openModifica()">
@@ -49,14 +67,14 @@
         <i class="fas fa-undo"></i>
       </button>
     </div>
+    <!--modifica-->
   </div>
-  <!--modifica-->
 
   <!--END RIGA PULSANTI -->
   <!--TITOLO-->
   <div class="row mr-3 d-flex">
     <div class="col px-5">
-      <h1 *ngIf="!modifica && !modifichePrecedenti" mat-dialog-title>{{post.nome_postIt}}</h1>
+      <h1 *ngIf="!modifica && !modifichePrecedenti && !aggiungi" mat-dialog-title>{{post.nome_postIt}}</h1>
 
       <h1 *ngIf="modificaSelezionata" mat-dialog-title>{{postItModifica.nome_postIt}}</h1>
       <h1 *ngIf="!modificaSelezionata && modifichePrecedenti && !modifica" mat-dialog-title>Storico delle Modifiche</h1>
@@ -71,12 +89,73 @@
   <!--CONTENUTO-->
   <mat-dialog-content>
 
-    <div *ngIf="!modifica && !modifichePrecedenti" class="row d-flex justify-content-end">
+    <div *ngIf="!modifica && !modifichePrecedenti && !aggiungi" class="row d-flex justify-content-end">
       <div class="col pl-5">
         {{post.descrizione_postIt}}
       </div>
     </div>
-    
+
+    <!--start aggiungi dipendenti-->
+    <div *ngIf="aggiungi" class="row d-flex justify-content-end">
+      <div class="col pl-5">
+        <div class="d-flex justify-content-center">
+          <mat-form-field class="w-100">
+            <input matInput placeholder="Nome post-it" type="text" name="nome_postIt"
+              [(ngModel)]="postNuovo.nome_postIt" value="{{postNuovo.nome_postIt}}">
+          </mat-form-field>
+        </div>
+        <div class="d-flex justify-content-center">
+          <mat-form-field class="w-100">
+            <textarea rows="3" matInput placeholder="Descrizione post-it" type="text" name="descrizione_postIt"
+              [(ngModel)]="postNuovo.descrizione_postIt" value="{{postNuovo.descrizione_postIt}}"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="d-flex justify-content-center">
+          <mat-form-field class="w-100">
+            <mat-label>Colore POST-IT</mat-label>
+            <mat-select [formControl]="panelColor" panelClass="example-panel-{{panelColor.value}}" id="colore_postIt"
+              name="colore_postIt">
+              <mat-option value="#FF6347">Rosso</mat-option>
+              <mat-option value="#98FB98">Verde</mat-option>
+              <mat-option value="#87CEEB">Blu</mat-option>
+              <mat-option value="#f7a1f3">Rosa</mat-option>
+              <mat-option value="#f9fab1">Giallo</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="d-flex justify-content-center">
+          <mat-form-field MatFormFieldControl class="w-100">
+            <mat-label>Tipologia</mat-label>
+            <mat-select [formControl]="typePost" panelClass="example-panel-{{typePost.value}}" id="tipologia"
+              name="tipologia">
+              <mat-option value="{{col}}" *ngFor="let col of colonne" (click)="onChangeType()">{{col}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="d-flex justify-content-center">
+          <mat-form-field class="w-100">
+            <mat-label>Story points</mat-label>
+            <mat-select [formControl]="difficoltaPost" panelClass="example-panel-{{difficoltaPost.value}}"
+              id="difficolta" name="difficolta">
+              <mat-option value="0">0</mat-option>
+              <mat-option value="0.5">1/2</mat-option>
+              <mat-option value="1">1</mat-option>
+              <mat-option value="2">2</mat-option>
+              <mat-option value="3">3</mat-option>
+              <mat-option value="5">5</mat-option>
+              <mat-option value="8">8</mat-option>
+              <mat-option value="13">13</mat-option>
+              <mat-option value="20">20</mat-option>
+              <mat-option value="60">60</mat-option>
+              <mat-option value="100">100</mat-option>
+              <mat-option value="?">?</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <!--fine aggiungi dipendenti-->
+
     <!--start form modifica-->
 
     <div *ngIf="modifica" class="row d-flex justify-content-end">
@@ -92,18 +171,19 @@
             <mat-label>Colore POST-IT</mat-label>
             <mat-select [formControl]="panelColor" panelClass="example-panel-{{panelColor.value}}" id="colore_postIt"
               name="colore_postIt">
-              <mat-option value="#FF6347" (click)="onChangeColor()">Rosso</mat-option>
-              <mat-option value="#98FB98" (click)="onChangeColor()">Verde</mat-option>
-              <mat-option value="#87CEEB" (click)="onChangeColor()">Blu</mat-option>
-              <mat-option value="#f7a1f3" (click)="onChangeColor()">Rosa</mat-option>
-              <mat-option value="#f9fab1" (click)="onChangeColor()">Giallo</mat-option>
+              <mat-option value="#FF6347">Rosso</mat-option>
+              <mat-option value="#98FB98">Verde</mat-option>
+              <mat-option value="#87CEEB">Blu</mat-option>
+              <mat-option value="#f7a1f3">Rosa</mat-option>
+              <mat-option value="#f9fab1">Giallo</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
         <div class="d-flex justify-content-center">
           <mat-form-field MatFormFieldControl class="w-100">
             <mat-label>Tipologia</mat-label>
-            <mat-select [formControl]="typePost" panelClass="example-panel-{{typePost.value}}" id="tipologia" name="tipologia">
+            <mat-select [formControl]="typePost" panelClass="example-panel-{{typePost.value}}" id="tipologia"
+              name="tipologia">
               <mat-option value="{{col}}" *ngFor="let col of colonne">{{col}}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -134,7 +214,7 @@
     </div>
     <!--end modifiche precedenti-->
 
-    <!--start modifica seelezionata-->
+    <!--start modifica selezionata-->
     <div *ngIf="modificaSelezionata" class="row d-flex justify-content-end">
       <div class="col pl-5">
         {{postItModifica.descrizione_postIt}}
@@ -145,12 +225,18 @@
   </mat-dialog-content>
   <!--CONTENUTO-->
 
+  <!--start messaggio di errore-->
+  <div *ngIf="error" class="alert alert-danger boxMsg">
+    <h4 class="textMsg">{{message}}</h4>
+  </div>
+  <!--fine messaggio di errore-->
+
   <mat-dialog-actions>
 
     <div class="row w-100">
 
       <div class="col-12 d-flex justify-content-center">
-          Story point: {{post.difficolta}}
+        Story point: {{post.difficolta}}
       </div>
 
       <!-- <div class="col-9">

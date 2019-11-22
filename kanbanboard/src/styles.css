@@ -57,9 +57,10 @@ box-shadow: none;
 overflow: hidden !important;
 height: 500px;
 }
+.mat-dialog-content::-webkit-scrollbar { width: 0 !important }
 .mat-dialog-content{
 scrollbar-width: none; /* Firefox */
--ms-overflow-style: none;  /* IE 10+ */
+-ms-overflow-style: none;  /* IE 10+ */;
 overflow-y:scroll;
 overflow-x:hidden;
 

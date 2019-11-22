@@ -60,6 +60,14 @@ export class PostItService {
     });
   }
 
+  inserimentoPostitDipendente(post, id_epica, id_progetto):Observable<any>{
+    return this.http.post(this.base_url + "/api/inserisciDipendente", {
+      'postIt': post,
+      'id_epica': id_epica,
+      'id_progetto': id_progetto
+    })
+  }
+
   /*
     inserimentoProgettiPerPostIt(progettiPerPostIt):Observable<any>{
       return this.http.post(this.base_url + "/api/post-it/progettiXPostIt", {

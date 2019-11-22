@@ -45,7 +45,7 @@ export class PostItComponent implements OnInit {
   antEpica: boolean = true;
 
   isGo: boolean = false;
-  numero_dipendenti: number = 3;
+  numero_dipendenti: number = 0;
   arrayPostIt = [];
 
   onSaveSubmit() {
@@ -146,21 +146,25 @@ export class PostItComponent implements OnInit {
   }
 
   onGoSubmit() {
-   /* if (this.nome_epica != "" && this.descrizione_epica != "" && this.typePost.value != "") {*/
+    if (this.nome_epica != "" && this.descrizione_epica != "" && this.typePost.value != "") {
       this.arrayPostIt.splice(0);
-      for(let i = 0; i < this.numero_dipendenti; i++){
-        this.arrayPostIt.push({'id': i, 'nome_postIt': "", 'descrizione_postIt': "", 'colore_postIt': "#FF6347", "tipologia": "",
-      'difficolta': 0});
+      if(this.numero_dipendenti == 0){
+        this.onSaveEpicSubmit();
+      }else{
+        for(let i = 0; i < this.numero_dipendenti; i++){
+          this.arrayPostIt.push({'id': i, 'nome_postIt': "", 'descrizione_postIt': "", 'colore_postIt': "#FF6347", "tipologia": "",
+        'difficolta': 0});
+        }
+        this.error = false;
+        this.antEpica = false;
+        this.isGo = true;
       }
-      this.error = false;
-      this.antEpica = false;
-      this.isGo = true;
-    /*} else {
+    } else {
       console.log("riempi i campi correttamente!");
       this.myMessage = "Riempi i campi correttamente!";
       this.error = true;
       this.aggiunto = false;
-    }*/
+    }
   }
 
   onReturnSubmit() {

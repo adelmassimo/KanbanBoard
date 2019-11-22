@@ -147,6 +147,8 @@ export class LavagnaComponent implements OnInit {
               this.visualizzaPostIt();
             }
           )
+        } else if(data.action === 'insert') {
+          this.visualizzaPostIt();
         }
       },
       undefined => {

@@ -16,7 +16,7 @@ postIt.post('/post-it/', function (req, res) {
     "'" + colore_postIt + "'," +
     "'" + tipologia + "'," +
     "'" + difficolta + "', " +
-    "'0, 0)";
+    "'0', '0')";
   console.log(query);
   sql_connection.query(query, function (err, rows, fields) {
     if (err) throw err;
@@ -157,24 +157,26 @@ postIt.post('/inserisciEpica/', function (req, res) {
     sql_connection.query(query, function (err, rows) {
       if (err) throw err;
 
-      //ciclo for per inserire nelle tabelle postit e progetti_x_postit tutti i dipendenti della epica
-      for (let post of arrayPostIt) {
-        //query per inserire i post-it dipendenti della epica nel database
-        query = "INSERT INTO postit (nome_postIt, descrizione_postIt, colore_postIt, tipologia, difficolta, epica, id_epica_riferimento) " +
-          "VALUES ('" + post.nome_postIt + "', '" + post.descrizione_postIt + "', '" + post.colore_postIt + "', '" + post.tipologia +
-          "', '" + post.difficolta + "', '0', '" + id_epica + "')";
+      if (arrayPostIt[0] != null) {
+        //ciclo for per inserire nelle tabelle postit e progetti_x_postit tutti i dipendenti della epica
+        for (let post of arrayPostIt) {
+          //query per inserire i post-it dipendenti della epica nel database
+          query = "INSERT INTO postit (nome_postIt, descrizione_postIt, colore_postIt, tipologia, difficolta, epica, id_epica_riferimento) " +
+            "VALUES ('" + post.nome_postIt + "', '" + post.descrizione_postIt + "', '" + post.colore_postIt + "', '" + post.tipologia +
+            "', '" + post.difficolta + "', '0', '" + id_epica + "')";
 
-        sql_connection.query(query, function (err, rows) {
-          if (err) throw err;
-
-          id_postIt = rows['insertId'];
-          //query per inserire i dipendenti della epica nella tabella progetti_x_postit
-          query = "INSERT INTO progetti_x_postit (id_progetto, id_postIt) VALUES ('" + epica.id_progetto + "', '" + id_postIt + "')";
           sql_connection.query(query, function (err, rows) {
             if (err) throw err;
 
+            id_postIt = rows['insertId'];
+            //query per inserire i dipendenti della epica nella tabella progetti_x_postit
+            query = "INSERT INTO progetti_x_postit (id_progetto, id_postIt) VALUES ('" + epica.id_progetto + "', '" + id_postIt + "')";
+            sql_connection.query(query, function (err, rows) {
+              if (err) throw err;
+
+            });
           });
-        });
+        }
       }
       /* FINE CICLO FOR */
       console.log(rows);
@@ -182,5 +184,26 @@ postIt.post('/inserisciEpica/', function (req, res) {
     });
   });
 })
+
+postIt.post('/inserisciDipendente/', function(req, res){
+  postIt = req.body.postIt;
+  id_epica = req.body.id_epica;
+  id_progetto = req.body.id_progetto;
+
+  query = "INSERT INTO postit (nome_postIt, descrizione_postIt, colore_postIt, tipologia, difficolta, epica, id_epica_riferimento) " +
+  "VALUES ('" + postIt.nome_postIt + "', '" + postIt.descrizione_postIt + "', '" + postIt.colore_postIt + "', '" + postIt.tipologia + 
+  "', '" + postIt.difficolta + "', '0', '" + id_epica + "')";
+  sql_connection.query(query, function(err, rows){
+    if(err) throw err;
+
+    id_postIt = rows['insertId'];
+    query = "INSERT INTO progetti_x_postit (id_progetto, id_postIt) VALUES ('" + id_progetto + "', '" + id_postIt + "')";
+    sql_connection.query(query, function(err, rows){
+      if(err) throw err;
+
+      res.send({'successo': 1});
+    });
+  });
+});
 
 module.exports = postIt;
