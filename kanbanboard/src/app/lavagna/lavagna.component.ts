@@ -44,6 +44,13 @@ export class LavagnaComponent implements OnInit {
   success: boolean = false;
   message: string = "progetto modificato correttamente";
 
+  clickButton: boolean = false;
+  lastIdClick: number = 0;
+  id: number = 0;
+
+  //questo array conterà tutte le relazioni tra post-it attive
+  arrayRelazioni: any[] = [];
+
   /* inizio variabili ngu-carousel */
   loadAPI: Promise<any>;
 
@@ -130,40 +137,42 @@ export class LavagnaComponent implements OnInit {
 
   //dialog visualizza postit
   openDialog(post) {
-    const dialogConfig = new MatDialogConfig();
+    if (!this.clickButton) {
+      const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = false;
+      dialogConfig.disableClose = false;
+      dialogConfig.autoFocus = false;
 
-    dialogConfig.width = '500px';
-    //dialogConfig.maxHeight= '500px';
+      dialogConfig.width = '500px';
+      //dialogConfig.maxHeight= '500px';
 
-    dialogConfig.data = post;
+      dialogConfig.data = post;
 
-    const dialogRef = this.dialog.open(PostItDialogComponent, dialogConfig);
+      const dialogRef = this.dialog.open(PostItDialogComponent, dialogConfig);
 
-    dialogRef.afterClosed().subscribe(
-      data => {
-        if (data.action === 'delete') {
-          this.postitservice.eliminaPostit(data.postIt).subscribe(
-            success => {
-              this.visualizzaPostIt();
-            }
-          )
-        } else if (data.action === 'update') {
-          this.postitservice.updatePostit(data.postIt, this.userService.user.id).subscribe(
-            success => {
-              this.visualizzaPostIt();
-            }
-          )
-        } else if (data.action === 'insert') {
+      dialogRef.afterClosed().subscribe(
+        data => {
+          if (data.action === 'delete') {
+            this.postitservice.eliminaPostit(data.postIt).subscribe(
+              success => {
+                this.visualizzaPostIt();
+              }
+            )
+          } else if (data.action === 'update') {
+            this.postitservice.updatePostit(data.postIt, this.userService.user.id).subscribe(
+              success => {
+                this.visualizzaPostIt();
+              }
+            )
+          } else if (data.action === 'insert') {
+            this.visualizzaPostIt();
+          }
+        },
+        undefined => {
           this.visualizzaPostIt();
-        }
-      },
-      undefined => {
-        this.visualizzaPostIt();
-      });
-
+        });
+    }
+    this.clickButton = false;
   }
 
   onClickUpdate() {
@@ -240,6 +249,62 @@ export class LavagnaComponent implements OnInit {
       )
 
     } // fine if
+  }
+
+  mouseIn(id) {
+    this.id = id;
+  }
+
+  mouseOut() {
+    this.id = 0;
+  }
+
+  //Evidenzia le relazioni tra post-it dipendenti
+  share(post) {
+    console.log("bottone cliccato")
+    this.clickButton = true;
+
+    if (this.lastIdClick == 0 || this.lastIdClick != post.id_postIt) {
+      this.removeShare();
+      if (post.epica == 0 && post.id_epica_riferimento == 0) {
+        console.log("post-it indipendente");
+      } else {
+        var element = document.getElementById(post.id_postIt);
+        this.arrayRelazioni.push(element);
+
+        if (post.epica == 1) {
+          for (let postIt of this.postIt) {
+            if (post.id_postIt == postIt.id_epica_riferimento) {
+              var element = document.getElementById(postIt.id_postIt);
+              this.arrayRelazioni.push(element);
+            }
+          }
+        } else {
+          for (let epica of this.postItEpiche) {
+            if (epica.id_postIt == post.id_epica_riferimento) {
+              var dip = document.getElementById(epica.id_postIt);
+              this.arrayRelazioni.push(dip);
+              break;
+            }
+          }
+        }
+        for (let postIt of this.arrayRelazioni) {
+          postIt.classList.add("boxShadow");
+        }
+        this.lastIdClick = post.id_postIt;
+      }
+    } else {
+      console.log("box shadow presente")
+      this.lastIdClick = 0;
+      this.removeShare();
+    }
+  }
+
+  removeShare() {
+    for (let postIt of this.arrayRelazioni) {
+      postIt.classList.remove("boxShadow");
+    }
+    this.arrayRelazioni.splice(0);
   }
 
   // FINE MOVIMENTO POST-IT

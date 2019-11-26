@@ -34,9 +34,14 @@
           <!-- rappresentazione post-it -->
           <div *ngIf="post.epica == 0">
             <div *ngIf="post.tipologia==item.nome_colonna" class="col divPost">
-              <div class="cursor-pointer divSelected" (click)="openDialog(post)" id="{{post.id_postIt}}"
-              (mouseenter)="boxShadowScriptAdd(post.id_epica_riferimento)" (mouseleave)="boxShadowScriptRemove(post.id_epica_riferimento)">
-                <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
+              <div class="cursor-pointer divSelected" (click)="openDialog(post)" (mouseenter)="mouseIn(post.id_postIt)"
+                (mouseleave)="mouseOut()">
+                <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}" id="{{post.id_postIt}}">
+                  <div *ngIf="id == post.id_postIt">
+                    <div (click)="share(post)" class="buttonShare d-flex justify-content-center align-items-center">
+                      <img src="../../assets/share.png">
+                    </div>
+                  </div>
                   <mat-card-title class="postIt-title">{{post.nomeInBreve}}</mat-card-title>
                   <mat-card-content class="postIt-desc">{{post.inBreve}}</mat-card-content>
                 </mat-card>
@@ -44,12 +49,18 @@
             </div>
           </div>
 
+
           <!-- rappresentazione epica -->
           <div *ngIf="post.epica == 1">
             <div *ngIf="post.tipologia==item.nome_colonna" class="col divPostEpic">
-              <div class="cursor-pointer divSelected" (click)="openDialog(post)" id="{{post.id_postIt}}"
-              (mouseenter)="boxShadowEpicScriptAdd(post.id_postIt)" (mouseleave)="boxShadowEpicScriptRemove(post.id_postIt)">
-                <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}">
+              <div class="cursor-pointer divSelected" (click)="openDialog(post)" (mouseenter)="mouseIn(post.id_postIt)"
+                (mouseleave)="mouseOut()">
+                <mat-card class="postIt" [ngStyle]="{'background' : post.colore_postIt}" id="{{post.id_postIt}}">
+                  <div *ngIf="id == post.id_postIt">
+                    <div (click)="share(post)" class="buttonShare d-flex justify-content-center align-items-center">
+                      <img src="../../assets/share.png">
+                    </div>
+                  </div>
                   <mat-card-title class="epic-title">{{post.nomeInBreve}}</mat-card-title>
                   <mat-card-content class="epic-desc">{{post.inBreve}}</mat-card-content>
                 </mat-card>
