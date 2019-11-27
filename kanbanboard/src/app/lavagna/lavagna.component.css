@@ -28,6 +28,7 @@
 }
 .postIt-title{
     font-size: 13px;
+    font-weight: 600;
 }
 .postIt-desc{
     font-size: 10px;
@@ -35,6 +36,7 @@
 .epic-title{
     text-align: center;
     font-size: 16px;
+    font-weight: 600;
 }
 .epica-desc{
     text-align: center;
@@ -96,8 +98,8 @@
     box-shadow: 0px 0px 15px 0px rgba(212,175,55,1);
 }
 .boxMsg{
-    position: absolute;
-    top: 8%;
+    position: fixed;
+    bottom: 10%;
     left: 30%;
     right: 30%;
     z-index: 99;
@@ -124,4 +126,16 @@
 }
 .hidden{
     display: none;
+}
+.cancellaRelazioni{
+    position: fixed;
+    top: 140px;
+    right: 15px;
+    width: 150px;
+}
+.modificaProg{
+    margin-top: 10px;
+}
+.wrenchModifica{
+    margin-bottom: 0;
 }

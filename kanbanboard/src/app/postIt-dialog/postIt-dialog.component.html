@@ -2,14 +2,14 @@
   <!--START RIGA PULSANTI -->
   <div class="row mr-3 d-flex justify-content-end">
     <!--APRI STORICO MODIFICHE-->
-    <div *ngIf="!modificaSelezionata && !modifichePrecedenti" class="col">
+    <div *ngIf="!modificaSelezionata && !modifichePrecedenti && !aggiungi" class="col">
       <button class="btn bottone" title="Modifiche Precedenti" (click)="openStoricoModifiche()">
         <i class="fas fa-clipboard-list"></i>
       </button>
     </div>
     <!--storico modifiche-->
     <!--CHIUDI STORICO MODIFICHE-->
-    <div *ngIf="!modificaSelezionata && modifichePrecedenti" class="col">
+    <div *ngIf="!modificaSelezionata && modifichePrecedenti && !aggiungi" class="col">
       <button class="btn bottone" title="Indietro" (click)="closeStoricoModifiche()">
         <i class="fas fa-chevron-left"></i>
       </button>
@@ -77,7 +77,7 @@
       <h1 *ngIf="!modifica && !modifichePrecedenti && !aggiungi" mat-dialog-title>{{post.nome_postIt}}</h1>
 
       <h1 *ngIf="modificaSelezionata" mat-dialog-title>{{postItModifica.nome_postIt}}</h1>
-      <h1 *ngIf="!modificaSelezionata && modifichePrecedenti && !modifica" mat-dialog-title>Storico delle Modifiche</h1>
+      <h1 *ngIf="!modificaSelezionata && modifichePrecedenti && !modifica && !aggiungi" mat-dialog-title>Storico delle Modifiche</h1>
 
       <mat-form-field *ngIf="modifica" class="w-75">
         <input matInput placeholder="Titolo" name="titolo" [(ngModel)]="titolo">

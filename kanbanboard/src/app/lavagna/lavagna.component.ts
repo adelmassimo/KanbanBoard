@@ -42,6 +42,7 @@ export class LavagnaComponent implements OnInit {
 
   error: boolean = false;
   success: boolean = false;
+  warning: boolean = false;
   message: string = "progetto modificato correttamente";
 
   clickButton: boolean = false;
@@ -64,7 +65,7 @@ export class LavagnaComponent implements OnInit {
     },
     load: 2,
     velocity: 0,
-    touch: false,
+    touch: true,
     easing: 'cubic-bezier(0, 0, 0.2, 1)'
   };
 
@@ -119,9 +120,16 @@ export class LavagnaComponent implements OnInit {
             post.inBreve = post.descrizione_postIt.length < 25
               ? post.descrizione_postIt
               : post.descrizione_postIt.substr(0, 24) + '...';
-            post.nomeInBreve = post.nome_postIt.length < 15
+            if(post.epica == 0){
+              post.nomeInBreve = post.nome_postIt.length < 15
               ? post.nome_postIt
               : (post.nome_postIt.substr(0, 14) + '...');
+            } else{
+              post.nomeInBreve = post.nome_postIt.length < 24
+              ? post.nome_postIt
+              : (post.nome_postIt.substr(0, 23) + '...');
+            }
+            
             this.postIt.push(post);
             if (post.epica == 1) {
               this.postItEpiche.push(post);
@@ -268,6 +276,8 @@ export class LavagnaComponent implements OnInit {
       this.removeShare();
       if (post.epica == 0 && post.id_epica_riferimento == 0) {
         console.log("post-it indipendente");
+        this.message = "Post-it indipendente";
+        this.warning = true;
       } else {
         var element = document.getElementById(post.id_postIt);
         this.arrayRelazioni.push(element);
@@ -295,15 +305,18 @@ export class LavagnaComponent implements OnInit {
       }
     } else {
       console.log("box shadow presente")
-      this.lastIdClick = 0;
       this.removeShare();
     }
+    setTimeout(() => {
+      this.warning = false;
+    }, 1500);
   }
 
   removeShare() {
     for (let postIt of this.arrayRelazioni) {
       postIt.classList.remove("boxShadow");
     }
+    this.lastIdClick = 0;
     this.arrayRelazioni.splice(0);
   }
 

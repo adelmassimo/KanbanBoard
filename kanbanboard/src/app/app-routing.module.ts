@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { ProjectComponent } from './project/project.component';
 import { LavagnaComponent } from './lavagna/lavagna.component';
 import { PostItComponent } from './post-it/post-it.component';
+import { SettingComponent } from './setting/setting.component';
 
 const routes: Routes = [
   { path: '', component: LoginRegisterComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'project', component: ProjectComponent },
   { path: 'lavagna', component: LavagnaComponent },
-  { path: 'post-it', component: PostItComponent }
+  { path: 'post-it', component: PostItComponent },
+  { path: 'setting', component: SettingComponent }
 ];
 
 @NgModule({

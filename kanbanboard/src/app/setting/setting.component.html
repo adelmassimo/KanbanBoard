@@ -1,0 +1,56 @@
+<div class="container d-flex justify-content-center">
+  <div class="d-flex flex-column justify-content-center w-75">
+    <h3 class="title">IMPOSTAZIONI ACCOUNT</h3>
+
+    <!--USERNAME-->
+    <div class="mb-3 d-flex justify-content-center">
+      <mat-form-field class="w-50">
+        <input matInput placeholder="Username" name="username" [(ngModel)]="username">
+      </mat-form-field>
+    </div>
+
+    <!--NOME-->
+    <div class="mb-3 d-flex justify-content-center">
+      <mat-form-field class="w-50">
+        <input matInput placeholder="Nome" name="nome" [(ngModel)]="nome">
+      </mat-form-field>
+    </div>
+
+    <!--COGNOME-->
+    <div class="mb-3 d-flex justify-content-center">
+      <mat-form-field class="w-50">
+        <input matInput placeholder="Cognome" name="cognome" [(ngModel)]="cognome">
+      </mat-form-field>
+    </div>
+
+    <!--EMAIL-->
+    <div class="mb-3 d-flex justify-content-center">
+      <mat-form-field class="w-50">
+        <input matInput placeholder="Email" name="email" [(ngModel)]="email">
+      </mat-form-field>
+    </div>
+
+    <hr class="w-100">
+
+    <!--PASSWORD-->
+    <div class="mb-3 d-flex justify-content-center">
+      <mat-form-field class="w-50">
+        <input matInput placeholder="Vecchia password" name="oldPassword" [(ngModel)]="oldPassword">
+      </mat-form-field>
+    </div>
+    <div class="mb-3 d-flex justify-content-center">
+      <mat-form-field class="w-50">
+        <input matInput placeholder="Nuova password" name="newPassword" [(ngModel)]="newPassword">
+      </mat-form-field>
+    </div>
+    <div class="mb-3 d-flex justify-content-center">
+      <mat-form-field class="w-50">
+        <input matInput placeholder="Riperi password" name="ripPassword" [(ngModel)]="ripPassword">
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3 d-flex justify-content-center">
+      <button class="btn btn-info">Salva modifiche</button>
+    </div>
+  </div>
+</div>

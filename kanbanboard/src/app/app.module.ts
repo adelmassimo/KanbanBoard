@@ -40,6 +40,7 @@ import { LocalStorageService } from './services/local-storage.service';
 
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SettingComponent } from './setting/setting.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     LavagnaComponent,
     PostItComponent,
     PostItDialogComponent,
-    ImpostazioniProgettoDialogComponent
+    ImpostazioniProgettoDialogComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,

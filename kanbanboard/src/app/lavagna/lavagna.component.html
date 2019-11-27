@@ -6,8 +6,8 @@
 
     <!-- bottone modifica progetto-->
     <div class="col">
-      <button mat-flat-button title="Modifica progetto" (click)="onClickUpdate()">
-        <h2><i class="fas fa-wrench cursor-pointer"></i> </h2>
+      <button mat-flat-button title="Modifica progetto" class="modificaProg" (click)="onClickUpdate()">
+        <h2 class="wrenchModifica"><i class="fas fa-wrench cursor-pointer"></i> </h2>
       </button>
     </div>
     <!-- bottone modifica progetto-->
@@ -72,8 +72,8 @@
       </div>
     </div>
   </ngu-tile>
-  <button NguCarouselPrev class="leftRs" [style.opacity]="myCarousel.isFirst ? 0:1">&lt;</button>
-  <button NguCarouselNext class="rightRs" [style.opacity]="myCarousel.isLast ? 0:1">&gt;</button>
+  <button NguCarouselPrev class="leftRs" [style.opacity]="myCarousel.isFirst ? 0.4:1">&lt;</button>
+  <button NguCarouselNext class="rightRs" [style.opacity]="myCarousel.isLast ? 0.4:1">&gt;</button>
   <!-- codice per mostrare i punti sotto le slide del carosello
   <ul class="myPoint" NguCarouselPoint>
     <li *ngFor="let i of myCarousel.pointNumbers; let i = index" [class.active]="i==myCarousel.activePoint" (click)="myCarousel.moveTo(i)"
@@ -83,6 +83,12 @@
 </ngu-carousel>
 <!--fine ngu-carousel-->
 
+<!-- BUTTON CANCELLA RELAZIONI -->
+<div class="cancellaRelazioni" *ngIf="lastIdClick != 0">
+  <button class="btn btn-danger" (click)="removeShare()">Cancella relazioni</button>
+</div>
+<!-- BUTTON CANCELLA RELAZIONI -->
+
 <!-- MESSAGGIO -->
 <div class="boxMsg">
   <div *ngIf="success" class="alert alert-success">
@@ -90,6 +96,10 @@
   </div>
 
   <div *ngIf="error" class="alert alert-danger">
+    <h4 class="msg">{{message}}</h4>
+  </div>
+
+  <div *ngIf="warning" class="alert alert-warning">
     <h4 class="msg">{{message}}</h4>
   </div>
 </div>

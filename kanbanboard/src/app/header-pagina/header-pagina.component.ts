@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-header-pagina',
   templateUrl: './header-pagina.component.html',
@@ -8,7 +10,7 @@ import { UserService } from '../services/user.service';
 })
 export class HeaderPaginaComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   isUtenteLoggedin: boolean = false;
 
@@ -42,4 +44,7 @@ export class HeaderPaginaComponent implements OnInit {
     this.userService.logOutUser();
   }
 
+  openConfig(){
+    this.router.navigate(['/setting']);
+  }
 }
